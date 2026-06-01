@@ -4,6 +4,7 @@ import { CTASection } from "@/components/CTASection";
 import { FAQ } from "@/components/FAQ";
 import { RecruitmentSolutions } from "@/components/RecruitmentSolutions";
 import { SchemaScript } from "@/components/SchemaScript";
+import { TemporarySpecialist } from "@/components/TemporarySpecialist";
 import {
   employerBenefits,
   faqs,
@@ -156,6 +157,12 @@ export default function EmployersPage() {
               </div>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section className="gradient-section py-16 lg:py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <TemporarySpecialist />
         </div>
       </section>
 

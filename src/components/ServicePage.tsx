@@ -3,6 +3,7 @@ import { Button } from "@/components/Button";
 import { CTASection } from "@/components/CTASection";
 import { FAQ } from "@/components/FAQ";
 import { SchemaScript } from "@/components/SchemaScript";
+import { TemporarySpecialist } from "@/components/TemporarySpecialist";
 import type { ServicePageContent } from "@/lib/services";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getFaqSchema, getWebPageSchema } from "@/lib/schema";
@@ -17,6 +18,10 @@ export function createServiceMetadata(content: ServicePageContent) {
 }
 
 export function ServicePage({ content }: { content: ServicePageContent }) {
+  const showSpecialist =
+    content.slug === "temporary-recruitment" ||
+    content.slug === "contract-recruitment";
+
   return (
     <>
       <SchemaScript
@@ -52,6 +57,14 @@ export function ServicePage({ content }: { content: ServicePageContent }) {
           </div>
         </div>
       </section>
+
+      {showSpecialist && (
+        <section className="gradient-section py-16 lg:py-20">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <TemporarySpecialist />
+          </div>
+        </section>
+      )}
 
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
