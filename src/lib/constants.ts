@@ -8,7 +8,8 @@ export const siteConfig = {
   phone: "07535961452",
   phoneDisplay: "07535 961 452",
   email: "james@jldrecruit.co.uk",
-  linkedIn: "https://www.linkedin.com/in/james-lloyd-davies/",
+  linkedIn:
+    "https://www.linkedin.com/company/jld-recruit-ltd/?viewAsMember=true",
   facebook: "https://www.facebook.com/profile.php?id=61567979330586",
   founder: "James Lloyd-Davies",
   areaServed: "United Kingdom",
