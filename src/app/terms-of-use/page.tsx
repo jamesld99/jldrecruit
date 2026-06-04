@@ -62,6 +62,25 @@ export default function TermsOfUsePage() {
               <strong>Business name:</strong> {siteConfig.legalName}
             </li>
             <li>
+              <strong>Company number:</strong>{" "}
+              <a
+                href={siteConfig.companiesHouseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {siteConfig.companiesHouseNumber}
+              </a>{" "}
+              (registered with{" "}
+              <a
+                href={siteConfig.companiesHouseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Companies House
+              </a>
+              )
+            </li>
+            <li>
               <strong>Email:</strong>{" "}
               <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
             </li>

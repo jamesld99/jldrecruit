@@ -16,6 +16,17 @@ export function Footer() {
               temporary and contract recruitment across automotive, engineering
               and technical sectors.
             </p>
+            <p className="mt-4 text-sm text-brand-300">
+              Registered in England and Wales.{" "}
+              <a
+                href={siteConfig.companiesHouseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-200 underline decoration-brand-500/50 underline-offset-2 transition-colors hover:text-white"
+              >
+                Company no. {siteConfig.companiesHouseNumber}
+              </a>
+            </p>
           </div>
 
           <div>
@@ -107,7 +118,16 @@ export function Footer() {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-brand-700/50 pt-8 sm:flex-row">
           <div className="flex flex-col items-center gap-2 sm:items-start">
             <p className="text-sm text-brand-300">
-              &copy; {currentYear} {siteConfig.legalName}. All rights reserved.
+              &copy; {currentYear}{" "}
+              <a
+                href={siteConfig.companiesHouseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-white"
+              >
+                {siteConfig.legalName}
+              </a>
+              . All rights reserved.
             </p>
             <div className="flex gap-4 text-sm">
               <Link

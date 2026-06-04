@@ -14,7 +14,16 @@ export function getOrganizationSchema() {
       "@type": "Person",
       name: siteConfig.founder,
     },
-    sameAs: [siteConfig.linkedIn, siteConfig.facebook],
+    identifier: {
+      "@type": "PropertyValue",
+      propertyID: "UK Companies House",
+      value: siteConfig.companiesHouseNumber,
+    },
+    sameAs: [
+      siteConfig.companiesHouseUrl,
+      siteConfig.linkedIn,
+      siteConfig.facebook,
+    ],
     areaServed: {
       "@type": "Country",
       name: siteConfig.areaServed,
@@ -49,7 +58,11 @@ export function getProfessionalServiceSchema() {
       "Temporary staffing solutions",
       "Candidate sourcing",
     ],
-    sameAs: [siteConfig.linkedIn, siteConfig.facebook],
+    sameAs: [
+      siteConfig.companiesHouseUrl,
+      siteConfig.linkedIn,
+      siteConfig.facebook,
+    ],
   };
 }
 
@@ -67,7 +80,11 @@ export function getLocalBusinessSchema() {
       "@type": "Country",
       name: siteConfig.areaServed,
     },
-    sameAs: [siteConfig.linkedIn, siteConfig.facebook],
+    sameAs: [
+      siteConfig.companiesHouseUrl,
+      siteConfig.linkedIn,
+      siteConfig.facebook,
+    ],
   };
 }
 

@@ -13,6 +13,9 @@ export const siteConfig = {
   founder: "James Lloyd-Davies",
   areaServed: "United Kingdom",
   logo: "/images/logo.png",
+  companiesHouseNumber: "17049874",
+  companiesHouseUrl:
+    "https://find-and-update.company-information.service.gov.uk/company/17049874",
 };
 
 export const navLinks = [

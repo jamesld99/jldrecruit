@@ -51,6 +51,17 @@ export default function AboutPage() {
               engineering and technical sectors. We offer a personal, direct and
               accountable service — without corporate layers or inflated fees.
             </p>
+            <p className="mt-4 text-sm text-navy-500">
+              Registered in England and Wales —{" "}
+              <a
+                href={siteConfig.companiesHouseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-brand-600 underline decoration-brand-300 underline-offset-2 hover:text-brand-700"
+              >
+                JLD Recruit LTD (Company no. {siteConfig.companiesHouseNumber})
+              </a>
+            </p>
           </div>
         </div>
       </section>
