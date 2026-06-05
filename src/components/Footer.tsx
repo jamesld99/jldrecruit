@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { footerLinks, navLinks, siteConfig } from "@/lib/constants";
+import { footerLinks, navLinks, siteConfig, ukWideRecruitmentSeo, ukWideServicesSeo } from "@/lib/constants";
 import { SocialLinks } from "./SocialLinks";
 
 export function Footer() {
@@ -12,8 +12,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <p className="text-lg font-bold text-white">{siteConfig.legalName}</p>
             <p className="mt-4 text-sm leading-relaxed text-brand-200">
-              {siteConfig.tagline}. Permanent, temporary and contract
-              recruitment UK-wide with direct access to James.
+              {ukWideServicesSeo} {ukWideRecruitmentSeo}
             </p>
             <p className="mt-4 text-sm text-brand-300">
               Registered in England and Wales.{" "}

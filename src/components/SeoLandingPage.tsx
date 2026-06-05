@@ -3,6 +3,7 @@ import { Button } from "@/components/Button";
 import { CTASection } from "@/components/CTASection";
 import { FAQ } from "@/components/FAQ";
 import { SchemaScript } from "@/components/SchemaScript";
+import { ukWideRecruitmentSeo } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getFaqSchema, getWebPageSchema } from "@/lib/schema";
 
@@ -85,6 +86,9 @@ export function SeoLandingPage({ content }: { content: SeoLandingContent }) {
                 {content.overview.map((paragraph) => (
                   <p key={paragraph.slice(0, 40)}>{paragraph}</p>
                 ))}
+                <p className="text-sm leading-relaxed text-navy-600">
+                  {ukWideRecruitmentSeo}
+                </p>
               </div>
             </div>
             <div className="rounded-2xl border border-brand-200 bg-brand-50/50 p-8 card-shadow">

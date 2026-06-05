@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sectors",
     "/about",
     "/insights",
+    "/uk-coverage",
     "/services/permanent-recruitment",
     "/services/temporary-recruitment",
     "/services/contract-recruitment",

@@ -8,7 +8,7 @@ export const siteConfig = {
   heroSubheadline:
     "UK-wide recruitment for lift engineers, fire & security engineers, gate & door engineers and vehicle technicians. We support employers across England, Scotland, Wales and Northern Ireland.",
   description:
-    "JLD Recruit Ltd is a family-run UK recruitment agency specialising in lift engineering, fire & security, gate & door, refrigeration, automotive and HGV recruitment. Permanent, temporary and contract solutions with direct access to James.",
+    "JLD Recruit Ltd provides specialist recruitment services across England, Scotland, Wales and Northern Ireland. UK-wide recruitment for lift engineering, fire & security, gate & door, refrigeration, automotive and HGV businesses. Permanent, temporary and contract solutions with direct access to James.",
   url: "https://www.jldrecruit.co.uk",
   phone: "07535961452",
   phoneDisplay: "07535 961 452",
@@ -37,6 +37,12 @@ export const navLinks = [
 export const ukWideMessage =
   "We support employers across England, Scotland, Wales and Northern Ireland.";
 
+export const ukWideServicesSeo =
+  "JLD Recruit Ltd provides specialist recruitment services across England, Scotland, Wales and Northern Ireland.";
+
+export const ukWideRecruitmentSeo =
+  "UK-wide recruitment for lift engineering, fire & security, gate & door, refrigeration, automotive and HGV businesses.";
+
 export const seoKeywords = [
   "lift engineer recruitment",
   "lift recruitment agency",
@@ -52,6 +58,7 @@ export const seoKeywords = [
 ];
 
 export const footerLinks = [
+  { href: "/uk-coverage", label: "UK Coverage" },
   { href: "/recruitment/lift-engineer-recruitment", label: "Lift Engineer Recruitment" },
   { href: "/recruitment/fire-security-recruitment", label: "Fire & Security Recruitment" },
   { href: "/recruitment/gate-door-recruitment", label: "Gate & Door Recruitment" },

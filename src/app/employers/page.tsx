@@ -11,7 +11,8 @@ import {
   employerFaqs,
   services,
   siteConfig,
-  ukWideMessage,
+  ukWideRecruitmentSeo,
+  ukWideServicesSeo,
 } from "@/lib/constants";
 import {
   employerContractContent,
@@ -25,7 +26,7 @@ import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 export const metadata = createMetadata({
   title: "Employers",
   description:
-    "JLD Recruit Ltd helps UK businesses hire lift engineers, fire & security engineers, gate & door engineers, refrigeration engineers and automotive & HGV technicians. Permanent, temporary and contract recruitment UK-wide.",
+    `${ukWideServicesSeo} JLD Recruit Ltd helps UK businesses hire lift engineers, fire & security engineers, gate & door engineers, refrigeration engineers and automotive & HGV technicians.`,
   path: "/employers",
   keywords: [
     "lift engineer recruitment",
@@ -67,7 +68,10 @@ export default function EmployersPage() {
               also provides temporary and contract recruitment solutions — giving
               employers proactive sourcing, headhunting, screening and flexible
               staffing support across lift engineering, fire & security, gate & door,
-              refrigeration and automotive & HGV sectors. {ukWideMessage}
+              refrigeration and automotive & HGV sectors. {ukWideServicesSeo}
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-navy-600">
+              {ukWideRecruitmentSeo}
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button href="/contact" variant="primary">

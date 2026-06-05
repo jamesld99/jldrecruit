@@ -2,8 +2,6 @@ import { Button } from "@/components/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SectorCard } from "@/components/SectorCard";
 import { CTASection } from "@/components/CTASection";
-import { ContactSection } from "@/components/ContactSection";
-import { CoverageAreas } from "@/components/CoverageAreas";
 import { LinkedInUpdates } from "@/components/LinkedInUpdates";
 import { RecruitmentSolutions } from "@/components/RecruitmentSolutions";
 import { SchemaScript } from "@/components/SchemaScript";
@@ -43,12 +41,12 @@ export default function HomePage() {
                 {siteConfig.heroSubheadline}
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Button href="/contact" variant="primary">
-                Submit Vacancy
-              </Button>
-              <Button href="/jobs" variant="outline">
-                View Jobs
-              </Button>
+                <Button href="/contact" variant="primary">
+                  Submit Vacancy
+                </Button>
+                <Button href="/jobs" variant="outline">
+                  View Jobs
+                </Button>
               </div>
               <p className="mt-6 text-sm font-medium text-brand-600">
                 {ukWideMessage} Direct access to James &middot; Headhunting included
@@ -58,14 +56,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <WhyChooseSection />
-
-      <RecruitmentSolutions
-        introDescription="Permanent recruitment is our core service. We also provide temporary and contract solutions when you need flexibility."
-      />
-
-      <LinkedInUpdates jobs={jobs} />
 
       <section className="gradient-section py-20 lg:py-28" aria-labelledby="key-sectors">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -87,36 +77,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <CoverageAreas />
+      <WhyChooseSection />
 
-      <section className="py-20 lg:py-28" aria-labelledby="candidate-support">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl rounded-3xl border border-brand-200 bg-white p-10 text-center card-shadow sm:p-12">
-            <p className="mb-4 eyebrow-pill">Candidate Support</p>
-            <h2
-              id="candidate-support"
-              className="text-3xl font-bold tracking-tight text-navy-900 sm:text-4xl"
-            >
-              Looking for your next role?
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-navy-600">
-              We help skilled candidates find permanent roles in lift engineering,
-              fire & security, gate & door, refrigeration, automotive and HGV sectors
-              UK-wide. Free service — speak directly with James.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button href="/jobs" variant="primary">
-                View Jobs
-              </Button>
-              <Button href="/job-seekers" variant="outline">
-                Job Seeker Information
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <RecruitmentSolutions
+        introDescription="Permanent recruitment is our core service. We also provide temporary and contract solutions when you need flexibility."
+      />
 
-      <ContactSection />
+      <LinkedInUpdates jobs={jobs} />
+
       <CTASection
         primaryLabel="Submit Vacancy"
         secondaryLabel="Hire Staff"

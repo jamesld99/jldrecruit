@@ -2,14 +2,14 @@ import { ContactForm } from "@/components/ContactForm";
 import { FAQ } from "@/components/FAQ";
 import { SchemaScript } from "@/components/SchemaScript";
 import { SocialLinks } from "@/components/SocialLinks";
-import { faqs, siteConfig } from "@/lib/constants";
+import { faqs, siteConfig, ukWideServicesSeo } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getFaqSchema, getWebPageSchema } from "@/lib/schema";
 
 export const metadata = createMetadata({
   title: "Contact",
   description:
-    "Contact JLD Recruit Ltd to discuss your recruitment needs. Call 07535 961 452, email james@jldrecruit.co.uk or send us your vacancy details through our contact form.",
+    "Contact JLD Recruit Ltd for UK-wide recruitment support across England, Scotland, Wales and Northern Ireland. Call 07535 961 452 or email james@jldrecruit.co.uk.",
   path: "/contact",
   keywords: [
     "contact recruitment agency",
@@ -25,7 +25,7 @@ export default function ContactPage() {
         data={[
           getWebPageSchema(
             "Contact JLD Recruit Ltd",
-            "Get in touch with JLD Recruit Ltd for automotive, engineering and technical recruitment support.",
+            `${ukWideServicesSeo} Contact James to discuss lift engineering, fire & security, gate & door, refrigeration, automotive and HGV recruitment.`,
             "/contact"
           ),
           getBreadcrumbSchema([
@@ -49,6 +49,9 @@ export default function ContactPage() {
               Whether you have a vacancy to fill, need recruitment support for a
               hard-to-find engineering role, or are a candidate looking for your
               next opportunity — get in touch and we will respond promptly.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-navy-500">
+              {ukWideServicesSeo}
             </p>
           </div>
         </div>

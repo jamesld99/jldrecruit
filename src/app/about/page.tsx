@@ -2,14 +2,14 @@ import { Button } from "@/components/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CTASection } from "@/components/CTASection";
 import { SchemaScript } from "@/components/SchemaScript";
-import { siteConfig, whyChooseUs } from "@/lib/constants";
+import { siteConfig, ukWideRecruitmentSeo, ukWideServicesSeo, whyChooseUs } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 
 export const metadata = createMetadata({
   title: "About JLD Recruit Ltd",
   description:
-    "Learn about JLD Recruit Ltd — a family-run UK recruitment agency specialising in lift engineering, fire & security, gate & door, refrigeration, automotive and HGV recruitment.",
+    `${ukWideServicesSeo} Learn about JLD Recruit Ltd — a family-run UK recruitment agency specialising in lift engineering, fire & security, gate & door, refrigeration, automotive and HGV recruitment.`,
   path: "/about",
   keywords: [
     "lift recruitment agency",
@@ -51,6 +51,9 @@ export default function AboutPage() {
               fire & security, gate & door, refrigeration, automotive and HGV
               sectors. We offer a personal, direct and accountable service —
               without corporate layers or inflated fees.
+            </p>
+            <p className="mt-4 text-lg leading-relaxed text-navy-600">
+              {ukWideServicesSeo} {ukWideRecruitmentSeo}
             </p>
             <p className="mt-4 text-sm text-navy-500">
               Registered in England and Wales —{" "}

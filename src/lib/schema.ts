@@ -25,10 +25,13 @@ export function getOrganizationSchema() {
       siteConfig.linkedIn,
       siteConfig.facebook,
     ],
-    areaServed: {
-      "@type": "Country",
-      name: siteConfig.areaServed,
-    },
+    areaServed: [
+      { "@type": "Country", name: "United Kingdom" },
+      { "@type": "AdministrativeArea", name: "England" },
+      { "@type": "AdministrativeArea", name: "Scotland" },
+      { "@type": "AdministrativeArea", name: "Wales" },
+      { "@type": "AdministrativeArea", name: "Northern Ireland" },
+    ],
   };
 }
 
@@ -42,10 +45,13 @@ export function getProfessionalServiceSchema() {
     telephone: `+44${siteConfig.phone.replace(/^0/, "")}`,
     email: siteConfig.email,
     priceRange: "$$",
-    areaServed: {
-      "@type": "Country",
-      name: siteConfig.areaServed,
-    },
+    areaServed: [
+      { "@type": "Country", name: "United Kingdom" },
+      { "@type": "AdministrativeArea", name: "England" },
+      { "@type": "AdministrativeArea", name: "Scotland" },
+      { "@type": "AdministrativeArea", name: "Wales" },
+      { "@type": "AdministrativeArea", name: "Northern Ireland" },
+    ],
     serviceType: [
       "Permanent recruitment",
       "Temporary recruitment",
@@ -84,10 +90,13 @@ export function getLocalBusinessSchema() {
     description: siteConfig.description,
     telephone: `+44${siteConfig.phone.replace(/^0/, "")}`,
     email: siteConfig.email,
-    areaServed: {
-      "@type": "Country",
-      name: siteConfig.areaServed,
-    },
+    areaServed: [
+      { "@type": "Country", name: "United Kingdom" },
+      { "@type": "AdministrativeArea", name: "England" },
+      { "@type": "AdministrativeArea", name: "Scotland" },
+      { "@type": "AdministrativeArea", name: "Wales" },
+      { "@type": "AdministrativeArea", name: "Northern Ireland" },
+    ],
     sameAs: [
       siteConfig.companiesHouseUrl,
       siteConfig.linkedIn,

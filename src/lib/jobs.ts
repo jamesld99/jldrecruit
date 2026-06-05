@@ -313,36 +313,6 @@ const rawJobs: RawJob[] = [
       "Monday to Friday with Saturdays on a rota basis",
     ],
   },
-  {
-    slug: "vehicle-technician-liskeard",
-    title: "Vehicle Technician",
-    location: "Liskeard",
-    region: "Cornwall",
-    salary: "£35,000 – £40,000",
-    sector: "Automotive",
-    type: "Permanent",
-    summary:
-      "Hands-on vehicle technician for a busy workshop in Cornwall.",
-    postedDate: "2026-05-15",
-    overview: [
-      "Experienced Vehicle Technician needed for a busy workshop in Liskeard, Cornwall.",
-      "Hands-on role within a good team environment — diagnostics, servicing, repairs and general mechanical work across a range of vehicles.",
-      "Customer-facing responsibilities include speaking with customers, answering the phone, making bookings and keeping customers updated.",
-    ],
-    responsibilities: [
-      "Diagnostics, servicing, repairs and general mechanical work",
-      "Vehicle inspections and fault finding",
-      "Speak with customers and manage bookings when required",
-      "Maintain high standards in a busy workshop team environment",
-    ],
-    requirements: [
-      "Confident using hand and power tools",
-      "Own tools and toolbox required",
-      "Welding experience advantageous",
-      "Every other Saturday morning",
-      "MOT Inspector qualification preferred but not essential",
-    ],
-  },
 ];
 
 export const jobs: JobListing[] = rawJobs.map(enrichJob);
