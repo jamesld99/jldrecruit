@@ -44,6 +44,7 @@ export const temporaryContractRoles = [
   "HGV Technicians",
   "Fire & Security Engineers",
   "Lift Engineers",
+  "Door Engineers",
   "Refrigeration Engineers",
   "HVAC Engineers",
   "Field Service Engineers",
@@ -81,7 +82,7 @@ export const servicePages: Record<string, ServicePageContent> = {
     title: "Permanent Recruitment",
     metaTitle: "Permanent Recruitment",
     metaDescription:
-      "JLD Recruit LTD provides permanent recruitment for automotive, engineering and technical roles across the UK. Targeted sourcing, headhunting and candidate screening from a family-run recruitment agency.",
+      "JLD Recruit Ltd provides permanent recruitment for automotive, engineering and technical roles across the UK. Targeted sourcing, headhunting and candidate screening from a family-run recruitment agency.",
     keywords: [
       "permanent recruitment",
       "automotive recruitment agency",
@@ -93,7 +94,7 @@ export const servicePages: Record<string, ServicePageContent> = {
     heroEyebrow: "Permanent Recruitment",
     heroTitle: "Permanent recruitment for skilled automotive and engineering roles",
     heroDescription:
-      "Permanent recruitment is at the heart of what we do. JLD Recruit LTD helps UK businesses secure skilled, long-term employees through targeted sourcing, headhunting and thorough candidate screening.",
+      "Permanent recruitment is at the heart of what we do. JLD Recruit Ltd helps UK businesses secure skilled, long-term employees through targeted sourcing, headhunting and thorough candidate screening.",
     overview: [
       "Finding the right permanent hire is one of the most important decisions a business can make. A poor hire costs time, money and momentum. We take the time to understand your business, your team and the role you need to fill.",
       "As a specialist automotive and engineering recruitment agency, we use proactive sourcing methods — including headhunting, LinkedIn outreach and targeted campaigns — to reach candidates who are not always visible on job boards.",
@@ -128,6 +129,7 @@ export const servicePages: Record<string, ServicePageContent> = {
       "HGV & Commercial Vehicle Technicians",
       "Fire & Security Engineers",
       "Lift Engineers",
+      "Door Engineers",
       "Refrigeration & HVAC Engineers",
       "Field Service Engineers",
       "Maintenance Engineers",
@@ -138,7 +140,7 @@ export const servicePages: Record<string, ServicePageContent> = {
       {
         question: "What is permanent recruitment?",
         answer:
-          "Permanent recruitment is the process of finding and placing skilled candidates into long-term, employed roles within your business. JLD Recruit LTD specialises in permanent recruitment for automotive, engineering and technical positions across the UK.",
+          "Permanent recruitment is the process of finding and placing skilled candidates into long-term, employed roles within your business. JLD Recruit Ltd specialises in permanent recruitment for automotive, engineering and technical positions across the UK.",
       },
       {
         question: "How long does permanent recruitment take?",
@@ -167,7 +169,7 @@ export const servicePages: Record<string, ServicePageContent> = {
     title: "Temporary Recruitment",
     metaTitle: "Temporary Recruitment",
     metaDescription:
-      "Temporary recruitment and staffing solutions from JLD Recruit LTD. Temporary automotive, engineering, construction and healthcare staff for sickness cover, holidays and project work across the UK.",
+      "Temporary recruitment and staffing solutions from JLD Recruit Ltd. Temporary automotive, engineering, construction and healthcare staff for sickness cover, holidays and project work across the UK.",
     keywords: [
       "temporary recruitment agency",
       "temporary staffing solutions",
@@ -183,10 +185,10 @@ export const servicePages: Record<string, ServicePageContent> = {
     heroEyebrow: "Temporary Recruitment",
     heroTitle: "Temporary staffing solutions when your business needs flexible cover",
     heroDescription:
-      "When you need additional support quickly, JLD Recruit LTD provides temporary recruitment solutions across automotive, engineering, technical, construction and healthcare sectors — covering sickness, holidays, seasonal demand, project work and short-term staffing needs.",
+      "When you need additional support quickly, JLD Recruit Ltd provides temporary recruitment solutions across automotive, engineering, technical, construction and healthcare sectors — covering sickness, holidays, seasonal demand, project work and short-term staffing needs.",
     overview: [
       "Every business faces periods when additional staff are needed — whether due to sickness absence, holiday cover, seasonal peaks or a sudden increase in workload. Temporary recruitment gives you the flexibility to maintain operations without a long-term commitment.",
-      "JLD Recruit LTD sources skilled temporary workers across automotive, engineering and technical sectors, as well as construction and healthcare for temporary staffing assignments. We understand the urgency of temporary cover and work quickly to identify candidates who can add value from day one.",
+      "JLD Recruit Ltd sources skilled temporary workers across automotive, engineering and technical sectors, as well as construction and healthcare for temporary staffing assignments. We understand the urgency of temporary cover and work quickly to identify candidates who can add value from day one.",
       "While permanent recruitment remains our core focus, temporary staffing is a valuable additional service for employers who need responsive, flexible recruitment support across a wider range of sectors.",
     ],
     benefits: [
@@ -219,6 +221,7 @@ export const servicePages: Record<string, ServicePageContent> = {
       "Temporary HGV Technicians",
       "Temporary Fire & Security Engineers",
       "Temporary Lift Engineers",
+      "Temporary Door Engineers",
       "Temporary Refrigeration Engineers",
       "Temporary HVAC Engineers",
       "Temporary Field Service Engineers",
@@ -233,7 +236,7 @@ export const servicePages: Record<string, ServicePageContent> = {
       {
         question: "What is temporary recruitment?",
         answer:
-          "Temporary recruitment involves sourcing skilled workers to cover short-term staffing needs such as sickness absence, holiday cover, seasonal demand or project-based work. JLD Recruit LTD provides temporary staffing solutions across automotive, engineering, technical, construction and healthcare sectors.",
+          "Temporary recruitment involves sourcing skilled workers to cover short-term staffing needs such as sickness absence, holiday cover, seasonal demand or project-based work. JLD Recruit Ltd provides temporary staffing solutions across automotive, engineering, technical, construction and healthcare sectors.",
       },
       {
         question: "How quickly can you provide temporary cover?",
@@ -243,7 +246,7 @@ export const servicePages: Record<string, ServicePageContent> = {
       {
         question: "What temporary roles do you supply?",
         answer:
-          "We supply temporary vehicle technicians, mechanics, MOT testers, HGV technicians, fire and security engineers, lift engineers, refrigeration and HVAC engineers, field service engineers, maintenance engineers, construction staff, skilled trades, healthcare assistants, support workers, care staff, registered nurses and other technical professionals.",
+          "We supply temporary vehicle technicians, mechanics, MOT testers, HGV technicians, fire and security engineers, lift engineers, door engineers, refrigeration and HVAC engineers, field service engineers, maintenance engineers, construction staff, skilled trades, healthcare assistants, support workers, care staff, registered nurses and other technical professionals.",
       },
       {
         question: "Is temporary recruitment your main service?",
@@ -262,7 +265,7 @@ export const servicePages: Record<string, ServicePageContent> = {
     title: "Contract Recruitment",
     metaTitle: "Contract Recruitment",
     metaDescription:
-      "Contract recruitment agency services from JLD Recruit LTD. Experienced contract engineers, construction specialists and healthcare professionals for fixed-term projects across the UK.",
+      "Contract recruitment agency services from JLD Recruit Ltd. Experienced contract engineers, construction specialists and healthcare professionals for fixed-term projects across the UK.",
     keywords: [
       "contract recruitment agency",
       "contract engineers",
@@ -277,7 +280,7 @@ export const servicePages: Record<string, ServicePageContent> = {
     heroEyebrow: "Contract Recruitment",
     heroTitle: "Contract engineers and specialists for fixed-term projects",
     heroDescription:
-      "For specialist projects and technical assignments, JLD Recruit LTD helps businesses secure experienced contractors across automotive, engineering, technical, construction and healthcare sectors — with the skills required to deliver results quickly.",
+      "For specialist projects and technical assignments, JLD Recruit Ltd helps businesses secure experienced contractors across automotive, engineering, technical, construction and healthcare sectors — with the skills required to deliver results quickly.",
     overview: [
       "Some business needs call for experienced specialists on a fixed-term basis — whether for a technical project, a specialist installation, a construction assignment, a healthcare placement or a defined role with a clear end date.",
       "Our contract recruitment service connects businesses with experienced contractors and specialists across automotive, engineering and technical sectors, as well as construction and healthcare for contract assignments. We focus on finding professionals who can hit the ground running and deliver from day one.",
@@ -312,6 +315,7 @@ export const servicePages: Record<string, ServicePageContent> = {
       "Contract HGV Technicians",
       "Contract Fire & Security Engineers",
       "Contract Lift Engineers",
+      "Contract Door Engineers",
       "Contract Refrigeration Engineers",
       "Contract HVAC Engineers",
       "Contract Field Service Engineers",
@@ -326,12 +330,12 @@ export const servicePages: Record<string, ServicePageContent> = {
       {
         question: "What is contract recruitment?",
         answer:
-          "Contract recruitment involves sourcing experienced professionals for fixed-term assignments and specialist projects. JLD Recruit LTD helps businesses find contract engineers, construction specialists and healthcare professionals across automotive, engineering, technical, construction and healthcare sectors.",
+          "Contract recruitment involves sourcing experienced professionals for fixed-term assignments and specialist projects. JLD Recruit Ltd helps businesses find contract engineers, construction specialists and healthcare professionals across automotive, engineering, technical, construction and healthcare sectors.",
       },
       {
         question: "What types of contract roles do you cover?",
         answer:
-          "We recruit contract vehicle technicians, mechanics, HGV technicians, fire and security engineers, lift engineers, refrigeration and HVAC engineers, field service engineers, maintenance engineers, construction specialists, skilled trades, healthcare professionals, support workers and care staff for fixed-term assignments.",
+          "We recruit contract vehicle technicians, mechanics, HGV technicians, fire and security engineers, lift engineers, door engineers, refrigeration and HVAC engineers, field service engineers, maintenance engineers, construction specialists, skilled trades, healthcare professionals, support workers and care staff for fixed-term assignments.",
       },
       {
         question: "How is contract recruitment different from temporary recruitment?",
@@ -356,7 +360,7 @@ export const flexibleRecruitmentContent = {
   eyebrow: "Recruitment Solutions",
   title: "Flexible Recruitment Solutions for Growing Businesses",
   paragraphs: [
-    "Whether you need a permanent employee, temporary cover or a specialist contractor, JLD Recruit LTD provides flexible recruitment solutions tailored to your business needs.",
+    "Whether you need a permanent employee, temporary cover or a specialist contractor, JLD Recruit Ltd provides flexible recruitment solutions tailored to your business needs.",
     "We work closely with employers to understand their requirements and identify skilled candidates who can add value from day one. From urgent temporary cover in construction and healthcare to long-term strategic hires in automotive and engineering, we deliver a straightforward and responsive recruitment service.",
   ],
   primaryCta: "Discuss Your Hiring Needs",
@@ -366,7 +370,7 @@ export const flexibleRecruitmentContent = {
 export const employerTemporaryContent = {
   title: "Temporary Recruitment",
   paragraphs: [
-    "When businesses need additional support, JLD Recruit LTD can help source temporary workers to cover periods of increased demand, staff absences, holiday cover and project-based work.",
+    "When businesses need additional support, JLD Recruit Ltd can help source temporary workers to cover periods of increased demand, staff absences, holiday cover and project-based work.",
     "We supply temporary automotive staff, temporary engineering staff, construction workers, healthcare professionals and skilled technical staff who can step in quickly and keep your operations running smoothly.",
   ],
 };
@@ -374,7 +378,7 @@ export const employerTemporaryContent = {
 export const employerContractContent = {
   title: "Contract Recruitment",
   paragraphs: [
-    "For specialist projects and technical assignments, JLD Recruit LTD can help businesses secure experienced contractors with the skills required to deliver results quickly.",
+    "For specialist projects and technical assignments, JLD Recruit Ltd can help businesses secure experienced contractors with the skills required to deliver results quickly.",
     "Whether you need a contract engineer, construction specialist or healthcare professional for a fixed-term project, we provide proactive contract recruitment support across automotive, engineering, technical, construction and healthcare sectors.",
   ],
 };

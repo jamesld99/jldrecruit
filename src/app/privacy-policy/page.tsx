@@ -7,7 +7,7 @@ import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 export const metadata = createMetadata({
   title: "Privacy Policy",
   description:
-    "Privacy Policy for JLD Recruit LTD. Learn how we collect, use and protect your personal data in accordance with UK data protection law.",
+    "Privacy Policy for JLD Recruit Ltd. Learn how we collect, use and protect your personal data in accordance with UK data protection law.",
   path: "/privacy-policy",
   keywords: ["privacy policy", "data protection", "GDPR", "recruitment agency"],
 });
@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
         data={[
           getWebPageSchema(
             "Privacy Policy",
-            "How JLD Recruit LTD collects, uses and protects personal data.",
+            "How JLD Recruit Ltd collects, uses and protects personal data.",
             "/privacy-policy"
           ),
           getBreadcrumbSchema([

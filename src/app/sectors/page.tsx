@@ -10,7 +10,7 @@ import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 export const metadata = createMetadata({
   title: "Sectors",
   description:
-    "JLD Recruit LTD recruits across automotive, engineering and technical sectors, with temporary and contract staffing also available in construction and healthcare across the UK.",
+    "JLD Recruit Ltd recruits across automotive, engineering and technical sectors, with temporary and contract staffing also available in construction and healthcare across the UK.",
   path: "/sectors",
   keywords: [
     "automotive recruitment agency",
@@ -19,6 +19,7 @@ export const metadata = createMetadata({
     "HGV technician recruitment",
     "fire and security engineer recruitment",
     "lift engineer recruitment",
+    "door engineer recruitment",
     "refrigeration engineer recruitment",
     "engineering recruitment agency",
     "temporary construction staff",

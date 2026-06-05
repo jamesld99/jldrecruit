@@ -25,6 +25,12 @@ export function SectorIcon({ name, className = "h-6 w-6" }: SectorIconProps) {
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
       </svg>
     ),
+    door: (
+      <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3.75h7.5A2.25 2.25 0 0118 6v12a2.25 2.25 0 01-2.25 2.25h-7.5A2.25 2.25 0 016 18V6a2.25 2.25 0 012.25-2.25z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12h.008v.008H15V12z" />
+      </svg>
+    ),
     snowflake: (
       <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18m0-18l-3 3m3-3l3 3M12 21l-3-3m3 3l3-3M3 12h18M3 12l3-3m-3 3l3 3M21 12l-3-3m3 3l-3 3" />

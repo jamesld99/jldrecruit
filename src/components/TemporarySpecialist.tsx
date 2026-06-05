@@ -16,7 +16,7 @@ export function TemporarySpecialist({ variant = "default" }: TemporarySpecialist
       <div className="shrink-0">
         <Image
           src="/images/eleanor.png"
-          alt="Eleanor — Temporary recruitment specialist at JLD Recruit LTD"
+          alt="Eleanor — Temporary recruitment specialist at JLD Recruit Ltd"
           width={1024}
           height={1024}
           className={`rounded-2xl object-cover object-top shadow-md ring-4 ring-brand-100 ${

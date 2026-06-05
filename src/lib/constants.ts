@@ -1,9 +1,9 @@
 export const siteConfig = {
-  name: "JLD Recruit LTD",
-  legalName: "JLD Recruit LTD",
+  name: "JLD Recruit Ltd",
+  legalName: "JLD Recruit Ltd",
   tagline: "Specialist Recruitment for Automotive, Engineering and Technical Businesses",
   description:
-    "JLD Recruit LTD is a family-run UK recruitment agency specialising in permanent, temporary and contract recruitment across automotive, engineering and technical sectors. Personal, proactive and accountable recruitment solutions.",
+    "JLD Recruit Ltd is a family-run UK recruitment agency specialising in permanent, temporary and contract recruitment across automotive, engineering and technical sectors. Personal, proactive and accountable recruitment solutions.",
   url: "https://www.jldrecruit.co.uk",
   phone: "07535961452",
   phoneDisplay: "07535 961 452",
@@ -45,19 +45,6 @@ export const sectors = [
     icon: "car",
   },
   {
-    slug: "hgv-commercial",
-    title: "HGV & Commercial Vehicle",
-    description:
-      "Skilled HGV and commercial vehicle technicians for workshops, fleet maintenance teams and transport operators across the UK.",
-    roles: [
-      "HGV Technicians",
-      "Commercial Vehicle Mechanics",
-      "Fleet Maintenance Engineers",
-      "Trailer Technicians",
-    ],
-    icon: "truck",
-  },
-  {
     slug: "fire-security",
     title: "Fire & Security",
     description:
@@ -82,6 +69,32 @@ export const sectors = [
       "Installation Engineers",
     ],
     icon: "elevator",
+  },
+  {
+    slug: "door-engineering",
+    title: "Door Engineering",
+    description:
+      "Automatic door and entrance system engineers for installation, service, repair and maintenance roles with door companies and building services providers.",
+    roles: [
+      "Automatic Door Engineers",
+      "Door Service Engineers",
+      "Entrance System Engineers",
+      "Installation Engineers",
+    ],
+    icon: "door",
+  },
+  {
+    slug: "hgv-commercial",
+    title: "HGV & Commercial Vehicle",
+    description:
+      "Skilled HGV and commercial vehicle technicians for workshops, fleet maintenance teams and transport operators across the UK.",
+    roles: [
+      "HGV Technicians",
+      "Commercial Vehicle Mechanics",
+      "Fleet Maintenance Engineers",
+      "Trailer Technicians",
+    ],
+    icon: "truck",
   },
   {
     slug: "refrigeration-hvac",
@@ -265,9 +278,9 @@ export const whoWeHelp = [
 
 export const faqs = [
   {
-    question: "What sectors does JLD Recruit LTD recruit for?",
+    question: "What sectors does JLD Recruit Ltd recruit for?",
     answer:
-      "JLD Recruit LTD recruits across automotive, engineering and technical sectors including vehicle technicians, mechanics, MOT testers, HGV technicians, fire and security engineers, lift engineers, refrigeration and HVAC engineers, field service engineers, maintenance engineers, solar and renewable energy engineers, and general engineering roles. We also provide temporary and contract staffing in construction and healthcare.",
+      "JLD Recruit Ltd recruits across automotive, engineering and technical sectors including vehicle technicians, mechanics, MOT testers, HGV technicians, fire and security engineers, lift engineers, door engineers, refrigeration and HVAC engineers, field service engineers, maintenance engineers, solar and renewable energy engineers, and general engineering roles. We also provide temporary and contract staffing in construction and healthcare.",
   },
   {
     question: "Do you specialise in automotive recruitment?",
@@ -297,7 +310,7 @@ export const faqs = [
   {
     question: "What areas do you cover?",
     answer:
-      "JLD Recruit LTD covers the United Kingdom. We support employers and candidates across England, Wales and Scotland for both local and national recruitment requirements.",
+      "JLD Recruit Ltd covers the United Kingdom. We support employers and candidates across England, Wales and Scotland for both local and national recruitment requirements.",
   },
   {
     question: "Do you offer temporary recruitment?",

@@ -9,7 +9,7 @@ import { getBreadcrumbSchema, getFaqSchema, getWebPageSchema } from "@/lib/schem
 export const metadata = createMetadata({
   title: "Contact",
   description:
-    "Contact JLD Recruit LTD to discuss your recruitment needs. Call 07535 961 452, email james@jldrecruit.co.uk or send us your vacancy details through our contact form.",
+    "Contact JLD Recruit Ltd to discuss your recruitment needs. Call 07535 961 452, email james@jldrecruit.co.uk or send us your vacancy details through our contact form.",
   path: "/contact",
   keywords: [
     "contact recruitment agency",
@@ -24,8 +24,8 @@ export default function ContactPage() {
       <SchemaScript
         data={[
           getWebPageSchema(
-            "Contact JLD Recruit LTD",
-            "Get in touch with JLD Recruit LTD for automotive, engineering and technical recruitment support.",
+            "Contact JLD Recruit Ltd",
+            "Get in touch with JLD Recruit Ltd for automotive, engineering and technical recruitment support.",
             "/contact"
           ),
           getBreadcrumbSchema([

@@ -10,7 +10,7 @@ import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 export const metadata = createMetadata({
   title: "How It Works",
   description:
-    "Learn how JLD Recruit LTD's recruitment process works — from understanding your vacancy to sourcing, shortlisting, interviewing and placement. Simple, proactive and effective.",
+    "Learn how JLD Recruit Ltd's recruitment process works — from understanding your vacancy to sourcing, shortlisting, interviewing and placement. Simple, proactive and effective.",
   path: "/how-it-works",
   keywords: [
     "recruitment process",

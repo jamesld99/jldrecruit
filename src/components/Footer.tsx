@@ -10,7 +10,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <p className="text-lg font-bold text-white">JLD Recruit LTD</p>
+            <p className="text-lg font-bold text-white">{siteConfig.legalName}</p>
             <p className="mt-4 text-sm leading-relaxed text-brand-200">
               A family-run UK recruitment agency specialising in permanent,
               temporary and contract recruitment across automotive, engineering

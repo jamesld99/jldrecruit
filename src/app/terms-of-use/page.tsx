@@ -7,7 +7,7 @@ import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 export const metadata = createMetadata({
   title: "Terms of Use",
   description:
-    "Terms of Use for the JLD Recruit LTD website. Read the terms and conditions governing use of our website and recruitment services.",
+    "Terms of Use for the JLD Recruit Ltd website. Read the terms and conditions governing use of our website and recruitment services.",
   path: "/terms-of-use",
   keywords: ["terms of use", "terms and conditions", "website terms"],
 });
@@ -19,7 +19,7 @@ export default function TermsOfUsePage() {
         data={[
           getWebPageSchema(
             "Terms of Use",
-            "Terms and conditions for using the JLD Recruit LTD website.",
+            "Terms and conditions for using the JLD Recruit Ltd website.",
             "/terms-of-use"
           ),
           getBreadcrumbSchema([

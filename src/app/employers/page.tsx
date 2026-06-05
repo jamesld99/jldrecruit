@@ -23,7 +23,7 @@ import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 export const metadata = createMetadata({
   title: "Employers",
   description:
-    "JLD Recruit LTD helps UK businesses with permanent, temporary and contract recruitment across automotive, engineering and technical sectors. Proactive sourcing, headhunting and flexible staffing solutions.",
+    "JLD Recruit Ltd helps UK businesses with permanent, temporary and contract recruitment across automotive, engineering and technical sectors. Proactive sourcing, headhunting and flexible staffing solutions.",
   path: "/employers",
   keywords: [
     "recruitment support for garages",
@@ -63,7 +63,7 @@ export default function EmployersPage() {
               Recruitment support for businesses that need results
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
-              Permanent recruitment is at the heart of what we do. JLD Recruit LTD
+              Permanent recruitment is at the heart of what we do. JLD Recruit Ltd
               also provides temporary and contract recruitment solutions — giving
               employers proactive sourcing, headhunting, screening and flexible
               staffing support across automotive, engineering and technical sectors.

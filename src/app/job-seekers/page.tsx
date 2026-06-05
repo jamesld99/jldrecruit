@@ -9,7 +9,7 @@ import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 export const metadata = createMetadata({
   title: "Job Seekers",
   description:
-    "JLD Recruit LTD helps skilled candidates find permanent roles in automotive, engineering and technical sectors across the UK. Free service — speak directly with James.",
+    "JLD Recruit Ltd helps skilled candidates find permanent roles in automotive, engineering and technical sectors across the UK. Free service — speak directly with James.",
   path: "/job-seekers",
   keywords: [
     "automotive jobs UK",
@@ -26,7 +26,7 @@ export default function JobSeekersPage() {
         data={[
           getWebPageSchema(
             "Job Seekers",
-            "Find permanent roles in automotive, engineering and technical sectors with JLD Recruit LTD.",
+            "Find permanent roles in automotive, engineering and technical sectors with JLD Recruit Ltd.",
             "/job-seekers"
           ),
           getBreadcrumbSchema([
@@ -46,7 +46,7 @@ export default function JobSeekersPage() {
               Find your next role in automotive, engineering and technical sectors
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
-              JLD Recruit LTD connects skilled candidates with suitable permanent
+              JLD Recruit Ltd connects skilled candidates with suitable permanent
               roles across the UK. Whether you are a vehicle technician, MOT
               tester, lift engineer or field service specialist — we help match
               your skills with the right opportunity.
@@ -69,7 +69,7 @@ export default function JobSeekersPage() {
           />
           <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-navy-600">
             <p>
-              At JLD Recruit LTD, you speak directly with {siteConfig.founder}.
+              At JLD Recruit Ltd, you speak directly with {siteConfig.founder}.
               There are no junior consultants or automated systems — just honest,
               straightforward guidance to help you find a role that genuinely
               suits your skills and career goals.
@@ -82,8 +82,9 @@ export default function JobSeekersPage() {
             <p>
               We work across automotive, engineering and technical sectors,
               placing candidates in roles ranging from vehicle technicians and
-              HGV mechanics to fire and security engineers, lift engineers,
-              refrigeration and HVAC specialists, and field service engineers.
+              HGV mechanics to fire and security engineers, lift engineers, door
+              engineers, refrigeration and HVAC specialists, and field service
+              engineers.
             </p>
           </div>
         </div>
@@ -93,7 +94,7 @@ export default function JobSeekersPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Your Benefits"
-            title="Why register with JLD Recruit LTD"
+            title="Why register with JLD Recruit Ltd"
           />
           <div className="grid gap-6 sm:grid-cols-2">
             {candidateBenefits.map((benefit) => (

@@ -7,9 +7,9 @@ import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 
 export const metadata = createMetadata({
-  title: "About JLD Recruit LTD",
+  title: "About JLD Recruit Ltd",
   description:
-    "Learn about JLD Recruit LTD — a family-run UK recruitment agency specialising in automotive, engineering and technical recruitment. Personal, direct and accountable.",
+    "Learn about JLD Recruit Ltd — a family-run UK recruitment agency specialising in automotive, engineering and technical recruitment. Personal, direct and accountable.",
   path: "/about",
   keywords: [
     "recruitment agency UK",
@@ -25,7 +25,7 @@ export default function AboutPage() {
       <SchemaScript
         data={[
           getWebPageSchema(
-            "About JLD Recruit LTD",
+            "About JLD Recruit Ltd",
             "A family-run UK recruitment agency helping businesses find skilled candidates in automotive, engineering and technical sectors.",
             "/about"
           ),
@@ -46,7 +46,7 @@ export default function AboutPage() {
               A family-run recruitment business built on personal service
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
-              JLD Recruit LTD is an independent, family-run recruitment agency
+              JLD Recruit Ltd is an independent, family-run recruitment agency
               helping companies hire skilled candidates across automotive,
               engineering and technical sectors. We offer a personal, direct and
               accountable service — without corporate layers or inflated fees.
@@ -59,7 +59,7 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className="font-medium text-brand-600 underline decoration-brand-300 underline-offset-2 hover:text-brand-700"
               >
-                JLD Recruit LTD (Company no. {siteConfig.companiesHouseNumber})
+                JLD Recruit Ltd (Company no. {siteConfig.companiesHouseNumber})
               </a>
             </p>
           </div>
@@ -77,7 +77,7 @@ export default function AboutPage() {
               />
               <div className="space-y-5 text-lg leading-relaxed text-navy-600">
                 <p>
-                  JLD Recruit LTD was founded on a simple belief: recruitment
+                  JLD Recruit Ltd was founded on a simple belief: recruitment
                   works best when it is personal. Business owners and hiring
                   managers deserve to deal directly with someone who understands
                   their sector, listens to their needs and takes ownership of

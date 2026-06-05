@@ -106,7 +106,7 @@ export function ServicePage({ content }: { content: ServicePageContent }) {
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-4 eyebrow-pill">Benefits for Employers</p>
             <h2 className="text-3xl font-bold tracking-tight text-navy-900 sm:text-4xl">
-              Why employers choose JLD Recruit LTD
+              Why employers choose JLD Recruit Ltd
             </h2>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2">

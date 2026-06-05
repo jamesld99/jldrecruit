@@ -1,6 +1,6 @@
-# JLD Recruit LTD Website
+# JLD Recruit Ltd Website
 
-Modern, responsive Next.js website for JLD Recruit LTD — a family-run UK recruitment agency specialising in automotive, engineering and technical recruitment.
+Modern, responsive Next.js website for JLD Recruit Ltd — a family-run UK recruitment agency specialising in automotive, engineering and technical recruitment.
 
 ## Getting Started
 

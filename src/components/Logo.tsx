@@ -9,7 +9,7 @@ export function Logo({ variant = "header" }: LogoProps) {
   const image = (
     <Image
       src="/images/logo.png"
-      alt="JLD Recruit LTD — specialist automotive and engineering recruitment"
+      alt="JLD Recruit Ltd — specialist automotive and engineering recruitment"
       width={405}
       height={233}
       className={
