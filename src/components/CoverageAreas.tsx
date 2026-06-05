@@ -10,7 +10,7 @@ export function CoverageAreas() {
         <SectionHeading
           eyebrow="UK Coverage"
           title="Areas we cover"
-          description={`${siteConfig.name} recruits nationwide across automotive, engineering and technical sectors.`}
+          description={`${siteConfig.name} recruits nationwide across lift, fire & security, gate & door, refrigeration and automotive engineering.`}
         />
         <div className="flex flex-wrap justify-center gap-3">
           {coverageAreas.map((area) => (
@@ -23,9 +23,9 @@ export function CoverageAreas() {
           ))}
         </div>
         <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-navy-600">
-          We recruit nationwide across major cities and regions — with particularly
-          strong activity in the South West (Devon and Cornwall) for automotive,
-          HGV, lift, fire & security and door engineering roles.
+          We recruit nationwide across major cities and regions — with strong
+          activity in lift engineering, fire & security, gate & door,
+          refrigeration and automotive & HGV roles UK-wide.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm">
           <Link href="/locations/vehicle-technician-recruitment-devon" className="font-semibold text-brand-600 hover:text-brand-500">

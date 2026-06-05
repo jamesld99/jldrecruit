@@ -33,11 +33,37 @@ export async function generateMetadata({ params }: Props) {
   });
 }
 
+function JobSection({
+  title,
+  items,
+}: {
+  title: string;
+  items: string[];
+}) {
+  return (
+    <div>
+      <h2 className="text-xl font-bold text-navy-900">{title}</h2>
+      <ul className="mt-4 space-y-3">
+        {items.map((item) => (
+          <li key={item} className="flex items-start gap-3">
+            <svg className="mt-0.5 h-5 w-5 shrink-0 text-brand-500" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+            <span className="text-sm leading-relaxed text-navy-700">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default async function JobDetailPage({ params }: Props) {
   const { slug } = await params;
   const job = getJobBySlug(slug);
 
   if (!job) notFound();
+
+  const applyMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`Application: ${job.title} — ${job.location}`)}`;
 
   return (
     <>
@@ -69,19 +95,34 @@ export default async function JobDetailPage({ params }: Props) {
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-navy-900 sm:text-5xl">
               {job.title}
             </h1>
-            <p className="mt-4 text-lg font-medium text-brand-600">
-              {job.location}, {job.region}
-            </p>
-            <p className="mt-2 text-xl font-semibold text-navy-800">{job.salary}</p>
+            <dl className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wider text-navy-500">Location</dt>
+                <dd className="mt-1 font-medium text-navy-900">{job.location}, {job.region}</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wider text-navy-500">Salary</dt>
+                <dd className="mt-1 font-medium text-navy-900">{job.salary}</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wider text-navy-500">Job type</dt>
+                <dd className="mt-1 font-medium text-navy-900">{job.type}</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wider text-navy-500">Working hours</dt>
+                <dd className="mt-1 font-medium text-navy-900">{job.workingHours}</dd>
+              </div>
+            </dl>
+            <p className="mt-6 text-lg leading-relaxed text-navy-600">{job.summary}</p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
-                href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(`Application: ${job.title} — ${job.location}`)}`}
+                href={applyMailto}
                 className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-brand-500/30 transition-all hover:from-brand-700 hover:to-brand-600"
               >
-                Apply for this role
+                Apply now
               </a>
               <Button href="/contact" variant="outline">
-                Ask a question
+                Speak to James
               </Button>
             </div>
           </div>
@@ -91,40 +132,49 @@ export default async function JobDetailPage({ params }: Props) {
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2">
-            <div>
-              <h2 className="text-2xl font-bold text-navy-900">About the role</h2>
-              <div className="mt-6 space-y-5 text-lg leading-relaxed text-navy-600">
-                {job.description.map((paragraph) => (
-                  <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-                ))}
+            <div className="space-y-10">
+              <div>
+                <h2 className="text-2xl font-bold text-navy-900">Overview</h2>
+                <div className="mt-6 space-y-5 text-lg leading-relaxed text-navy-600">
+                  {job.overview.map((paragraph) => (
+                    <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
+              <JobSection title="Responsibilities" items={job.responsibilities} />
             </div>
-            <div className="rounded-2xl border border-brand-200 bg-brand-50/50 p-8 card-shadow">
-              <h2 className="text-xl font-bold text-navy-900">Requirements</h2>
-              <ul className="mt-6 space-y-3">
-                {job.requirements.map((req) => (
-                  <li key={req} className="flex items-start gap-3">
-                    <svg className="mt-0.5 h-5 w-5 shrink-0 text-brand-500" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                    </svg>
-                    <span className="text-sm text-navy-700">{req}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8">
-                <a
-                  href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(`Application: ${job.title} — ${job.location}`)}`}
-                  className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand-500/30 transition-all hover:from-brand-700 hover:to-brand-600"
-                >
-                  Apply via email
-                </a>
+            <div className="space-y-10">
+              <JobSection title="Requirements" items={job.requirements} />
+              <JobSection title="Benefits" items={job.benefits} />
+              <div className="rounded-2xl border border-brand-200 bg-brand-50/50 p-8 card-shadow">
+                <h2 className="text-xl font-bold text-navy-900">Apply for this role</h2>
+                <p className="mt-3 text-sm leading-relaxed text-navy-600">
+                  Email your CV or message James directly. You will speak with him throughout the process — no call centres.
+                </p>
+                <div className="mt-6 flex flex-col gap-3">
+                  <a
+                    href={applyMailto}
+                    className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand-500/30 transition-all hover:from-brand-700 hover:to-brand-600"
+                  >
+                    Apply now
+                  </a>
+                  <a
+                    href={`tel:${siteConfig.phone}`}
+                    className="inline-flex w-full items-center justify-center rounded-full border-2 border-brand-600 px-6 py-3.5 text-sm font-semibold text-brand-700 transition-all hover:bg-brand-600 hover:text-white"
+                  >
+                    Call {siteConfig.phoneDisplay}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <CTASection />
+      <CTASection
+        primaryLabel="Submit a Vacancy"
+        secondaryLabel="Speak to James"
+      />
     </>
   );
 }

@@ -143,7 +143,7 @@ function buildLiftLocation(city: string, slugSuffix: string): LocationPageConten
     ],
     relatedLinks: [
       { label: "Lift Engineer Recruitment", href: "/recruitment/lift-engineer-recruitment" },
-      { label: "Door Engineer Recruitment", href: "/recruitment/door-engineer-recruitment" },
+      { label: "Gate & Door Recruitment", href: "/recruitment/gate-door-recruitment" },
     ],
   };
 }
@@ -216,7 +216,53 @@ export const locationPages: LocationPageContent[] = [
   buildFireSecurityLocation("Cornwall", "cornwall"),
   buildFireSecurityLocation("London", "london"),
   buildFireSecurityLocation("Barnstaple", "barnstaple", "Devon"),
+  buildFireSecurityLocation("Midlands", "midlands"),
+  buildRefrigerationLocation("Bristol", "bristol"),
+  buildRefrigerationLocation("South West", "south-west"),
+  buildVehicleTechnicianLocation("Bristol", "Avon", "bristol"),
 ];
+
+function buildRefrigerationLocation(
+  location: string,
+  slugSuffix: string
+): LocationPageContent {
+  return {
+    slug: `refrigeration-recruitment-${slugSuffix}`,
+    role: "Refrigeration Engineer",
+    location,
+    region: slugSuffix === "south-west" ? "South West" : "UK",
+    metaTitle: `Refrigeration Engineer Recruitment ${location}`,
+    metaDescription: `Refrigeration, HVAC and air conditioning engineer recruitment in ${location}. Chiller, F-Gas and service engineers across the UK.`,
+    keywords: [
+      `refrigeration engineer jobs ${location}`,
+      `HVAC recruitment ${location}`,
+      `air conditioning engineer ${location}`,
+    ],
+    heroTitle: `Refrigeration Engineer Recruitment ${location}`,
+    heroDescription: `Refrigeration, HVAC and air conditioning engineer recruitment in ${location}. We find chiller engineers, F-Gas technicians and service engineers for commercial and industrial clients.`,
+    overview: [
+      `Refrigeration and HVAC recruitment in ${location} requires engineers with relevant F-Gas qualifications, commercial system experience and strong service skills.`,
+      `JLD Recruit Ltd recruits refrigeration engineers, chiller engineers, air conditioning engineers and HVAC technicians for service companies and contractors in ${location} and across the UK.`,
+      `Our proactive headhunting approach helps employers reach experienced engineers who are not always visible on job boards.`,
+    ],
+    roles: [
+      "Refrigeration Engineers",
+      "HVAC Engineers",
+      "Chiller Engineers",
+      "Air Conditioning Engineers",
+    ],
+    faqs: [
+      {
+        question: `Do you recruit refrigeration engineers in ${location}?`,
+        answer: `Yes. We provide refrigeration and HVAC recruitment support in ${location} and nationwide. Contact James to discuss your vacancy.`,
+      },
+    ],
+    relatedLinks: [
+      { label: "Refrigeration Recruitment", href: "/recruitment/refrigeration-recruitment" },
+      { label: "Current Jobs", href: "/jobs" },
+    ],
+  };
+}
 
 export const coverageAreas = [
   // Major cities — England

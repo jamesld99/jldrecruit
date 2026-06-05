@@ -4,29 +4,38 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { SectorCard } from "@/components/SectorCard";
 import { CTASection } from "@/components/CTASection";
 import { SchemaScript } from "@/components/SchemaScript";
-import { sectors, siteConfig } from "@/lib/constants";
+import {
+  additionalSectors,
+  otherSectors,
+  primarySectors,
+  siteConfig,
+} from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 
 export const metadata = createMetadata({
   title: "Sectors",
   description:
-    "JLD Recruit Ltd recruits across automotive, engineering and technical sectors, with temporary and contract staffing also available in construction and healthcare across the UK.",
+    "JLD Recruit Ltd specialises in lift engineering, fire & security, gate & door, refrigeration and automotive & HGV recruitment across the UK.",
   path: "/sectors",
   keywords: [
-    "automotive recruitment agency",
-    "vehicle technician recruitment",
-    "MOT tester recruitment",
-    "HGV technician recruitment",
-    "fire and security engineer recruitment",
     "lift engineer recruitment",
-    "door engineer recruitment",
+    "fire and security engineer recruitment",
+    "gate engineer recruitment",
     "refrigeration engineer recruitment",
-    "engineering recruitment agency",
-    "temporary construction staff",
-    "temporary healthcare staff",
+    "automotive recruitment agency",
+    "HGV technician recruitment",
   ],
 });
+
+const recruitmentLinks = [
+  { label: "Lift Engineer Recruitment", href: "/recruitment/lift-engineer-recruitment" },
+  { label: "Fire & Security Recruitment", href: "/recruitment/fire-security-recruitment" },
+  { label: "Gate & Door Recruitment", href: "/recruitment/gate-door-recruitment" },
+  { label: "Refrigeration Recruitment", href: "/recruitment/refrigeration-recruitment" },
+  { label: "Automotive Recruitment", href: "/recruitment/automotive-recruitment" },
+  { label: "Vehicle Technician Recruitment", href: "/recruitment/vehicle-technician-recruitment" },
+];
 
 export default function SectorsPage() {
   return (
@@ -35,7 +44,7 @@ export default function SectorsPage() {
         data={[
           getWebPageSchema(
             "Recruitment Sectors",
-            "Specialist recruitment across automotive, engineering and technical sectors in the UK.",
+            "Specialist lift, fire & security, gate & door, refrigeration and automotive recruitment across the UK.",
             "/sectors"
           ),
           getBreadcrumbSchema([
@@ -48,18 +57,16 @@ export default function SectorsPage() {
       <section className="gradient-hero py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl">
-            <p className="mb-4 eyebrow-pill">
-              Sectors
-            </p>
+            <p className="mb-4 eyebrow-pill">Sectors</p>
             <h1 className="text-4xl font-bold tracking-tight text-navy-900 sm:text-5xl">
-              Specialist recruitment across automotive, engineering and technical
-              sectors
+              Specialist recruitment for lift, fire & security, gate & door,
+              refrigeration and automotive engineering
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
-              {siteConfig.name} is a technical recruitment agency with deep
-              sector knowledge. We specialise in permanent recruitment across
-              automotive, engineering and technical sectors, and also provide
-              temporary and contract staffing in construction and healthcare.
+              {siteConfig.name} is a specialist engineering recruitment agency.
+              Our primary focus is lift engineering, fire & security, gate & door,
+              refrigeration & HVAC, and automotive & HGV — with additional
+              support available in other industries.
             </p>
           </div>
         </div>
@@ -68,12 +75,44 @@ export default function SectorsPage() {
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Our Sectors"
-            title="Key sectors we recruit for"
-            description="Permanent recruitment is our core focus across automotive, engineering and technical sectors. Construction and healthcare are available for temporary and contract staffing."
+            eyebrow="Primary Sectors"
+            title="Core sectors we recruit for"
+            description="Permanent recruitment is our core service across these specialist engineering sectors."
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
-            {sectors.map((sector) => (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {primarySectors.map((sector) => (
+              <SectorCard key={sector.slug} sector={sector} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {otherSectors.length > 0 && (
+        <section className="gradient-section py-20 lg:py-28">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Other Technical Sectors"
+              title="Additional engineering sectors"
+              description="We also support recruitment across these technical sectors."
+            />
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {otherSectors.map((sector) => (
+                <SectorCard key={sector.slug} sector={sector} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className="py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Other Industries We Support"
+            title="Additional sectors"
+            description="Temporary and contract staffing available in construction and healthcare — alongside our core engineering recruitment specialisms."
+          />
+          <div className="grid gap-6 sm:grid-cols-2">
+            {additionalSectors.map((sector) => (
               <SectorCard key={sector.slug} sector={sector} />
             ))}
           </div>
@@ -85,17 +124,10 @@ export default function SectorsPage() {
           <SectionHeading
             eyebrow="Specialist Recruitment"
             title="Dedicated recruitment pages"
-            description="In-depth recruitment support for our core sectors — built to help employers and candidates find exactly what they need."
+            description="In-depth recruitment support for our core sectors."
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { label: "Automotive Recruitment", href: "/recruitment/automotive-recruitment" },
-              { label: "Vehicle Technician Recruitment", href: "/recruitment/vehicle-technician-recruitment" },
-              { label: "HGV Recruitment", href: "/recruitment/hgv-recruitment" },
-              { label: "Lift Engineer Recruitment", href: "/recruitment/lift-engineer-recruitment" },
-              { label: "Fire & Security Recruitment", href: "/recruitment/fire-security-recruitment" },
-              { label: "Door Engineer Recruitment", href: "/recruitment/door-engineer-recruitment" },
-            ].map((link) => (
+            {recruitmentLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -108,30 +140,29 @@ export default function SectorsPage() {
         </div>
       </section>
 
-      <section className="gradient-section py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-2xl font-bold text-navy-900 sm:text-3xl">
-              Need to hire in one of these sectors?
-            </h2>
-            <p className="mt-4 text-lg text-navy-600">
-              Whether you are filling a single vacancy or building a team, we
-              provide proactive recruitment support tailored to your sector and
-              requirements.
-            </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button href="/contact" variant="primary">
-                Book a Recruitment Call
-              </Button>
-              <Button href="/employers" variant="outline">
-                Employer Services
-              </Button>
-            </div>
+      <section className="py-20 lg:py-28">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-navy-900 sm:text-3xl">
+            Need to hire an engineer or technician?
+          </h2>
+          <p className="mt-4 text-lg text-navy-600">
+            Submit your vacancy or speak directly with James about your hiring requirements.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button href="/contact" variant="primary">
+              Submit a Vacancy
+            </Button>
+            <Button href="/employers" variant="outline">
+              Request Staff
+            </Button>
           </div>
         </div>
       </section>
 
-      <CTASection />
+      <CTASection
+        primaryLabel="Book a Recruitment Call"
+        secondaryLabel="Speak to James"
+      />
     </>
   );
 }

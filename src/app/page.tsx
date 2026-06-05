@@ -9,11 +9,9 @@ import { RecruitmentSolutions } from "@/components/RecruitmentSolutions";
 import { SchemaScript } from "@/components/SchemaScript";
 import { TrustSignals } from "@/components/TrustSignals";
 import { VacancyForm } from "@/components/VacancyForm";
-import { faqs, sectors, siteConfig } from "@/lib/constants";
+import { faqs, primarySectors, siteConfig } from "@/lib/constants";
 import { jobs } from "@/lib/jobs";
 import { getFaqSchema, getWebPageSchema } from "@/lib/schema";
-
-const featuredSectors = sectors.slice(0, 4);
 
 export default function HomePage() {
   return (
@@ -45,12 +43,12 @@ export default function HomePage() {
                 {siteConfig.heroSubheadline}
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <Button href="/jobs" variant="primary">
-                  View Current Jobs
-                </Button>
-                <Button href="/employers" variant="outline">
-                  Employer Services
-                </Button>
+              <Button href="/jobs" variant="primary">
+                View Current Jobs
+              </Button>
+              <Button href="/contact" variant="outline">
+                Submit a Vacancy
+              </Button>
               </div>
               <p className="mt-6 text-sm font-medium text-brand-600">
                 Direct access to James &middot; No call centres &middot;
@@ -75,10 +73,10 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Key Sectors"
             title="Sectors we recruit for"
-            description="Specialist recruitment across automotive, fire & security, lift, door engineering and technical roles."
+            description="Specialist recruitment for lift engineering, fire & security, gate & door, refrigeration and automotive & HGV."
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredSectors.map((sector) => (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {primarySectors.map((sector) => (
               <SectorCard key={sector.slug} sector={sector} compact />
             ))}
           </div>
@@ -120,7 +118,10 @@ export default function HomePage() {
       </section>
 
       <ContactSection />
-      <CTASection />
+      <CTASection
+        primaryLabel="Book a Recruitment Call"
+        secondaryLabel="Submit a Vacancy"
+      />
     </>
   );
 }

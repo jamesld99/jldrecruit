@@ -1,4 +1,4 @@
-export type JobListing = {
+type RawJob = {
   slug: string;
   title: string;
   location: string;
@@ -7,12 +7,73 @@ export type JobListing = {
   sector: string;
   type: "Permanent" | "Temporary" | "Contract";
   summary: string;
-  description: string[];
+  overview: string[];
+  responsibilities?: string[];
   requirements: string[];
+  benefits?: string[];
+  workingHours?: string;
   postedDate: string;
 };
 
-export const jobs: JobListing[] = [
+export type JobListing = RawJob & {
+  responsibilities: string[];
+  benefits: string[];
+  workingHours: string;
+};
+
+const defaultBenefits = [
+  "Long-term career opportunity",
+  "Professional working environment",
+  "Ongoing training and development where applicable",
+];
+
+function defaultResponsibilities(sector: string): string[] {
+  if (sector === "Fire & Security") {
+    return [
+      "Install, commission, test and handover fire and security systems",
+      "Work from technical drawings and specifications",
+      "Carry out programming, fault finding and system testing",
+      "Ensure work meets current regulations and British Standards",
+      "Maintain professional standards on commercial and industrial sites",
+    ];
+  }
+  return [
+    "Carry out servicing, diagnostics, repairs and maintenance",
+    "Complete fault finding and vehicle inspections to a high standard",
+    "Work efficiently within a busy workshop environment",
+    "Maintain quality workmanship and attention to detail",
+    "Support the wider team and deliver excellent customer satisfaction",
+  ];
+}
+
+function defaultWorkingHours(sector: string, overview: string[]): string {
+  const text = overview.join(" ");
+  if (text.includes("Monday to Friday with no weekend")) {
+    return "Monday to Friday — no weekend work";
+  }
+  if (text.includes("Saturdays on a rota") || text.includes("Saturdays worked on a rota")) {
+    return "Monday to Friday with Saturdays on a rota basis";
+  }
+  if (text.includes("Every other Saturday")) {
+    return "Monday to Friday with every other Saturday morning";
+  }
+  if (sector === "Fire & Security") {
+    return "Monday to Friday — occasional flexibility required for project work";
+  }
+  return "Monday to Friday (full details confirmed with employer)";
+}
+
+function enrichJob(raw: RawJob): JobListing {
+  return {
+    ...raw,
+    responsibilities: raw.responsibilities ?? defaultResponsibilities(raw.sector),
+    benefits: raw.benefits ?? defaultBenefits,
+    workingHours:
+      raw.workingHours ?? defaultWorkingHours(raw.sector, raw.overview),
+  };
+}
+
+const rawJobs: RawJob[] = [
   {
     slug: "fire-security-engineer-barnstaple",
     title: "Fire & Security Engineer",
@@ -24,11 +85,17 @@ export const jobs: JobListing[] = [
     summary:
       "Installation and commissioning engineer for fire detection, CCTV, access control and intruder alarm systems.",
     postedDate: "2026-05-29",
-    description: [
+    overview: [
       "We are recruiting an experienced Fire & Security Installation and Commissioning Engineer for a growing company in Barnstaple.",
       "This is a long-term opportunity with varied commercial and industrial projects, career development and the chance to join a supportive, professional team with strong growth plans.",
       "The role involves installation, commissioning, testing and handover of Fire Detection, CCTV, Access Control and Intruder Alarm systems across a range of sites.",
       "You will work from technical drawings and specifications, carrying out programming, fault finding and system testing while ensuring all work meets current regulations and British Standards.",
+    ],
+    benefits: [
+      "Long-term opportunity with career development",
+      "Varied commercial and industrial projects",
+      "Supportive, professional team with growth plans",
+      "Industry qualifications beneficial (FIA Units, ECS, CSCS, IPAF, PASMA)",
     ],
     requirements: [
       "At least 2 years' experience within Fire & Security",
@@ -49,7 +116,7 @@ export const jobs: JobListing[] = [
     summary:
       "Skilled vehicle technician for an independent prestige specialist workshop.",
     postedDate: "2026-05-29",
-    description: [
+    overview: [
       "We are working with an independent prestige specialist in Macclesfield looking for a skilled Vehicle Technician to join their professional workshop.",
       "The role involves diagnostics, servicing, repairs and maintenance across a range of prestige vehicles, including engine, suspension, braking and electrical systems.",
       "You will use diagnostic equipment, workshop tools and technical manuals daily in an environment focused on quality workmanship and attention to detail.",
@@ -73,10 +140,15 @@ export const jobs: JobListing[] = [
     summary:
       "Experienced motor vehicle technician for a well established independent garage.",
     postedDate: "2026-05-22",
-    description: [
+    overview: [
       "Join a well established independent garage in Bournemouth with over 20 years' trading experience and a solid local reputation.",
       "The role involves servicing and repairing a wide range of vehicles including routine maintenance, brakes, clutches, exhaust systems, timing belts, diagnostics and general mechanical repairs.",
       "Monday to Friday with no weekend work — a stable role within a friendly, close-knit team.",
+    ],
+    benefits: [
+      "Monday to Friday — no weekend work",
+      "Stable role within a friendly, close-knit team",
+      "Over 20 years' established local reputation",
     ],
     requirements: [
       "Strong all-round mechanical ability",
@@ -96,16 +168,21 @@ export const jobs: JobListing[] = [
     summary:
       "Multiple technician and MOT tester opportunities with an established motor group.",
     postedDate: "2026-05-22",
-    description: [
+    overview: [
       "Multiple opportunities for experienced Vehicle Technicians and MOT Testers in Barnstaple with a well established motor group.",
       "Secure, long-term positions within professional workshop environments offering ongoing support and career progression.",
       "Servicing, diagnostics, repairs, fault finding and general maintenance across a variety of vehicles in busy, well-equipped workshops.",
+    ],
+    benefits: [
+      "Cycle to work scheme and staff discounts",
+      "Sick pay and life insurance",
+      "Referral schemes and additional leave",
+      "Ongoing training and development opportunities",
     ],
     requirements: [
       "Strong mechanical knowledge and diagnostic ability",
       "MOT licence beneficial but not essential for the right person",
       "Monday to Friday with Saturdays on a rota basis",
-      "Benefits include cycle to work scheme, staff discounts, sick pay, life insurance and training opportunities",
     ],
   },
   {
@@ -119,7 +196,7 @@ export const jobs: JobListing[] = [
     summary:
       "Multiple technician roles with a motor group investing in workshops and staff.",
     postedDate: "2026-05-22",
-    description: [
+    overview: [
       "Multiple Vehicle Technician and MOT Tester positions in Torquay with a well established motor group.",
       "Long-term roles within busy but supportive workshop environments where good work is recognised and progression is available.",
       "Servicing, repairs, diagnostics, fault finding and general maintenance using modern workshop equipment.",
@@ -142,16 +219,20 @@ export const jobs: JobListing[] = [
     summary:
       "Professional workshop roles with long-term stability and progression.",
     postedDate: "2026-05-22",
-    description: [
+    overview: [
       "Multiple opportunities in Exeter with a well established motor group offering professional workshop environments and genuine progression.",
       "Servicing, repairs, diagnostics, fault finding and general vehicle maintenance across a variety of makes and models.",
       "Busy workshops with strong team environments and consistent workflow.",
+    ],
+    benefits: [
+      "Strong benefits package including training and development",
+      "Cycle to work scheme and staff discounts",
+      "Sick pay, life insurance and referral schemes",
     ],
     requirements: [
       "Solid mechanical experience and attention to detail",
       "Ability to work efficiently in a fast-paced environment",
       "MOT licence an advantage but not essential",
-      "Strong benefits package including training and development",
     ],
   },
   {
@@ -165,7 +246,7 @@ export const jobs: JobListing[] = [
     summary:
       "Stable technician roles with a growing motor group across the South West.",
     postedDate: "2026-05-22",
-    description: [
+    overview: [
       "Multiple Vehicle Technician and MOT Tester opportunities in Plymouth with a well established motor group continuing to grow across the South West.",
       "Day-to-day work includes servicing, diagnostics, repairs, fault finding and general maintenance in busy, well-equipped workshops.",
       "Stable, long-term roles within professional environments that value good staff.",
@@ -188,7 +269,7 @@ export const jobs: JobListing[] = [
     summary:
       "Technician roles with an established motor group in Cornwall.",
     postedDate: "2026-05-22",
-    description: [
+    overview: [
       "Experienced Vehicle Technicians and MOT Testers needed for multiple opportunities in St Austell.",
       "Positions with a well established motor group offering stable, long-term career opportunities and excellent workshop support.",
       "Servicing, repairs, diagnostics and general maintenance across a wide range of vehicles in a professional, busy workshop.",
@@ -211,7 +292,7 @@ export const jobs: JobListing[] = [
     summary:
       "Multiple roles with a family run motor group in Cornwall.",
     postedDate: "2026-05-22",
-    description: [
+    overview: [
       "A family run motor group in Cornwall is looking for multiple Vehicle Technicians and MOT Testers for workshop teams in Truro.",
       "Long-term positions within a supportive business that values staff and offers strong career progression.",
       "Servicing, maintenance, repairs, diagnostics, fault finding, road testing and repair work in a professional environment.",
@@ -234,10 +315,16 @@ export const jobs: JobListing[] = [
     summary:
       "Hands-on vehicle technician for a busy workshop in Cornwall.",
     postedDate: "2026-05-15",
-    description: [
+    overview: [
       "Experienced Vehicle Technician needed for a busy workshop in Liskeard, Cornwall.",
       "Hands-on role within a good team environment — diagnostics, servicing, repairs and general mechanical work across a range of vehicles.",
       "Customer-facing responsibilities include speaking with customers, answering the phone, making bookings and keeping customers updated.",
+    ],
+    responsibilities: [
+      "Diagnostics, servicing, repairs and general mechanical work",
+      "Vehicle inspections and fault finding",
+      "Speak with customers and manage bookings when required",
+      "Maintain high standards in a busy workshop team environment",
     ],
     requirements: [
       "Confident using hand and power tools",
@@ -248,6 +335,8 @@ export const jobs: JobListing[] = [
     ],
   },
 ];
+
+export const jobs: JobListing[] = rawJobs.map(enrichJob);
 
 export function getJobBySlug(slug: string) {
   return jobs.find((job) => job.slug === slug);

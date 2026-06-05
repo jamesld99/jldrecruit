@@ -152,7 +152,7 @@ export function getJobPostingSchema(job: JobListing) {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: job.title,
-    description: [job.summary, ...job.description].join(" "),
+    description: [job.summary, ...job.overview].join(" "),
     datePosted: job.postedDate,
     employmentType: job.type === "Permanent" ? "FULL_TIME" : "TEMPORARY",
     hiringOrganization: {

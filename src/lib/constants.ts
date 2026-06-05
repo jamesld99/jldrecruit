@@ -1,12 +1,14 @@
 export const siteConfig = {
   name: "JLD Recruit Ltd",
   legalName: "JLD Recruit Ltd",
-  tagline: "Automotive & Engineering Recruitment Specialists",
-  heroHeadline: "Automotive & Engineering Recruitment Specialists",
+  tagline:
+    "Specialist Recruitment for Lift Engineering, Fire & Security, Gate & Door, Refrigeration, Automotive and Technical Businesses",
+  heroHeadline:
+    "Specialist Recruitment for Lift Engineering, Fire & Security, Gate & Door, Refrigeration, Automotive and Technical Businesses",
   heroSubheadline:
-    "Finding vehicle technicians, HGV mechanics, lift engineers, fire & security engineers, door engineers and technical professionals across the UK.",
+    "Finding lift engineers, fire & security engineers, gate & door engineers, refrigeration engineers, vehicle technicians, HGV mechanics and technical professionals across the UK.",
   description:
-    "JLD Recruit Ltd is a family-run UK recruitment agency specialising in permanent, temporary and contract recruitment across automotive, engineering and technical sectors. Personal, proactive and accountable recruitment solutions.",
+    "JLD Recruit Ltd is a family-run UK recruitment agency specialising in lift engineering, fire & security, gate & door, refrigeration, automotive and technical recruitment. Permanent, temporary and contract solutions with direct access to James.",
   url: "https://www.jldrecruit.co.uk",
   phone: "07535961452",
   phoneDisplay: "07535 961 452",
@@ -34,16 +36,18 @@ export const navLinks = [
 
 export const footerLinks = [
   { href: "/how-it-works", label: "How It Works" },
-  { href: "/recruitment/automotive-recruitment", label: "Automotive Recruitment" },
-  { href: "/recruitment/vehicle-technician-recruitment", label: "Vehicle Technician Recruitment" },
+  { href: "/recruitment/lift-engineer-recruitment", label: "Lift Engineer Recruitment" },
+  { href: "/recruitment/fire-security-recruitment", label: "Fire & Security Recruitment" },
+  { href: "/recruitment/gate-door-recruitment", label: "Gate & Door Recruitment" },
   { href: "/locations/vehicle-technician-recruitment-devon", label: "Devon Recruitment" },
   { href: "/locations/vehicle-technician-recruitment-cornwall", label: "Cornwall Recruitment" },
 ];
 
 export const trustSignals = [
   {
-    title: "Automotive & engineering specialists",
-    description: "Focused recruitment for technical roles — not generic office staffing.",
+    title: "Specialist engineering recruitment",
+    description:
+      "Focused on lift, fire & security, gate & door, refrigeration, automotive and technical roles — not generic staffing.",
   },
   {
     title: "Direct access to James",
@@ -68,93 +72,135 @@ export const trustSignals = [
 ];
 
 export const sectorRecruitmentLinks: Record<string, string> = {
-  automotive: "/recruitment/automotive-recruitment",
-  "fire-security": "/recruitment/fire-security-recruitment",
   "lift-engineering": "/recruitment/lift-engineer-recruitment",
-  "door-engineering": "/recruitment/door-engineer-recruitment",
-  "hgv-commercial": "/recruitment/hgv-recruitment",
+  "fire-security": "/recruitment/fire-security-recruitment",
+  "gate-door-engineering": "/recruitment/gate-door-recruitment",
   "refrigeration-hvac": "/recruitment/refrigeration-recruitment",
+  "automotive-hgv": "/recruitment/automotive-recruitment",
 };
+
+export const PRIMARY_SECTOR_SLUGS = [
+  "lift-engineering",
+  "fire-security",
+  "gate-door-engineering",
+  "refrigeration-hvac",
+  "automotive-hgv",
+] as const;
+
+export const ADDITIONAL_SECTOR_SLUGS = ["construction", "healthcare"] as const;
+
+export const employerWhyChoose = [
+  "Family-run business",
+  "Direct access to the business owner",
+  "Specialist engineering recruitment",
+  "UK-wide coverage",
+  "Permanent, temporary and contract recruitment",
+  "Headhunting approach",
+];
+
+export const employerFaqs = [
+  {
+    question: "How much does recruitment cost?",
+    answer:
+      "Fees depend on the role, sector and service level. We offer transparent, fixed fee recruitment where agreed upfront — without corporate markups. Contact James for a straightforward quote based on your vacancy.",
+  },
+  {
+    question: "What recruitment options do you offer?",
+    answer:
+      "We offer permanent recruitment as our core service, plus temporary and contract staffing when you need flexibility. Headhunting and targeted talent search are included in our proactive approach.",
+  },
+  {
+    question: "Do you work nationwide?",
+    answer:
+      "Yes. JLD Recruit Ltd supports employers across the United Kingdom, with strong recruitment activity in the South West, Midlands, London and major cities nationwide.",
+  },
+  {
+    question: "How long does it take to find engineers?",
+    answer:
+      "Timelines vary by role, location and market conditions. We provide honest timelines upfront and keep you updated throughout. Hard-to-fill engineering roles often benefit from our headhunting approach rather than waiting for applications.",
+  },
+  {
+    question: "Do you headhunt candidates?",
+    answer:
+      "Yes. Headhunting and proactive sourcing are core to how we work. We reach out directly to employed candidates who match your requirements — particularly important for lift engineers, fire & security engineers and skilled technicians.",
+  },
+  {
+    question: "Do you offer exclusive recruitment?",
+    answer:
+      "Yes. Exclusive recruitment can be arranged for the right vacancy, giving you dedicated focus on your role. Speak with James to discuss the best approach for your hiring needs.",
+  },
+];
 
 export const sectors = [
   {
-    slug: "automotive",
-    title: "Automotive",
+    slug: "lift-engineering",
+    title: "Lift Engineering",
     description:
-      "Vehicle technicians, mechanics, MOT testers, diagnostic technicians and workshop staff for garages, dealerships and fleet operators.",
+      "Lift engineers for service, repair, installation, maintenance and modernisation roles with lift companies and building services providers.",
     roles: [
-      "Vehicle Technicians",
-      "Mechanics",
-      "MOT Testers",
-      "Diagnostic Technicians",
-      "Workshop Supervisors",
+      "Service Engineers",
+      "Repair Engineers",
+      "Installation Engineers",
+      "Modernisation Engineers",
+      "NVQ 3 Engineers",
+      "NVQ 4 Engineers",
     ],
-    icon: "car",
+    icon: "elevator",
   },
   {
     slug: "fire-security",
     title: "Fire & Security",
     description:
-      "Fire and security engineer recruitment for installation, maintenance and service roles across commercial and residential sectors.",
+      "Fire and security engineer recruitment for installation, commissioning, service and maintenance across commercial and industrial sectors.",
     roles: [
-      "Fire Alarm Engineers",
+      "Installation Engineers",
+      "Service Engineers",
+      "Commissioning Engineers",
+      "Small Works Engineers",
       "Security Engineers",
-      "CCTV Installers",
-      "Access Control Engineers",
+      "Fire Alarm Engineers",
     ],
     icon: "shield",
   },
   {
-    slug: "lift-engineering",
-    title: "Lift Engineering",
+    slug: "gate-door-engineering",
+    title: "Gate & Door Engineering",
     description:
-      "Lift engineers for service, repair, installation and maintenance roles with lift companies and building services providers.",
+      "Gate, automatic door and industrial entrance system engineers for installation, service, repair and maintenance roles.",
     roles: [
-      "Lift Engineers",
-      "Escalator Engineers",
-      "Lift Service Engineers",
-      "Installation Engineers",
-    ],
-    icon: "elevator",
-  },
-  {
-    slug: "door-engineering",
-    title: "Door Engineering",
-    description:
-      "Automatic door and entrance system engineers for installation, service, repair and maintenance roles with door companies and building services providers.",
-    roles: [
+      "Gate Engineers",
       "Automatic Door Engineers",
-      "Door Service Engineers",
-      "Entrance System Engineers",
-      "Installation Engineers",
+      "Industrial Door Engineers",
+      "Roller Shutter Engineers",
     ],
     icon: "door",
   },
   {
-    slug: "hgv-commercial",
-    title: "HGV & Commercial Vehicle",
-    description:
-      "Skilled HGV and commercial vehicle technicians for workshops, fleet maintenance teams and transport operators across the UK.",
-    roles: [
-      "HGV Technicians",
-      "Commercial Vehicle Mechanics",
-      "Fleet Maintenance Engineers",
-      "Trailer Technicians",
-    ],
-    icon: "truck",
-  },
-  {
     slug: "refrigeration-hvac",
-    title: "Refrigeration, Air Conditioning & HVAC",
+    title: "Refrigeration & HVAC",
     description:
-      "Refrigeration, air conditioning and HVAC engineer recruitment for commercial, industrial and domestic environments.",
+      "Refrigeration, air conditioning, chiller and HVAC engineer recruitment for commercial, industrial and domestic environments.",
     roles: [
       "Refrigeration Engineers",
-      "Air Conditioning Engineers",
       "HVAC Engineers",
-      "F-Gas Engineers",
+      "Chiller Engineers",
+      "Air Conditioning Engineers",
     ],
     icon: "snowflake",
+  },
+  {
+    slug: "automotive-hgv",
+    title: "Automotive & HGV",
+    description:
+      "Vehicle technicians, MOT testers, diagnostic technicians, master technicians and HGV mechanics for garages, dealerships, fleet operators and workshops.",
+    roles: [
+      "Vehicle Technicians",
+      "MOT Testers",
+      "Diagnostic Technicians",
+      "Master Technicians",
+      "HGV Technicians",
+    ],
+    icon: "car",
   },
   {
     slug: "field-service-maintenance",
@@ -224,6 +270,20 @@ export const sectors = [
     tempContract: true,
   },
 ];
+
+export const primarySectors = PRIMARY_SECTOR_SLUGS.map((slug) =>
+  sectors.find((s) => s.slug === slug)
+).filter((s): s is (typeof sectors)[number] => Boolean(s));
+
+export const additionalSectors = sectors.filter((s) =>
+  (ADDITIONAL_SECTOR_SLUGS as readonly string[]).includes(s.slug)
+);
+
+export const otherSectors = sectors.filter(
+  (s) =>
+    !(PRIMARY_SECTOR_SLUGS as readonly string[]).includes(s.slug) &&
+    !(ADDITIONAL_SECTOR_SLUGS as readonly string[]).includes(s.slug)
+);
 
 export const services = [
   "Permanent recruitment",
@@ -327,12 +387,17 @@ export const faqs = [
   {
     question: "What sectors does JLD Recruit Ltd recruit for?",
     answer:
-      "JLD Recruit Ltd recruits across automotive, engineering and technical sectors including vehicle technicians, mechanics, MOT testers, HGV technicians, fire and security engineers, lift engineers, door engineers, refrigeration and HVAC engineers, field service engineers, maintenance engineers, solar and renewable energy engineers, and general engineering roles. We also provide temporary and contract staffing in construction and healthcare.",
+      "Our core specialisms are lift engineering, fire & security, gate & door engineering, refrigeration & HVAC, and automotive & HGV recruitment. We also support field service, renewable energy and general engineering roles, with temporary and contract staffing available in construction and healthcare.",
   },
   {
-    question: "Do you specialise in automotive recruitment?",
+    question: "Do you specialise in lift and fire & security recruitment?",
     answer:
-      "Yes. Automotive recruitment is a core specialism. We regularly place vehicle technicians, mechanics, MOT testers, diagnostic technicians and workshop staff with garages, dealerships and fleet operators across the UK.",
+      "Yes. Lift engineering and fire & security recruitment are key growth areas for JLD Recruit Ltd. We recruit service, installation, commissioning and maintenance engineers across the UK through proactive headhunting and targeted sourcing.",
+  },
+  {
+    question: "Do you recruit gate and door engineers?",
+    answer:
+      "Yes. We recruit gate engineers, automatic door engineers, industrial door engineers and roller shutter engineers for installation, service and maintenance roles UK-wide.",
   },
   {
     question: "Can you help with hard-to-fill engineering roles?",

@@ -94,7 +94,7 @@ export function VacancyForm() {
           disabled={loading}
           className="w-full rounded-full bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-brand-500/30 transition-all hover:from-brand-700 hover:to-brand-600 disabled:opacity-60"
         >
-          {loading ? "Opening email..." : "Send Vacancy"}
+          {loading ? "Opening email..." : "Submit Vacancy"}
         </button>
       </form>
     </div>

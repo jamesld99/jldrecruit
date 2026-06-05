@@ -15,9 +15,9 @@ export type SeoPageContent = {
 
 const sharedWhyChoose = [
   {
-    title: "Automotive & engineering specialists",
+    title: "Specialist engineering recruitment",
     description:
-      "We focus on technical roles — not general office recruitment — so we understand the skills, qualifications and experience that matter.",
+      "We focus on lift, fire & security, gate & door, refrigeration and automotive engineering roles — not generic office recruitment.",
   },
   {
     title: "Direct access to James",
@@ -61,12 +61,10 @@ export const recruitmentPages: SeoPageContent[] = [
     whyChoose: sharedWhyChoose,
     roles: [
       "Vehicle Technicians",
-      "Mechanics",
       "MOT Testers",
       "Diagnostic Technicians",
-      "Workshop Supervisors",
-      "Prestige Vehicle Technicians",
-      "Fleet Maintenance Technicians",
+      "Master Technicians",
+      "HGV Technicians",
     ],
     faqs: [
       {
@@ -199,11 +197,12 @@ export const recruitmentPages: SeoPageContent[] = [
     ],
     whyChoose: sharedWhyChoose,
     roles: [
-      "Lift Engineers",
-      "Escalator Engineers",
-      "Lift Service Engineers",
+      "Service Engineers",
+      "Repair Engineers",
       "Installation Engineers",
-      "Lift Maintenance Engineers",
+      "Modernisation Engineers",
+      "NVQ 3 Engineers",
+      "NVQ 4 Engineers",
     ],
     faqs: [
       {
@@ -215,7 +214,7 @@ export const recruitmentPages: SeoPageContent[] = [
     relatedLinks: [
       { label: "Lift Engineer Jobs London", href: "/locations/lift-engineer-recruitment-london" },
       { label: "Lift Engineer Jobs Birmingham", href: "/locations/lift-engineer-recruitment-birmingham" },
-      { label: "Door Engineer Recruitment", href: "/recruitment/door-engineer-recruitment" },
+      { label: "Gate & Door Recruitment", href: "/recruitment/gate-door-recruitment" },
     ],
   },
   {
@@ -241,11 +240,12 @@ export const recruitmentPages: SeoPageContent[] = [
     ],
     whyChoose: sharedWhyChoose,
     roles: [
-      "Fire Alarm Engineers",
-      "Security Engineers",
-      "CCTV Installers",
-      "Access Control Engineers",
+      "Installation Engineers",
+      "Service Engineers",
       "Commissioning Engineers",
+      "Small Works Engineers",
+      "Security Engineers",
+      "Fire Alarm Engineers",
     ],
     faqs: [
       {
@@ -256,7 +256,7 @@ export const recruitmentPages: SeoPageContent[] = [
     ],
     relatedLinks: [
       { label: "Fire & Security Jobs Devon", href: "/locations/fire-security-recruitment-devon" },
-      { label: "Fire & Security Jobs Birmingham", href: "/locations/fire-security-recruitment-birmingham" },
+      { label: "Fire & Security Midlands", href: "/locations/fire-security-recruitment-midlands" },
       { label: "Current Jobs", href: "/jobs" },
     ],
   },
@@ -284,10 +284,9 @@ export const recruitmentPages: SeoPageContent[] = [
     whyChoose: sharedWhyChoose,
     roles: [
       "Refrigeration Engineers",
-      "Air Conditioning Engineers",
       "HVAC Engineers",
-      "F-Gas Engineers",
-      "Commercial Refrigeration Engineers",
+      "Chiller Engineers",
+      "Air Conditioning Engineers",
     ],
     faqs: [
       {
@@ -297,44 +296,44 @@ export const recruitmentPages: SeoPageContent[] = [
       },
     ],
     relatedLinks: [
-      { label: "Automotive Recruitment", href: "/recruitment/automotive-recruitment" },
-      { label: "Field Service Engineers", href: "/sectors" },
+      { label: "Refrigeration Bristol", href: "/locations/refrigeration-recruitment-bristol" },
+      { label: "Refrigeration South West", href: "/locations/refrigeration-recruitment-south-west" },
+      { label: "Lift Engineer Recruitment", href: "/recruitment/lift-engineer-recruitment" },
     ],
   },
   {
-    slug: "door-engineer-recruitment",
-    metaTitle: "Door Engineer Recruitment UK",
+    slug: "gate-door-recruitment",
+    metaTitle: "Gate & Door Engineer Recruitment UK",
     metaDescription:
-      "Automatic door and entrance system engineer recruitment for installation, service, repair and maintenance roles across the UK.",
+      "Gate, automatic door and industrial door engineer recruitment for installation, service, repair and maintenance roles across the UK.",
     keywords: [
-      "door engineer recruitment",
+      "gate engineer recruitment",
       "automatic door engineer jobs",
-      "entrance system engineer recruitment",
-      "door engineer jobs UK",
+      "industrial door engineer recruitment",
+      "roller shutter engineer jobs",
     ],
-    heroEyebrow: "Door Engineer Recruitment",
-    heroTitle: "Door Engineer Recruitment",
+    heroEyebrow: "Gate & Door Recruitment",
+    heroTitle: "Gate & Door Engineer Recruitment",
     heroDescription:
-      "Specialist recruitment for automatic door engineers, entrance system engineers and door service engineers for installation, maintenance and repair roles UK-wide.",
+      "Specialist recruitment for gate engineers, automatic door engineers, industrial door engineers and roller shutter engineers for installation, service and maintenance roles UK-wide.",
     overview: [
-      "Door engineering is a specialist trade covering automatic doors, entrance systems, sliding doors, revolving doors and associated access equipment. Finding engineers with the right installation and service experience can be challenging without sector-focused recruitment.",
-      "We recruit automatic door engineers, door service engineers and entrance system engineers for door companies, building services providers and maintenance contractors.",
-      "Like lift engineering, door engineering roles often require specific product knowledge and safety awareness that generic recruiters overlook. We take time to understand your requirements and source candidates with relevant hands-on experience.",
-      "We provide permanent door engineer recruitment alongside temporary and contract cover when businesses need responsive staffing support.",
+      "Gate and door engineering covers automatic doors, industrial doors, roller shutters, gates and entrance systems. Finding engineers with the right installation and service experience requires sector-focused recruitment.",
+      "We recruit gate engineers, automatic door engineers, industrial door engineers and roller shutter engineers for door companies, building services providers and maintenance contractors.",
+      "Like lift engineering, these roles require specific product knowledge and safety awareness that generic recruiters overlook. We source candidates with relevant hands-on experience through proactive headhunting.",
+      "We provide permanent gate and door engineer recruitment alongside temporary and contract cover when businesses need responsive staffing support.",
     ],
     whyChoose: sharedWhyChoose,
     roles: [
+      "Gate Engineers",
       "Automatic Door Engineers",
-      "Door Service Engineers",
-      "Entrance System Engineers",
-      "Installation Engineers",
-      "Door Maintenance Engineers",
+      "Industrial Door Engineers",
+      "Roller Shutter Engineers",
     ],
     faqs: [
       {
-        question: "What door engineering roles do you recruit for?",
+        question: "What gate and door engineering roles do you recruit for?",
         answer:
-          "We recruit automatic door engineers, service engineers, installation engineers and entrance system specialists for door companies and building services businesses across the UK.",
+          "We recruit gate engineers, automatic door engineers, industrial door engineers and roller shutter engineers for installation, service and maintenance roles across the UK.",
       },
     ],
     relatedLinks: [

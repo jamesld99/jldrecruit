@@ -7,7 +7,8 @@ import { SchemaScript } from "@/components/SchemaScript";
 import { TemporarySpecialist } from "@/components/TemporarySpecialist";
 import {
   employerBenefits,
-  faqs,
+  employerFaqs,
+  employerWhyChoose,
   services,
   siteConfig,
 } from "@/lib/constants";
@@ -23,7 +24,7 @@ import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 export const metadata = createMetadata({
   title: "Employers",
   description:
-    "JLD Recruit Ltd helps UK businesses with permanent, temporary and contract recruitment across automotive, engineering and technical sectors. Proactive sourcing, headhunting and flexible staffing solutions.",
+    "JLD Recruit Ltd helps UK businesses hire lift engineers, fire & security engineers, gate & door engineers, refrigeration engineers and automotive & HGV technicians. Permanent, temporary and contract recruitment UK-wide.",
   path: "/employers",
   keywords: [
     "recruitment support for garages",
@@ -246,6 +247,29 @@ export default function EmployersPage() {
         </div>
       </section>
 
+      <section className="gradient-section py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Why Choose Us"
+            title="Why choose JLD Recruit"
+            description="Personal, specialist engineering recruitment without the corporate agency experience."
+          />
+          <ul className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
+            {employerWhyChoose.map((item) => (
+              <li
+                key={item}
+                className="flex items-start gap-3 rounded-2xl border border-brand-100 bg-white p-5 card-shadow"
+              >
+                <svg className="mt-0.5 h-5 w-5 shrink-0 text-brand-500" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                <span className="text-sm font-medium text-navy-800">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -294,13 +318,13 @@ export default function EmployersPage() {
       </section>
 
       <FAQ
-        items={faqs.slice(0, 7)}
+        items={employerFaqs}
         title="Employer FAQs"
-        description="Common questions from businesses looking for recruitment support."
+        description="Common questions from businesses looking for engineering and technical recruitment support."
       />
       <CTASection
-        primaryLabel="Discuss Your Hiring Needs"
-        secondaryLabel="Request Staff"
+        primaryLabel="Book a Recruitment Call"
+        secondaryLabel="Submit a Vacancy"
       />
     </>
   );
