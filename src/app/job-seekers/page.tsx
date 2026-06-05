@@ -2,14 +2,14 @@ import { Button } from "@/components/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CTASection } from "@/components/CTASection";
 import { SchemaScript } from "@/components/SchemaScript";
-import { candidateBenefits, sectors, siteConfig } from "@/lib/constants";
+import { candidateBenefits, primarySectors, siteConfig, ukWideMessage } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 
 export const metadata = createMetadata({
   title: "Job Seekers",
   description:
-    "JLD Recruit Ltd helps skilled candidates find permanent roles in automotive, engineering and technical sectors across the UK. Free service — speak directly with James.",
+    "JLD Recruit Ltd helps skilled candidates find permanent roles in lift engineering, fire & security, gate & door, refrigeration and automotive & HGV sectors UK-wide. Free service — speak directly with James.",
   path: "/job-seekers",
   keywords: [
     "automotive jobs UK",
@@ -26,7 +26,7 @@ export default function JobSeekersPage() {
         data={[
           getWebPageSchema(
             "Job Seekers",
-            "Find permanent roles in automotive, engineering and technical sectors with JLD Recruit Ltd.",
+            "Find permanent roles in lift engineering, fire & security, gate & door, refrigeration and automotive & HGV sectors with JLD Recruit Ltd.",
             "/job-seekers"
           ),
           getBreadcrumbSchema([
@@ -43,17 +43,22 @@ export default function JobSeekersPage() {
               For Job Seekers
             </p>
             <h1 className="text-4xl font-bold tracking-tight text-navy-900 sm:text-5xl">
-              Find your next role in automotive, engineering and technical sectors
+              Find your next role in lift, fire & security, gate & door,
+              refrigeration and automotive & HGV sectors
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
               JLD Recruit Ltd connects skilled candidates with suitable permanent
-              roles across the UK. Whether you are a vehicle technician, MOT
-              tester, lift engineer or field service specialist — we help match
-              your skills with the right opportunity.
+              roles across the UK. Whether you are a lift engineer, fire & security
+              engineer, gate & door engineer, refrigeration engineer, vehicle
+              technician or HGV mechanic — we help match your skills with the right
+              opportunity. {ukWideMessage}
             </p>
-            <div className="mt-8">
-              <Button href="/contact" variant="primary">
-                Get in Touch
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <Button href="/jobs" variant="primary">
+                View Jobs
+              </Button>
+              <Button href="/contact" variant="outline">
+                Speak to James
               </Button>
             </div>
           </div>
@@ -80,11 +85,11 @@ export default function JobSeekersPage() {
               focus is always on finding the right match for both parties.
             </p>
             <p>
-              We work across automotive, engineering and technical sectors,
-              placing candidates in roles ranging from vehicle technicians and
-              HGV mechanics to fire and security engineers, lift engineers, door
-              engineers, refrigeration and HVAC specialists, and field service
-              engineers.
+              We work across lift engineering, fire & security, gate & door,
+              refrigeration, automotive and HGV sectors — placing candidates in
+              roles ranging from lift service engineers and fire alarm engineers
+              to gate engineers, refrigeration engineers, vehicle technicians and
+              HGV mechanics UK-wide.
             </p>
           </div>
         </div>
@@ -121,8 +126,8 @@ export default function JobSeekersPage() {
             title="Roles we recruit for"
             description="We specialise in skilled technical and engineering positions across these sectors."
           />
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {sectors.map((sector) => (
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+            {primarySectors.map((sector) => (
               <li
                 key={sector.slug}
                 className="rounded-xl border border-brand-100 bg-brand-50/50 p-4 card-shadow"
@@ -176,9 +181,9 @@ export default function JobSeekersPage() {
       <CTASection
         title="Looking for your next role?"
         description="Get in touch with James to discuss suitable opportunities in your sector."
-        primaryLabel="Get in Touch"
-        secondaryLabel="View Sectors"
-        secondaryHref="/sectors"
+        primaryLabel="View Jobs"
+        primaryHref="/jobs"
+        secondaryLabel="Speak to James"
       />
     </>
   );

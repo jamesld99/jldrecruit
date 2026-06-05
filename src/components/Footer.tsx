@@ -12,9 +12,8 @@ export function Footer() {
           <div className="lg:col-span-1">
             <p className="text-lg font-bold text-white">{siteConfig.legalName}</p>
             <p className="mt-4 text-sm leading-relaxed text-brand-200">
-              A family-run UK recruitment agency specialising in permanent,
-              temporary and contract recruitment across automotive, engineering
-              and technical sectors.
+              {siteConfig.tagline}. Permanent, temporary and contract
+              recruitment UK-wide with direct access to James.
             </p>
             <p className="mt-4 text-sm text-brand-300">
               Registered in England and Wales.{" "}
@@ -163,8 +162,7 @@ export function Footer() {
             </div>
           </div>
           <p className="text-sm text-brand-300">
-            Recruitment agency UK &middot; Automotive &amp; Engineering
-            Specialists
+            UK-wide engineering &amp; automotive recruitment specialists
           </p>
         </div>
       </div>

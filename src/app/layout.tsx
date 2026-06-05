@@ -9,7 +9,7 @@ import {
   getProfessionalServiceSchema,
 } from "@/lib/schema";
 import { createMetadata } from "@/lib/metadata";
-import { siteConfig } from "@/lib/constants";
+import { siteConfig, seoKeywords } from "@/lib/constants";
 import "./globals.css";
 
 const inter = Inter({
@@ -22,12 +22,7 @@ export const metadata: Metadata = createMetadata({
   title: siteConfig.name,
   description: siteConfig.description,
   path: "/",
-  keywords: [
-    "vehicle technician recruitment",
-    "MOT tester recruitment",
-    "HGV technician recruitment",
-    "recruitment support for garages",
-  ],
+  keywords: seoKeywords,
 });
 
 export default function RootLayout({

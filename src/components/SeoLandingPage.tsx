@@ -64,10 +64,10 @@ export function SeoLandingPage({ content }: { content: SeoLandingContent }) {
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button href="/contact" variant="primary">
-                Discuss Your Hiring Needs
+                Submit Vacancy
               </Button>
               <Button href="/jobs" variant="outline">
-                View Current Jobs
+                View Jobs
               </Button>
             </div>
           </div>
@@ -144,7 +144,10 @@ export function SeoLandingPage({ content }: { content: SeoLandingContent }) {
       )}
 
       <FAQ items={content.faqs} />
-      <CTASection />
+      <CTASection
+        primaryLabel="Submit Vacancy"
+        secondaryLabel="Hire Staff"
+      />
     </>
   );
 }

@@ -12,9 +12,9 @@ interface CTASectionProps {
 export function CTASection({
   title = "Need help filling a role?",
   description = "Speak directly with James today. No corporate layers, no inflated fees — just honest, proactive recruitment support.",
-  primaryLabel = "Book a Recruitment Call",
+  primaryLabel = "Submit Vacancy",
   primaryHref = "/contact",
-  secondaryLabel = "Send Us a Vacancy",
+  secondaryLabel = "Hire Staff",
   secondaryHref = "/contact",
 }: CTASectionProps) {
   return (

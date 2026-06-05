@@ -51,7 +51,7 @@ export function Header() {
             {siteConfig.phoneDisplay}
           </a>
           <Button href="/contact" variant="primary">
-            Book a Call
+            Submit Vacancy
           </Button>
         </div>
 
@@ -113,7 +113,7 @@ export function Header() {
             </li>
             <li className="px-3 pt-2">
               <Button href="/contact" variant="primary" className="w-full">
-                Book a Call
+                Submit Vacancy
               </Button>
             </li>
           </ul>

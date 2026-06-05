@@ -5,12 +5,13 @@ import { FAQ } from "@/components/FAQ";
 import { RecruitmentSolutions } from "@/components/RecruitmentSolutions";
 import { SchemaScript } from "@/components/SchemaScript";
 import { TemporarySpecialist } from "@/components/TemporarySpecialist";
+import { WhyChooseSection } from "@/components/WhyChooseSection";
 import {
   employerBenefits,
   employerFaqs,
-  employerWhyChoose,
   services,
   siteConfig,
+  ukWideMessage,
 } from "@/lib/constants";
 import {
   employerContractContent,
@@ -27,15 +28,13 @@ export const metadata = createMetadata({
     "JLD Recruit Ltd helps UK businesses hire lift engineers, fire & security engineers, gate & door engineers, refrigeration engineers and automotive & HGV technicians. Permanent, temporary and contract recruitment UK-wide.",
   path: "/employers",
   keywords: [
-    "recruitment support for garages",
-    "recruitment support for engineering companies",
-    "permanent recruitment",
-    "temporary recruitment agency",
-    "contract recruitment agency",
-    "temporary staffing solutions",
-    "engineering recruitment agency",
-    "automotive recruitment agency",
-    "recruitment solutions",
+    "lift engineer recruitment",
+    "fire and security recruitment",
+    "gate engineer recruitment",
+    "refrigeration engineer recruitment",
+    "vehicle technician recruitment",
+    "HGV technician recruitment",
+    "UK-wide engineering recruitment",
   ],
 });
 
@@ -46,7 +45,7 @@ export default function EmployersPage() {
         data={[
           getWebPageSchema(
             "Employer Recruitment Services",
-            "Permanent, temporary and contract recruitment support for UK businesses hiring automotive, engineering and technical staff.",
+            "Permanent, temporary and contract recruitment for lift engineering, fire & security, gate & door, refrigeration and automotive & HGV roles.",
             "/employers"
           ),
           getBreadcrumbSchema([
@@ -67,14 +66,15 @@ export default function EmployersPage() {
               Permanent recruitment is at the heart of what we do. JLD Recruit Ltd
               also provides temporary and contract recruitment solutions — giving
               employers proactive sourcing, headhunting, screening and flexible
-              staffing support across automotive, engineering and technical sectors.
+              staffing support across lift engineering, fire & security, gate & door,
+              refrigeration and automotive & HGV sectors. {ukWideMessage}
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button href="/contact" variant="primary">
-                Discuss Your Hiring Needs
+                Submit Vacancy
               </Button>
               <Button href="/contact" variant="outline">
-                Request Staff
+                Hire Staff
               </Button>
             </div>
           </div>
@@ -247,28 +247,7 @@ export default function EmployersPage() {
         </div>
       </section>
 
-      <section className="gradient-section py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Why Choose Us"
-            title="Why choose JLD Recruit"
-            description="Personal, specialist engineering recruitment without the corporate agency experience."
-          />
-          <ul className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
-            {employerWhyChoose.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 rounded-2xl border border-brand-100 bg-white p-5 card-shadow"
-              >
-                <svg className="mt-0.5 h-5 w-5 shrink-0 text-brand-500" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-                <span className="text-sm font-medium text-navy-800">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <WhyChooseSection />
 
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -323,8 +302,8 @@ export default function EmployersPage() {
         description="Common questions from businesses looking for engineering and technical recruitment support."
       />
       <CTASection
-        primaryLabel="Book a Recruitment Call"
-        secondaryLabel="Submit a Vacancy"
+        primaryLabel="Submit Vacancy"
+        secondaryLabel="Speak to James"
       />
     </>
   );

@@ -39,17 +39,17 @@ const sharedWhyChoose = [
 export const recruitmentPages: SeoPageContent[] = [
   {
     slug: "automotive-recruitment",
-    metaTitle: "Automotive Recruitment Agency UK",
+    metaTitle: "Automotive & HGV Recruitment UK",
     metaDescription:
-      "Automotive recruitment agency specialising in vehicle technicians, mechanics, MOT testers and workshop staff. Permanent, temporary and contract recruitment across the UK.",
+      "Automotive and HGV recruitment for vehicle technicians, MOT testers, diagnostic technicians, master technicians, HGV mechanics and mobile vehicle technicians UK-wide.",
     keywords: [
       "automotive recruitment agency",
       "vehicle technician recruitment",
-      "mechanic recruitment UK",
-      "garage recruitment agency",
+      "HGV technician recruitment",
+      "vehicle technician recruitment UK",
     ],
-    heroEyebrow: "Automotive Recruitment",
-    heroTitle: "Automotive Recruitment Agency",
+    heroEyebrow: "Automotive & HGV Recruitment",
+    heroTitle: "Automotive & HGV Recruitment",
     heroDescription:
       "JLD Recruit Ltd is a specialist automotive recruitment agency helping garages, dealerships, fleet operators and motor groups find skilled vehicle technicians, mechanics, MOT testers and workshop staff across the UK.",
     overview: [
@@ -65,6 +65,7 @@ export const recruitmentPages: SeoPageContent[] = [
       "Diagnostic Technicians",
       "Master Technicians",
       "HGV Technicians",
+      "Mobile Vehicle Technicians",
     ],
     faqs: [
       {
@@ -176,14 +177,14 @@ export const recruitmentPages: SeoPageContent[] = [
   },
   {
     slug: "lift-engineer-recruitment",
-    metaTitle: "Lift Engineer Recruitment UK",
+    metaTitle: "Lift Engineer Recruitment UK | Lift Recruitment Agency",
     metaDescription:
-      "Lift engineer recruitment for service, repair, installation and maintenance roles. Escalator engineers and lift service engineers across the UK.",
+      "Lift engineer recruitment agency for service, repair, installation and modernisation roles. NVQ Level 3 and Level 4 lift engineers UK-wide.",
     keywords: [
       "lift engineer recruitment",
-      "escalator engineer jobs",
-      "lift engineer jobs London",
-      "lift maintenance recruitment",
+      "lift recruitment agency",
+      "lift service engineer jobs",
+      "NVQ lift engineer recruitment",
     ],
     heroEyebrow: "Lift Engineer Recruitment",
     heroTitle: "Lift Engineer Recruitment",
@@ -197,34 +198,35 @@ export const recruitmentPages: SeoPageContent[] = [
     ],
     whyChoose: sharedWhyChoose,
     roles: [
-      "Service Engineers",
-      "Repair Engineers",
-      "Installation Engineers",
-      "Modernisation Engineers",
-      "NVQ 3 Engineers",
-      "NVQ 4 Engineers",
+      "Lift Service Engineers",
+      "Lift Repair Engineers",
+      "Lift Installation Engineers",
+      "Lift Modernisation Engineers",
+      "NVQ Level 3 Lift Engineers",
+      "NVQ Level 4 Lift Engineers",
     ],
     faqs: [
       {
         question: "What lift engineering roles do you recruit for?",
         answer:
-          "We recruit lift engineers, escalator engineers, service engineers, installation engineers and maintenance engineers for lift companies and building services businesses across the UK.",
+          "We recruit lift service engineers, lift repair engineers, lift installation engineers, lift modernisation engineers, and NVQ Level 3 and Level 4 lift engineers for lift companies and building services businesses across the UK.",
       },
     ],
     relatedLinks: [
       { label: "Lift Engineer Jobs London", href: "/locations/lift-engineer-recruitment-london" },
       { label: "Lift Engineer Jobs Birmingham", href: "/locations/lift-engineer-recruitment-birmingham" },
+      { label: "Lift Engineer Jobs Glasgow", href: "/locations/lift-engineer-recruitment-glasgow" },
       { label: "Gate & Door Recruitment", href: "/recruitment/gate-door-recruitment" },
     ],
   },
   {
     slug: "fire-security-recruitment",
-    metaTitle: "Fire & Security Engineer Recruitment UK",
+    metaTitle: "Fire & Security Recruitment UK",
     metaDescription:
-      "Fire and security engineer recruitment for installation, commissioning, maintenance and service roles. CCTV, access control and fire alarm engineers UK-wide.",
+      "Fire and security recruitment for fire alarm engineers, security engineers, CCTV, access control and intruder alarm engineers UK-wide.",
     keywords: [
-      "fire and security engineer recruitment",
-      "fire alarm engineer jobs",
+      "fire and security recruitment",
+      "fire alarm engineer recruitment",
       "CCTV engineer recruitment",
       "security engineer jobs",
     ],
@@ -240,12 +242,13 @@ export const recruitmentPages: SeoPageContent[] = [
     ],
     whyChoose: sharedWhyChoose,
     roles: [
+      "Fire Alarm Engineers",
+      "Security Engineers",
       "Installation Engineers",
       "Service Engineers",
       "Commissioning Engineers",
       "Small Works Engineers",
-      "Security Engineers",
-      "Fire Alarm Engineers",
+      "CCTV, Access Control and Intruder Alarm Engineers",
     ],
     faqs: [
       {
@@ -255,21 +258,22 @@ export const recruitmentPages: SeoPageContent[] = [
       },
     ],
     relatedLinks: [
-      { label: "Fire & Security Jobs Devon", href: "/locations/fire-security-recruitment-devon" },
-      { label: "Fire & Security Midlands", href: "/locations/fire-security-recruitment-midlands" },
+      { label: "Fire & Security Jobs London", href: "/locations/fire-security-recruitment-london" },
+      { label: "Fire & Security Jobs Birmingham", href: "/locations/fire-security-recruitment-birmingham" },
+      { label: "Fire & Security Jobs Manchester", href: "/locations/fire-security-recruitment-manchester" },
       { label: "Current Jobs", href: "/jobs" },
     ],
   },
   {
     slug: "refrigeration-recruitment",
-    metaTitle: "Refrigeration & HVAC Engineer Recruitment UK",
+    metaTitle: "Refrigeration & HVAC Recruitment UK",
     metaDescription:
-      "Refrigeration, air conditioning and HVAC engineer recruitment for commercial, industrial and domestic environments across the UK.",
+      "Refrigeration engineer recruitment and HVAC recruitment for chiller, air conditioning and commercial refrigeration engineers UK-wide.",
     keywords: [
       "refrigeration engineer recruitment",
-      "HVAC recruitment agency",
+      "HVAC recruitment",
       "air conditioning engineer jobs",
-      "F-Gas engineer recruitment",
+      "commercial refrigeration recruitment",
     ],
     heroEyebrow: "Refrigeration & HVAC Recruitment",
     heroTitle: "Refrigeration, Air Conditioning & HVAC Recruitment",
@@ -287,6 +291,7 @@ export const recruitmentPages: SeoPageContent[] = [
       "HVAC Engineers",
       "Chiller Engineers",
       "Air Conditioning Engineers",
+      "Commercial Refrigeration Engineers",
     ],
     faqs: [
       {
@@ -296,8 +301,9 @@ export const recruitmentPages: SeoPageContent[] = [
       },
     ],
     relatedLinks: [
+      { label: "Refrigeration London", href: "/locations/refrigeration-recruitment-london" },
+      { label: "Refrigeration Birmingham", href: "/locations/refrigeration-recruitment-birmingham" },
       { label: "Refrigeration Bristol", href: "/locations/refrigeration-recruitment-bristol" },
-      { label: "Refrigeration South West", href: "/locations/refrigeration-recruitment-south-west" },
       { label: "Lift Engineer Recruitment", href: "/recruitment/lift-engineer-recruitment" },
     ],
   },
@@ -305,10 +311,10 @@ export const recruitmentPages: SeoPageContent[] = [
     slug: "gate-door-recruitment",
     metaTitle: "Gate & Door Engineer Recruitment UK",
     metaDescription:
-      "Gate, automatic door and industrial door engineer recruitment for installation, service, repair and maintenance roles across the UK.",
+      "Gate engineer recruitment, automatic door engineer recruitment and industrial door engineer recruitment for installation, service and maintenance UK-wide.",
     keywords: [
       "gate engineer recruitment",
-      "automatic door engineer jobs",
+      "automatic door engineer recruitment",
       "industrial door engineer recruitment",
       "roller shutter engineer jobs",
     ],
@@ -328,6 +334,7 @@ export const recruitmentPages: SeoPageContent[] = [
       "Automatic Door Engineers",
       "Industrial Door Engineers",
       "Roller Shutter Engineers",
+      "Barrier Engineers",
     ],
     faqs: [
       {
@@ -337,6 +344,8 @@ export const recruitmentPages: SeoPageContent[] = [
       },
     ],
     relatedLinks: [
+      { label: "Gate Engineer Jobs London", href: "/locations/gate-engineer-recruitment-london" },
+      { label: "Gate Engineer Jobs Midlands", href: "/locations/gate-engineer-recruitment-midlands" },
       { label: "Lift Engineer Recruitment", href: "/recruitment/lift-engineer-recruitment" },
       { label: "Fire & Security Recruitment", href: "/recruitment/fire-security-recruitment" },
     ],

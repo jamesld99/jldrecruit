@@ -2,13 +2,13 @@ export const siteConfig = {
   name: "JLD Recruit Ltd",
   legalName: "JLD Recruit Ltd",
   tagline:
-    "Specialist Recruitment for Lift Engineering, Fire & Security, Gate & Door, Refrigeration, Automotive and Technical Businesses",
+    "Specialist Recruitment for Lift Engineering, Fire & Security, Gate & Door, Refrigeration, Automotive & HGV Businesses",
   heroHeadline:
-    "Specialist Recruitment for Lift Engineering, Fire & Security, Gate & Door, Refrigeration, Automotive and Technical Businesses",
+    "Specialist Recruitment for Lift Engineering, Fire & Security, Gate & Door and Automotive Businesses",
   heroSubheadline:
-    "Finding lift engineers, fire & security engineers, gate & door engineers, refrigeration engineers, vehicle technicians, HGV mechanics and technical professionals across the UK.",
+    "UK-wide recruitment for lift engineers, fire & security engineers, gate & door engineers and vehicle technicians. We support employers across England, Scotland, Wales and Northern Ireland.",
   description:
-    "JLD Recruit Ltd is a family-run UK recruitment agency specialising in lift engineering, fire & security, gate & door, refrigeration, automotive and technical recruitment. Permanent, temporary and contract solutions with direct access to James.",
+    "JLD Recruit Ltd is a family-run UK recruitment agency specialising in lift engineering, fire & security, gate & door, refrigeration, automotive and HGV recruitment. Permanent, temporary and contract solutions with direct access to James.",
   url: "https://www.jldrecruit.co.uk",
   phone: "07535961452",
   phoneDisplay: "07535 961 452",
@@ -34,11 +34,29 @@ export const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+export const ukWideMessage =
+  "We support employers across England, Scotland, Wales and Northern Ireland.";
+
+export const seoKeywords = [
+  "lift engineer recruitment",
+  "lift recruitment agency",
+  "fire and security recruitment",
+  "gate engineer recruitment",
+  "automatic door engineer recruitment",
+  "industrial door engineer recruitment",
+  "refrigeration engineer recruitment",
+  "HVAC recruitment",
+  "vehicle technician recruitment",
+  "HGV technician recruitment",
+  "UK-wide engineering recruitment",
+];
+
 export const footerLinks = [
-  { href: "/how-it-works", label: "How It Works" },
   { href: "/recruitment/lift-engineer-recruitment", label: "Lift Engineer Recruitment" },
   { href: "/recruitment/fire-security-recruitment", label: "Fire & Security Recruitment" },
   { href: "/recruitment/gate-door-recruitment", label: "Gate & Door Recruitment" },
+  { href: "/recruitment/refrigeration-recruitment", label: "Refrigeration Recruitment" },
+  { href: "/insights", label: "Recruitment Insights" },
   { href: "/locations/vehicle-technician-recruitment-devon", label: "Devon Recruitment" },
   { href: "/locations/vehicle-technician-recruitment-cornwall", label: "Cornwall Recruitment" },
 ];
@@ -90,12 +108,13 @@ export const PRIMARY_SECTOR_SLUGS = [
 export const ADDITIONAL_SECTOR_SLUGS = ["construction", "healthcare"] as const;
 
 export const employerWhyChoose = [
-  "Family-run business",
-  "Direct access to the business owner",
-  "Specialist engineering recruitment",
-  "UK-wide coverage",
-  "Permanent, temporary and contract recruitment",
+  "Family-run recruitment business",
+  "Direct access to James",
+  "UK-wide candidate search",
+  "Specialist engineering and automotive recruitment",
   "Headhunting approach",
+  "Permanent, temporary and contract recruitment support",
+  "Clear communication from start to finish",
 ];
 
 export const employerFaqs = [
@@ -112,7 +131,7 @@ export const employerFaqs = [
   {
     question: "Do you work nationwide?",
     answer:
-      "Yes. JLD Recruit Ltd supports employers across the United Kingdom, with strong recruitment activity in the South West, Midlands, London and major cities nationwide.",
+      "Yes. JLD Recruit Ltd supports employers across England, Scotland, Wales and Northern Ireland, with strong recruitment activity in London, the Midlands, major cities and the South West.",
   },
   {
     question: "How long does it take to find engineers?",
@@ -138,12 +157,12 @@ export const sectors = [
     description:
       "Lift engineers for service, repair, installation, maintenance and modernisation roles with lift companies and building services providers.",
     roles: [
-      "Service Engineers",
-      "Repair Engineers",
-      "Installation Engineers",
-      "Modernisation Engineers",
-      "NVQ 3 Engineers",
-      "NVQ 4 Engineers",
+      "Lift Service Engineers",
+      "Lift Repair Engineers",
+      "Lift Installation Engineers",
+      "Lift Modernisation Engineers",
+      "NVQ Level 3 Lift Engineers",
+      "NVQ Level 4 Lift Engineers",
     ],
     icon: "elevator",
   },
@@ -153,12 +172,13 @@ export const sectors = [
     description:
       "Fire and security engineer recruitment for installation, commissioning, service and maintenance across commercial and industrial sectors.",
     roles: [
+      "Fire Alarm Engineers",
+      "Security Engineers",
       "Installation Engineers",
       "Service Engineers",
       "Commissioning Engineers",
       "Small Works Engineers",
-      "Security Engineers",
-      "Fire Alarm Engineers",
+      "CCTV, Access Control and Intruder Alarm Engineers",
     ],
     icon: "shield",
   },
@@ -172,6 +192,7 @@ export const sectors = [
       "Automatic Door Engineers",
       "Industrial Door Engineers",
       "Roller Shutter Engineers",
+      "Barrier Engineers",
     ],
     icon: "door",
   },
@@ -185,6 +206,7 @@ export const sectors = [
       "HVAC Engineers",
       "Chiller Engineers",
       "Air Conditioning Engineers",
+      "Commercial Refrigeration Engineers",
     ],
     icon: "snowflake",
   },
@@ -199,6 +221,7 @@ export const sectors = [
       "Diagnostic Technicians",
       "Master Technicians",
       "HGV Technicians",
+      "Mobile Vehicle Technicians",
     ],
     icon: "car",
   },

@@ -10,6 +10,7 @@ type RawJob = {
   overview: string[];
   responsibilities?: string[];
   requirements: string[];
+  desirable?: string[];
   benefits?: string[];
   workingHours?: string;
   postedDate: string;
@@ -17,6 +18,7 @@ type RawJob = {
 
 export type JobListing = RawJob & {
   responsibilities: string[];
+  desirable: string[];
   benefits: string[];
   workingHours: string;
 };
@@ -63,10 +65,17 @@ function defaultWorkingHours(sector: string, overview: string[]): string {
   return "Monday to Friday (full details confirmed with employer)";
 }
 
+const defaultDesirable = [
+  "Additional sector-specific qualifications or manufacturer training",
+  "Experience with similar equipment or systems",
+  "Strong communication and customer-facing skills",
+];
+
 function enrichJob(raw: RawJob): JobListing {
   return {
     ...raw,
     responsibilities: raw.responsibilities ?? defaultResponsibilities(raw.sector),
+    desirable: raw.desirable ?? defaultDesirable,
     benefits: raw.benefits ?? defaultBenefits,
     workingHours:
       raw.workingHours ?? defaultWorkingHours(raw.sector, raw.overview),

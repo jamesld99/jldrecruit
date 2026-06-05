@@ -150,17 +150,17 @@ export default function SectorsPage() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button href="/contact" variant="primary">
-              Submit a Vacancy
+              Submit Vacancy
             </Button>
             <Button href="/employers" variant="outline">
-              Request Staff
+              Hire Staff
             </Button>
           </div>
         </div>
       </section>
 
       <CTASection
-        primaryLabel="Book a Recruitment Call"
+        primaryLabel="Submit Vacancy"
         secondaryLabel="Speak to James"
       />
     </>

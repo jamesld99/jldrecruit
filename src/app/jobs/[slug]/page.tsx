@@ -141,13 +141,20 @@ export default async function JobDetailPage({ params }: Props) {
                   ))}
                 </div>
               </div>
-              <JobSection title="Responsibilities" items={job.responsibilities} />
+              <JobSection title="Key Responsibilities" items={job.responsibilities} />
             </div>
             <div className="space-y-10">
               <JobSection title="Requirements" items={job.requirements} />
+              <JobSection title="Desirable" items={job.desirable} />
               <JobSection title="Benefits" items={job.benefits} />
+              <div>
+                <h2 className="text-xl font-bold text-navy-900">Working Hours</h2>
+                <p className="mt-4 text-sm leading-relaxed text-navy-700">
+                  {job.workingHours}
+                </p>
+              </div>
               <div className="rounded-2xl border border-brand-200 bg-brand-50/50 p-8 card-shadow">
-                <h2 className="text-xl font-bold text-navy-900">Apply for this role</h2>
+                <h2 className="text-xl font-bold text-navy-900">Apply Now</h2>
                 <p className="mt-3 text-sm leading-relaxed text-navy-600">
                   Email your CV or message James directly. You will speak with him throughout the process — no call centres.
                 </p>

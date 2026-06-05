@@ -9,13 +9,13 @@ import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 export const metadata = createMetadata({
   title: "About JLD Recruit Ltd",
   description:
-    "Learn about JLD Recruit Ltd — a family-run UK recruitment agency specialising in automotive, engineering and technical recruitment. Personal, direct and accountable.",
+    "Learn about JLD Recruit Ltd — a family-run UK recruitment agency specialising in lift engineering, fire & security, gate & door, refrigeration, automotive and HGV recruitment.",
   path: "/about",
   keywords: [
-    "recruitment agency UK",
+    "lift recruitment agency",
+    "UK-wide engineering recruitment",
     "family-run recruitment",
-    "automotive recruitment agency",
-    "engineering recruitment agency",
+    "specialist engineering recruitment",
   ],
 });
 
@@ -26,7 +26,7 @@ export default function AboutPage() {
         data={[
           getWebPageSchema(
             "About JLD Recruit Ltd",
-            "A family-run UK recruitment agency helping businesses find skilled candidates in automotive, engineering and technical sectors.",
+            "A family-run UK recruitment agency helping businesses hire lift engineers, fire & security engineers, gate & door engineers, refrigeration engineers and automotive & HGV technicians.",
             "/about"
           ),
           getBreadcrumbSchema([
@@ -47,9 +47,10 @@ export default function AboutPage() {
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
               JLD Recruit Ltd is an independent, family-run recruitment agency
-              helping companies hire skilled candidates across automotive,
-              engineering and technical sectors. We offer a personal, direct and
-              accountable service — without corporate layers or inflated fees.
+              helping companies hire skilled candidates across lift engineering,
+              fire & security, gate & door, refrigeration, automotive and HGV
+              sectors. We offer a personal, direct and accountable service —
+              without corporate layers or inflated fees.
             </p>
             <p className="mt-4 text-sm text-navy-500">
               Registered in England and Wales —{" "}
@@ -92,10 +93,11 @@ export default function AboutPage() {
                   corporate agency.
                 </p>
                 <p>
-                  Our focus is on automotive, engineering and technical
-                  recruitment — sectors where understanding qualifications,
-                  certifications and hands-on experience makes the difference
-                  between a good hire and a great one.
+                  Our focus is on lift engineering, fire & security, gate & door,
+                  refrigeration, automotive and HGV recruitment — sectors where
+                  understanding qualifications, certifications and hands-on
+                  experience makes the difference between a good hire and a great
+                  one.
                 </p>
               </div>
             </div>
@@ -158,10 +160,10 @@ export default function AboutPage() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button href="/contact" variant="primary">
-              Get in Touch
+              Submit Vacancy
             </Button>
-            <Button href="/how-it-works" variant="outline">
-              How It Works
+            <Button href="/jobs" variant="outline">
+              View Jobs
             </Button>
           </div>
         </div>

@@ -10,7 +10,7 @@ import { getBreadcrumbSchema, getJobListSchema, getWebPageSchema } from "@/lib/s
 export const metadata = createMetadata({
   title: "Current Jobs & Vacancies",
   description:
-    "Browse current job vacancies with JLD Recruit Ltd. Vehicle technician, MOT tester, fire & security engineer and technical roles across Devon, Cornwall and the UK.",
+    "Browse current job vacancies with JLD Recruit Ltd. Lift engineering, fire & security, gate & door, refrigeration, vehicle technician and HGV roles UK-wide.",
   path: "/jobs",
   keywords: [
     "vehicle technician jobs",
@@ -28,7 +28,7 @@ export default function JobsPage() {
         data={[
           getWebPageSchema(
             "Current Jobs & Vacancies",
-            "Live recruitment vacancies with JLD Recruit Ltd across automotive, engineering and technical sectors.",
+            "Live recruitment vacancies with JLD Recruit Ltd across lift engineering, fire & security, gate & door, refrigeration and automotive & HGV sectors.",
             "/jobs"
           ),
           getBreadcrumbSchema([
@@ -47,9 +47,9 @@ export default function JobsPage() {
               Jobs we&apos;re recruiting for
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
-              Browse our current vacancies across automotive, fire & security and
-              engineering sectors. Apply directly — speak with James throughout
-              the process.
+              Browse our current vacancies across lift engineering, fire & security,
+              gate & door, refrigeration and automotive & HGV sectors. Apply
+              directly — speak with James throughout the process.
             </p>
           </div>
         </div>
@@ -73,7 +73,8 @@ export default function JobsPage() {
             </h2>
             <p className="mt-3 text-navy-600">
               Send us your CV or register your interest — we recruit across
-              automotive, engineering and technical sectors UK-wide.
+              lift engineering, fire & security, gate & door, refrigeration and
+              automotive & HGV sectors UK-wide.
             </p>
             <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button href="/job-seekers" variant="primary">

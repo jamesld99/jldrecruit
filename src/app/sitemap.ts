@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/constants";
 import { jobs } from "@/lib/jobs";
 import { locationPages } from "@/lib/location-pages";
+import { insightArticles } from "@/lib/insights";
 import { recruitmentPages } from "@/lib/recruitment-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -12,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/jobs",
     "/sectors",
     "/about",
-    "/how-it-works",
+    "/insights",
     "/services/permanent-recruitment",
     "/services/temporary-recruitment",
     "/services/contract-recruitment",
@@ -27,12 +28,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const locationRoutes = locationPages.map(
     (page) => `/locations/${page.slug}`
   );
+  const insightRoutes = insightArticles.map(
+    (article) => `/insights/${article.slug}`
+  );
   const jobRoutes = jobs.map((job) => `/jobs/${job.slug}`);
 
   const allRoutes = [
     ...staticRoutes,
     ...recruitmentRoutes,
     ...locationRoutes,
+    ...insightRoutes,
     ...jobRoutes,
   ];
 

@@ -7,9 +7,9 @@ import { CoverageAreas } from "@/components/CoverageAreas";
 import { LinkedInUpdates } from "@/components/LinkedInUpdates";
 import { RecruitmentSolutions } from "@/components/RecruitmentSolutions";
 import { SchemaScript } from "@/components/SchemaScript";
-import { TrustSignals } from "@/components/TrustSignals";
+import { WhyChooseSection } from "@/components/WhyChooseSection";
 import { VacancyForm } from "@/components/VacancyForm";
-import { faqs, primarySectors, siteConfig } from "@/lib/constants";
+import { faqs, primarySectors, siteConfig, ukWideMessage } from "@/lib/constants";
 import { jobs } from "@/lib/jobs";
 import { getFaqSchema, getWebPageSchema } from "@/lib/schema";
 
@@ -34,7 +34,7 @@ export default function HomePage() {
           <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
               <p className="mb-4 eyebrow-pill">
-                Family-run UK recruitment agency
+                UK-wide specialist recruitment agency
               </p>
               <h1 className="text-4xl font-bold tracking-tight text-navy-900 sm:text-5xl lg:leading-[1.1]">
                 {siteConfig.heroHeadline}
@@ -43,16 +43,15 @@ export default function HomePage() {
                 {siteConfig.heroSubheadline}
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Button href="/jobs" variant="primary">
-                View Current Jobs
+              <Button href="/contact" variant="primary">
+                Submit Vacancy
               </Button>
-              <Button href="/contact" variant="outline">
-                Submit a Vacancy
+              <Button href="/jobs" variant="outline">
+                View Jobs
               </Button>
               </div>
               <p className="mt-6 text-sm font-medium text-brand-600">
-                Direct access to James &middot; No call centres &middot;
-                Headhunting included
+                {ukWideMessage} Direct access to James &middot; Headhunting included
               </p>
             </div>
             <VacancyForm />
@@ -60,7 +59,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <TrustSignals />
+      <WhyChooseSection />
 
       <RecruitmentSolutions
         introDescription="Permanent recruitment is our core service. We also provide temporary and contract solutions when you need flexibility."
@@ -73,7 +72,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Key Sectors"
             title="Sectors we recruit for"
-            description="Specialist recruitment for lift engineering, fire & security, gate & door, refrigeration and automotive & HGV."
+            description="Specialist recruitment for lift engineering, fire & security, gate & door, refrigeration & HVAC and automotive & HGV across the United Kingdom."
           />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {primarySectors.map((sector) => (
@@ -101,13 +100,13 @@ export default function HomePage() {
               Looking for your next role?
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-navy-600">
-              We help skilled candidates find permanent roles in automotive,
-              engineering and technical sectors. Free service — speak directly
-              with James.
+              We help skilled candidates find permanent roles in lift engineering,
+              fire & security, gate & door, refrigeration, automotive and HGV sectors
+              UK-wide. Free service — speak directly with James.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button href="/jobs" variant="primary">
-                Browse Current Jobs
+                View Jobs
               </Button>
               <Button href="/job-seekers" variant="outline">
                 Job Seeker Information
@@ -119,8 +118,8 @@ export default function HomePage() {
 
       <ContactSection />
       <CTASection
-        primaryLabel="Book a Recruitment Call"
-        secondaryLabel="Submit a Vacancy"
+        primaryLabel="Submit Vacancy"
+        secondaryLabel="Hire Staff"
       />
     </>
   );
