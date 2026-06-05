@@ -1,4 +1,5 @@
 import { faqs, siteConfig } from "./constants";
+import type { JobListing } from "./jobs";
 
 export function getOrganizationSchema() {
   return {
@@ -52,6 +53,11 @@ export function getProfessionalServiceSchema() {
       "Construction staffing",
       "Healthcare staffing",
       "Automotive recruitment",
+      "Vehicle technician recruitment",
+      "HGV recruitment",
+      "Lift engineer recruitment",
+      "Fire and security recruitment",
+      "Door engineer recruitment",
       "Engineering recruitment",
       "Technical recruitment",
       "Headhunting",
@@ -138,5 +144,59 @@ export function getWebPageSchema(
       "@type": "ProfessionalService",
       name: siteConfig.legalName,
     },
+  };
+}
+
+export function getJobPostingSchema(job: JobListing) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: job.title,
+    description: [job.summary, ...job.description].join(" "),
+    datePosted: job.postedDate,
+    employmentType: job.type === "Permanent" ? "FULL_TIME" : "TEMPORARY",
+    hiringOrganization: {
+      "@type": "Organization",
+      name: siteConfig.legalName,
+      sameAs: siteConfig.url,
+      logo: `${siteConfig.url}${siteConfig.logo}`,
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: job.location,
+        addressRegion: job.region,
+        addressCountry: "GB",
+      },
+    },
+    baseSalary: {
+      "@type": "MonetaryAmount",
+      currency: "GBP",
+      value: {
+        "@type": "QuantitativeValue",
+        value: job.salary,
+        unitText: "YEAR",
+      },
+    },
+    applicantLocationRequirements: {
+      "@type": "Country",
+      name: "United Kingdom",
+    },
+    url: `${siteConfig.url}/jobs/${job.slug}`,
+  };
+}
+
+export function getJobListSchema(jobList: JobListing[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Current Jobs at JLD Recruit Ltd",
+    itemListElement: jobList.map((job, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${siteConfig.url}/jobs/${job.slug}`,
+      name: `${job.title} — ${job.location}`,
+    })),
   };
 }

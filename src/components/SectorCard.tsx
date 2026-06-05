@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { sectors } from "@/lib/constants";
+import { sectorRecruitmentLinks } from "@/lib/constants";
 import { SectorIcon } from "./Icons";
 
 type Sector = (typeof sectors)[number];
@@ -41,10 +42,16 @@ export function SectorCard({ sector, compact = false }: SectorCardProps) {
         </ul>
       )}
       <Link
-        href={isTempContract ? "/services/temporary-recruitment" : "/contact"}
+        href={
+          sector.slug in sectorRecruitmentLinks
+            ? sectorRecruitmentLinks[sector.slug as keyof typeof sectorRecruitmentLinks]
+            : isTempContract
+              ? "/services/temporary-recruitment"
+              : "/contact"
+        }
         className="mt-5 inline-flex items-center text-sm font-semibold text-brand-600 transition-colors group-hover:text-brand-500"
       >
-        Discuss this sector
+        {sector.slug in sectorRecruitmentLinks ? "Learn more" : "Discuss this sector"}
         <svg
           className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
           fill="none"

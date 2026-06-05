@@ -1,7 +1,10 @@
 export const siteConfig = {
   name: "JLD Recruit Ltd",
   legalName: "JLD Recruit Ltd",
-  tagline: "Specialist Recruitment for Automotive, Engineering and Technical Businesses",
+  tagline: "Automotive & Engineering Recruitment Specialists",
+  heroHeadline: "Automotive & Engineering Recruitment Specialists",
+  heroSubheadline:
+    "Finding vehicle technicians, HGV mechanics, lift engineers, fire & security engineers, door engineers and technical professionals across the UK.",
   description:
     "JLD Recruit Ltd is a family-run UK recruitment agency specialising in permanent, temporary and contract recruitment across automotive, engineering and technical sectors. Personal, proactive and accountable recruitment solutions.",
   url: "https://www.jldrecruit.co.uk",
@@ -23,11 +26,55 @@ export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/employers", label: "Employers" },
   { href: "/job-seekers", label: "Job Seekers" },
+  { href: "/jobs", label: "Jobs" },
   { href: "/sectors", label: "Sectors" },
   { href: "/about", label: "About" },
-  { href: "/how-it-works", label: "How It Works" },
   { href: "/contact", label: "Contact" },
 ];
+
+export const footerLinks = [
+  { href: "/how-it-works", label: "How It Works" },
+  { href: "/recruitment/automotive-recruitment", label: "Automotive Recruitment" },
+  { href: "/recruitment/vehicle-technician-recruitment", label: "Vehicle Technician Recruitment" },
+  { href: "/locations/vehicle-technician-recruitment-devon", label: "Devon Recruitment" },
+  { href: "/locations/vehicle-technician-recruitment-cornwall", label: "Cornwall Recruitment" },
+];
+
+export const trustSignals = [
+  {
+    title: "Automotive & engineering specialists",
+    description: "Focused recruitment for technical roles — not generic office staffing.",
+  },
+  {
+    title: "Direct access to James",
+    description: "No call centres. You speak directly with your recruiter throughout.",
+  },
+  {
+    title: "Proactive weekly outreach",
+    description: "We actively contact candidates — we do not wait for applications.",
+  },
+  {
+    title: "No call centres",
+    description: "Personal, family-run service with honest communication at every stage.",
+  },
+  {
+    title: "Fixed fee recruitment available",
+    description: "Transparent fees agreed upfront — no corporate markups.",
+  },
+  {
+    title: "Headhunting included",
+    description: "Targeted talent search and direct outreach for hard-to-fill roles.",
+  },
+];
+
+export const sectorRecruitmentLinks: Record<string, string> = {
+  automotive: "/recruitment/automotive-recruitment",
+  "fire-security": "/recruitment/fire-security-recruitment",
+  "lift-engineering": "/recruitment/lift-engineer-recruitment",
+  "door-engineering": "/recruitment/door-engineer-recruitment",
+  "hgv-commercial": "/recruitment/hgv-recruitment",
+  "refrigeration-hvac": "/recruitment/refrigeration-recruitment",
+};
 
 export const sectors = [
   {

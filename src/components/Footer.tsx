@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navLinks, siteConfig } from "@/lib/constants";
+import { footerLinks, navLinks, siteConfig } from "@/lib/constants";
 import { SocialLinks } from "./SocialLinks";
 
 export function Footer() {
@@ -78,12 +78,30 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  href="/jobs"
+                  className="text-sm text-brand-200 transition-colors hover:text-white"
+                >
+                  Current Jobs
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/sectors"
                   className="text-sm text-brand-200 transition-colors hover:text-white"
                 >
                   Sectors We Recruit For
                 </Link>
               </li>
+              {footerLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-brand-200 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

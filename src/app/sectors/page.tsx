@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SectorCard } from "@/components/SectorCard";
@@ -74,6 +75,34 @@ export default function SectorsPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
             {sectors.map((sector) => (
               <SectorCard key={sector.slug} sector={sector} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="gradient-section py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Specialist Recruitment"
+            title="Dedicated recruitment pages"
+            description="In-depth recruitment support for our core sectors — built to help employers and candidates find exactly what they need."
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { label: "Automotive Recruitment", href: "/recruitment/automotive-recruitment" },
+              { label: "Vehicle Technician Recruitment", href: "/recruitment/vehicle-technician-recruitment" },
+              { label: "HGV Recruitment", href: "/recruitment/hgv-recruitment" },
+              { label: "Lift Engineer Recruitment", href: "/recruitment/lift-engineer-recruitment" },
+              { label: "Fire & Security Recruitment", href: "/recruitment/fire-security-recruitment" },
+              { label: "Door Engineer Recruitment", href: "/recruitment/door-engineer-recruitment" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-2xl border border-brand-100 bg-white p-5 text-sm font-semibold text-brand-700 transition-all hover:border-brand-300 hover:card-shadow"
+              >
+                {link.label} &rarr;
+              </Link>
             ))}
           </div>
         </div>
