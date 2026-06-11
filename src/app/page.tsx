@@ -8,10 +8,14 @@ import { SchemaScript } from "@/components/SchemaScript";
 import { WhyChooseSection } from "@/components/WhyChooseSection";
 import { VacancyForm } from "@/components/VacancyForm";
 import { faqs, primarySectors, siteConfig, ukWideMessage } from "@/lib/constants";
-import { jobs } from "@/lib/jobs";
+import { getJobs } from "@/lib/jobs";
 import { getFaqSchema, getWebPageSchema } from "@/lib/schema";
 
-export default function HomePage() {
+export const revalidate = 300;
+
+export default async function HomePage() {
+  const jobs = await getJobs();
+
   return (
     <>
       <SchemaScript
@@ -80,7 +84,7 @@ export default function HomePage() {
       <WhyChooseSection />
 
       <RecruitmentSolutions
-        introDescription="Permanent recruitment is our core service. We also provide temporary and contract solutions when you need flexibility."
+        introDescription="Permanent recruitment is our service. Fixed-fee, exclusive and retained campaigns available for skilled engineering and automotive hires."
       />
 
       <LinkedInUpdates jobs={jobs} />

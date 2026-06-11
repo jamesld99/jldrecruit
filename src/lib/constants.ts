@@ -8,14 +8,14 @@ export const siteConfig = {
   heroSubheadline:
     "UK-wide recruitment for lift engineers, fire & security engineers, gate & door engineers and vehicle technicians. We support employers across England, Scotland, Wales and Northern Ireland.",
   description:
-    "JLD Recruit Ltd provides specialist recruitment services across England, Scotland, Wales and Northern Ireland. UK-wide recruitment for lift engineering, fire & security, gate & door, refrigeration, automotive and HGV businesses. Permanent, temporary and contract solutions with direct access to James.",
+    "JLD Recruit Ltd provides specialist recruitment services across England, Scotland, Wales and Northern Ireland. UK-wide recruitment for lift engineering, fire & security, gate & door, refrigeration, automotive and HGV businesses. Permanent recruitment with direct access to James.",
   url: "https://www.jldrecruit.co.uk",
   phone: "07535961452",
   phoneDisplay: "07535 961 452",
   email: "james@jldrecruit.co.uk",
   linkedIn:
     "https://www.linkedin.com/company/jld-recruit-ltd/?viewAsMember=true",
-  facebook: "https://www.facebook.com/profile.php?id=61567979330586",
+  facebook: "https://www.facebook.com/JLDRecruitLtd/",
   founder: "James Lloyd-Davies",
   areaServed: "United Kingdom",
   logo: "/images/logo.png",
@@ -112,7 +112,7 @@ export const PRIMARY_SECTOR_SLUGS = [
   "automotive-hgv",
 ] as const;
 
-export const ADDITIONAL_SECTOR_SLUGS = ["construction", "healthcare"] as const;
+export const ADDITIONAL_SECTOR_SLUGS = [] as const;
 
 export const employerWhyChoose = [
   "Family-run recruitment business",
@@ -120,7 +120,7 @@ export const employerWhyChoose = [
   "UK-wide candidate search",
   "Specialist engineering and automotive recruitment",
   "Headhunting approach",
-  "Permanent, temporary and contract recruitment support",
+  "Permanent recruitment support",
   "Clear communication from start to finish",
 ];
 
@@ -133,7 +133,7 @@ export const employerFaqs = [
   {
     question: "What recruitment options do you offer?",
     answer:
-      "We offer permanent recruitment as our core service, plus temporary and contract staffing when you need flexibility. Headhunting and targeted talent search are included in our proactive approach.",
+      "We offer permanent recruitment including fixed-fee, exclusive and retained campaigns. Headhunting and targeted talent search are included in our proactive approach.",
   },
   {
     question: "Do you work nationwide?",
@@ -271,34 +271,6 @@ export const sectors = [
     ],
     icon: "cog",
   },
-  {
-    slug: "construction",
-    title: "Construction",
-    description:
-      "Temporary and contract staffing for construction businesses — skilled trades, site staff and project-based cover when you need flexibility.",
-    roles: [
-      "Skilled Trades",
-      "Site Operatives",
-      "Groundworkers",
-      "Site Supervisors",
-    ],
-    icon: "construction",
-    tempContract: true,
-  },
-  {
-    slug: "healthcare",
-    title: "Healthcare",
-    description:
-      "Temporary and contract recruitment for healthcare providers — qualified staff and support workers to cover demand, absences and specialist assignments.",
-    roles: [
-      "Healthcare Assistants",
-      "Support Workers",
-      "Registered Nurses",
-      "Care Staff",
-    ],
-    icon: "healthcare",
-    tempContract: true,
-  },
 ];
 
 export const primarySectors = PRIMARY_SECTOR_SLUGS.map((slug) =>
@@ -317,8 +289,9 @@ export const otherSectors = sectors.filter(
 
 export const services = [
   "Permanent recruitment",
-  "Temporary recruitment",
-  "Contract recruitment",
+  "Fixed-fee recruitment",
+  "Exclusive recruitment campaigns",
+  "Retained recruitment",
   "Headhunting & talent search",
   "Candidate sourcing",
   "Shortlisting",
@@ -328,6 +301,7 @@ export const services = [
   "CV Library searches",
   "Interview coordination",
   "Recruitment support for hard-to-fill roles",
+  "Long-term workforce growth",
 ];
 
 export const whyChooseUs = [
@@ -417,7 +391,7 @@ export const faqs = [
   {
     question: "What sectors does JLD Recruit Ltd recruit for?",
     answer:
-      "Our core specialisms are lift engineering, fire & security, gate & door engineering, refrigeration & HVAC, and automotive & HGV recruitment. We also support field service, renewable energy and general engineering roles, with temporary and contract staffing available in construction and healthcare.",
+      "Our core specialisms are lift engineering, fire & security, gate & door engineering, refrigeration & HVAC, and automotive & HGV permanent recruitment. We also support field service, renewable energy and general engineering roles.",
   },
   {
     question: "Do you specialise in lift and fire & security recruitment?",
@@ -455,19 +429,9 @@ export const faqs = [
       "JLD Recruit Ltd covers the United Kingdom. We support employers and candidates across England, Wales and Scotland for both local and national recruitment requirements.",
   },
   {
-    question: "Do you offer temporary recruitment?",
+    question: "Do you offer fixed-fee or retained recruitment?",
     answer:
-      "Yes. We provide temporary recruitment and temporary staffing solutions across automotive, engineering, technical, construction and healthcare sectors. This includes temporary vehicle technicians, mechanics, engineers, construction staff, healthcare workers and other professionals to cover sickness, holidays, seasonal demand and project work.",
-  },
-  {
-    question: "Do you provide contract recruitment?",
-    answer:
-      "Yes. Our contract recruitment service helps businesses secure experienced contractors and specialists for fixed-term projects and assignments across automotive, engineering, technical, construction and healthcare sectors.",
-  },
-  {
-    question: "Is permanent recruitment your main service?",
-    answer:
-      "Yes. Permanent recruitment is our core service and primary specialism. Temporary and contract recruitment are additional flexible solutions we offer alongside our permanent recruitment support.",
+      "Yes. We offer transparent fixed-fee recruitment, exclusive recruitment campaigns and retained search for the right vacancy. Contact James to discuss the best approach for your permanent hiring needs.",
   },
 ];
 

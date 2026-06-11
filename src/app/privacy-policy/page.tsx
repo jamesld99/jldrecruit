@@ -117,8 +117,7 @@ export default function PrivacyPolicyPage() {
         <ul>
           <li>To respond to enquiries and provide recruitment services</li>
           <li>
-            To match candidates with suitable permanent, temporary or contract
-            roles
+            To match candidates with suitable permanent roles
           </li>
           <li>To communicate with employers and candidates about vacancies</li>
           <li>To improve our website and services</li>

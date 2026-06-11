@@ -104,12 +104,13 @@ export default function SectorsPage() {
         </section>
       )}
 
+      {additionalSectors.length > 0 && (
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Other Industries We Support"
             title="Additional sectors"
-            description="Temporary and contract staffing available in construction and healthcare — alongside our core engineering recruitment specialisms."
+            description="Additional permanent recruitment support alongside our core engineering specialisms."
           />
           <div className="grid gap-6 sm:grid-cols-2">
             {additionalSectors.map((sector) => (
@@ -118,6 +119,7 @@ export default function SectorsPage() {
           </div>
         </div>
       </section>
+      )}
 
       <section className="gradient-section py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

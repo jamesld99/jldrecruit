@@ -4,7 +4,6 @@ import { CTASection } from "@/components/CTASection";
 import { FAQ } from "@/components/FAQ";
 import { RecruitmentSolutions } from "@/components/RecruitmentSolutions";
 import { SchemaScript } from "@/components/SchemaScript";
-import { TemporarySpecialist } from "@/components/TemporarySpecialist";
 import { WhyChooseSection } from "@/components/WhyChooseSection";
 import {
   employerBenefits,
@@ -14,27 +13,21 @@ import {
   ukWideRecruitmentSeo,
   ukWideServicesSeo,
 } from "@/lib/constants";
-import {
-  employerContractContent,
-  employerConstructionHealthcareContent,
-  employerTemporaryContent,
-  temporaryContractRoles,
-} from "@/lib/services";
+import { permanentRoles } from "@/lib/services";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 
 export const metadata = createMetadata({
   title: "Employers",
   description:
-    `${ukWideServicesSeo} JLD Recruit Ltd helps UK businesses hire lift engineers, fire & security engineers, gate & door engineers, refrigeration engineers and automotive & HGV technicians.`,
+    `${ukWideServicesSeo} JLD Recruit Ltd is a permanent recruitment agency helping UK businesses hire lift engineers, fire & security engineers, gate & door engineers, refrigeration engineers and automotive & HGV technicians.`,
   path: "/employers",
   keywords: [
+    "permanent recruitment agency",
+    "fixed fee recruitment",
     "lift engineer recruitment",
     "fire and security recruitment",
-    "gate engineer recruitment",
-    "refrigeration engineer recruitment",
-    "vehicle technician recruitment",
-    "HGV technician recruitment",
+    "engineering recruitment agency",
     "UK-wide engineering recruitment",
   ],
 });
@@ -46,7 +39,7 @@ export default function EmployersPage() {
         data={[
           getWebPageSchema(
             "Employer Recruitment Services",
-            "Permanent, temporary and contract recruitment for lift engineering, fire & security, gate & door, refrigeration and automotive & HGV roles.",
+            "Permanent recruitment for lift engineering, fire & security, gate & door, refrigeration and automotive & HGV roles UK-wide.",
             "/employers"
           ),
           getBreadcrumbSchema([
@@ -61,13 +54,12 @@ export default function EmployersPage() {
           <div className="mx-auto max-w-3xl">
             <p className="mb-4 eyebrow-pill">For Employers</p>
             <h1 className="text-4xl font-bold tracking-tight text-navy-900 sm:text-5xl">
-              Recruitment support for businesses that need results
+              Permanent recruitment support for businesses that need results
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
-              Permanent recruitment is at the heart of what we do. JLD Recruit Ltd
-              also provides temporary and contract recruitment solutions — giving
-              employers proactive sourcing, headhunting, screening and flexible
-              staffing support across lift engineering, fire & security, gate & door,
+              JLD Recruit Ltd is a permanent recruitment agency giving employers
+              proactive sourcing, headhunting, screening and long-term hiring
+              support across lift engineering, fire & security, gate & door,
               refrigeration and automotive & HGV sectors. {ukWideServicesSeo}
             </p>
             <p className="mt-4 text-sm leading-relaxed text-navy-600">
@@ -89,8 +81,8 @@ export default function EmployersPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Recruitment Solutions"
-            title="Flexible recruitment services for your business"
-            description="Permanent recruitment is our primary focus. We also offer temporary and contract solutions for employers who need additional flexibility."
+            title="Permanent recruitment services for your business"
+            description="Fixed-fee, exclusive and retained permanent recruitment with proactive headhunting and direct access to James."
           />
           <RecruitmentSolutions embedded showIntro={false} />
         </div>
@@ -107,100 +99,21 @@ export default function EmployersPage() {
             <p>
               Whether you are a garage owner looking for a qualified MOT tester,
               an engineering company searching for a lift engineer, or an
-              operations manager struggling to fill a field service role — we
+              operations manager struggling to fill a specialist role — we
               understand the pressure of an unfilled vacancy.
             </p>
             <p>
-              As a specialist engineering recruitment agency and automotive
-              recruitment agency, we do not wait for applications to arrive. We
-              proactively source candidates through headhunting, LinkedIn outreach,
-              CV Library searches, job board advertising and local candidate
-              attraction.
+              As a specialist permanent recruitment agency, we do not wait for
+              applications to arrive. We proactively source candidates through
+              headhunting, LinkedIn outreach, CV Library searches, job board
+              advertising and local candidate attraction.
             </p>
             <p>
               You deal directly with {siteConfig.founder} throughout the
               process. No account managers, no hand-offs, no corporate
-              bureaucracy — just honest communication and a focus on results.
+              bureaucracy — just honest communication and a focus on skilled
+              permanent hires.
             </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="gradient-section py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <article className="rounded-2xl border border-brand-100 bg-white p-8 card-shadow">
-              <p className="mb-3 eyebrow-pill">Additional Service</p>
-              <h2 className="text-2xl font-bold text-navy-900">
-                {employerTemporaryContent.title}
-              </h2>
-              <div className="mt-4 space-y-4 text-navy-600">
-                {employerTemporaryContent.paragraphs.map((p) => (
-                  <p key={p.slice(0, 30)} className="leading-relaxed">{p}</p>
-                ))}
-              </div>
-              <div className="mt-6">
-                <Button href="/services/temporary-recruitment" variant="outline">
-                  Temporary Recruitment
-                </Button>
-              </div>
-            </article>
-            <article className="rounded-2xl border border-brand-100 bg-white p-8 card-shadow">
-              <p className="mb-3 eyebrow-pill">Additional Service</p>
-              <h2 className="text-2xl font-bold text-navy-900">
-                {employerContractContent.title}
-              </h2>
-              <div className="mt-4 space-y-4 text-navy-600">
-                {employerContractContent.paragraphs.map((p) => (
-                  <p key={p.slice(0, 30)} className="leading-relaxed">{p}</p>
-                ))}
-              </div>
-              <div className="mt-6">
-                <Button href="/services/contract-recruitment" variant="outline">
-                  Contract Recruitment
-                </Button>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="gradient-section py-16 lg:py-20">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <TemporarySpecialist />
-        </div>
-      </section>
-
-      <section className="py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Additional Sectors"
-            title="Construction and healthcare temporary & contract staffing"
-            description="Alongside our core automotive and engineering recruitment, we also provide temporary and contract staffing in construction and healthcare."
-          />
-          <div className="grid gap-8 lg:grid-cols-2">
-            {[employerConstructionHealthcareContent.construction, employerConstructionHealthcareContent.healthcare].map((sector) => (
-              <article
-                key={sector.title}
-                className="rounded-2xl border border-brand-100 bg-white p-8 card-shadow"
-              >
-                <span className="mb-3 inline-flex rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">
-                  Temporary &amp; Contract
-                </span>
-                <h3 className="text-xl font-bold text-navy-900">{sector.title}</h3>
-                <p className="mt-3 leading-relaxed text-navy-600">{sector.description}</p>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {sector.roles.map((role) => (
-                    <li
-                      key={role}
-                      className="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700 ring-1 ring-brand-100"
-                    >
-                      {role}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
           </div>
         </div>
       </section>
@@ -209,11 +122,11 @@ export default function EmployersPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Typical Roles"
-            title="Temporary and contract roles we supply"
-            description="Skilled professionals available for temporary cover and contract assignments across multiple sectors."
+            title="Permanent roles we recruit for"
+            description="Skilled permanent hires across engineering, technical and automotive sectors UK-wide."
           />
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {temporaryContractRoles.map((role) => (
+            {permanentRoles.map((role) => (
               <li
                 key={role}
                 className="flex items-center gap-3 rounded-xl border border-brand-100 bg-brand-50/50 px-4 py-3"
@@ -233,7 +146,7 @@ export default function EmployersPage() {
           <SectionHeading
             eyebrow="What We Offer"
             title="Full employer recruitment services"
-            description="Everything you need to find, assess and hire skilled candidates — permanently or flexibly."
+            description="Everything you need to find, assess and hire skilled permanent candidates."
           />
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
@@ -280,7 +193,7 @@ export default function EmployersPage() {
       <section className="gradient-section py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-navy-900 sm:text-3xl">
-            Ready to fill your next role?
+            Ready to fill your next permanent role?
           </h2>
           <p className="mt-4 text-lg text-navy-600">
             Send us your vacancy details and we will respond promptly to discuss
@@ -303,7 +216,7 @@ export default function EmployersPage() {
       <FAQ
         items={employerFaqs}
         title="Employer FAQs"
-        description="Common questions from businesses looking for engineering and technical recruitment support."
+        description="Common questions from businesses looking for permanent engineering and technical recruitment support."
       />
       <CTASection
         primaryLabel="Submit Vacancy"

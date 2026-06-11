@@ -4,21 +4,24 @@ import { Button } from "@/components/Button";
 import { CTASection } from "@/components/CTASection";
 import { SchemaScript } from "@/components/SchemaScript";
 import { siteConfig } from "@/lib/constants";
-import { getJobBySlug, jobs } from "@/lib/jobs";
+import { getJobBySlug, getJobs } from "@/lib/jobs";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getJobPostingSchema } from "@/lib/schema";
+
+export const revalidate = 300;
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
+  const jobs = await getJobs();
   return jobs.map((job) => ({ slug: job.slug }));
 }
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const job = getJobBySlug(slug);
+  const job = await getJobBySlug(slug);
   if (!job) return {};
 
   return createMetadata({
@@ -59,7 +62,7 @@ function JobSection({
 
 export default async function JobDetailPage({ params }: Props) {
   const { slug } = await params;
-  const job = getJobBySlug(slug);
+  const job = await getJobBySlug(slug);
 
   if (!job) notFound();
 
@@ -121,9 +124,20 @@ export default async function JobDetailPage({ params }: Props) {
               >
                 Apply now
               </a>
-              <Button href="/contact" variant="outline">
-                Speak to James
-              </Button>
+              {job.linkedInUrl ? (
+                <a
+                  href={job.linkedInUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-full border-2 border-brand-600 px-6 py-3 text-sm font-semibold text-brand-700 transition-all hover:bg-brand-600 hover:text-white"
+                >
+                  View on LinkedIn
+                </a>
+              ) : (
+                <Button href="/contact" variant="outline">
+                  Speak to James
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -165,6 +179,16 @@ export default async function JobDetailPage({ params }: Props) {
                   >
                     Apply now
                   </a>
+                  {job.linkedInUrl ? (
+                    <a
+                      href={job.linkedInUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full items-center justify-center rounded-full border-2 border-brand-600 px-6 py-3.5 text-sm font-semibold text-brand-700 transition-all hover:bg-brand-600 hover:text-white"
+                    >
+                      View original LinkedIn post
+                    </a>
+                  ) : null}
                   <a
                     href={`tel:${siteConfig.phone}`}
                     className="inline-flex w-full items-center justify-center rounded-full border-2 border-brand-600 px-6 py-3.5 text-sm font-semibold text-brand-700 transition-all hover:bg-brand-600 hover:text-white"

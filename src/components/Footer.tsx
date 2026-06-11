@@ -60,22 +60,6 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/temporary-recruitment"
-                  className="text-sm text-brand-200 transition-colors hover:text-white"
-                >
-                  Temporary Recruitment
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/contract-recruitment"
-                  className="text-sm text-brand-200 transition-colors hover:text-white"
-                >
-                  Contract Recruitment
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/jobs"
                   className="text-sm text-brand-200 transition-colors hover:text-white"
                 >

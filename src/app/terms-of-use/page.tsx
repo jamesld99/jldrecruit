@@ -52,9 +52,9 @@ export default function TermsOfUsePage() {
 
           <h2>1. About us</h2>
           <p>
-            {siteConfig.legalName} is a family-run recruitment business
-            providing permanent, temporary and contract recruitment services
-            across automotive, engineering and technical sectors in the United
+            {siteConfig.legalName} is a family-run permanent recruitment business
+            providing specialist recruitment services across lift engineering,
+            fire & security, automotive and technical sectors in the United
             Kingdom.
           </p>
           <ul>
@@ -128,9 +128,9 @@ export default function TermsOfUsePage() {
           <p>
             Use of this website does not create a contractual relationship between
             you and {siteConfig.legalName} unless expressly agreed in writing.
-            Recruitment services, including permanent, temporary and contract
-            placements, are subject to separate terms and conditions agreed with
-            clients and candidates at the point of engagement.
+            Recruitment services, including permanent placements, are subject to
+            separate terms and conditions agreed with clients and candidates at
+            the point of engagement.
           </p>
           <p>
             We do not guarantee that a suitable candidate or role will be found

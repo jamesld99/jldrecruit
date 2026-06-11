@@ -198,8 +198,7 @@ export default function UkCoveragePage() {
               </p>
               <p className="mt-4 text-sm leading-relaxed text-navy-600">
                 This is not an exhaustive list — we work UK-wide across towns,
-                cities and regions for permanent, temporary and contract
-                recruitment.
+                cities and regions for permanent recruitment.
               </p>
             </div>
           </div>

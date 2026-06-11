@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/constants";
-import { jobs } from "@/lib/jobs";
+import { getJobs } from "@/lib/jobs";
 import { locationPages } from "@/lib/location-pages";
 import { insightArticles } from "@/lib/insights";
 import { recruitmentPages } from "@/lib/recruitment-pages";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const jobs = await getJobs();
   const staticRoutes = [
     "",
     "/employers",
@@ -16,8 +17,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/insights",
     "/uk-coverage",
     "/services/permanent-recruitment",
-    "/services/temporary-recruitment",
-    "/services/contract-recruitment",
     "/contact",
     "/privacy-policy",
     "/terms-of-use",

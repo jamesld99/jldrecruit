@@ -3,9 +3,11 @@ import { CTASection } from "@/components/CTASection";
 import { JobCard } from "@/components/JobCard";
 import { SchemaScript } from "@/components/SchemaScript";
 import { SectionHeading } from "@/components/SectionHeading";
-import { jobs } from "@/lib/jobs";
+import { getJobs } from "@/lib/jobs";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getJobListSchema, getWebPageSchema } from "@/lib/schema";
+
+export const revalidate = 300;
 
 export const metadata = createMetadata({
   title: "Current Jobs & Vacancies",
@@ -21,7 +23,9 @@ export const metadata = createMetadata({
   ],
 });
 
-export default function JobsPage() {
+export default async function JobsPage() {
+  const jobs = await getJobs();
+
   return (
     <>
       <SchemaScript
@@ -48,8 +52,8 @@ export default function JobsPage() {
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
               Browse our current vacancies across lift engineering, fire & security,
-              gate & door, refrigeration and automotive & HGV sectors. Apply
-              directly — speak with James throughout the process.
+              gate & door, refrigeration and automotive & HGV sectors. Roles sync
+              automatically from our LinkedIn updates every few minutes.
             </p>
           </div>
         </div>
@@ -60,7 +64,7 @@ export default function JobsPage() {
           <SectionHeading
             eyebrow={`${jobs.length} Active Roles`}
             title="Current opportunities"
-            description="These vacancies are updated regularly. Don't see the right role? Register your interest and we'll be in touch when something suitable comes up."
+            description="These vacancies are synced from our LinkedIn job posts and updated regularly. Don't see the right role? Register your interest and we'll be in touch when something suitable comes up."
           />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {jobs.map((job) => (

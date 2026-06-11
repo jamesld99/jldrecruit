@@ -54,8 +54,9 @@ export function getProfessionalServiceSchema() {
     ],
     serviceType: [
       "Permanent recruitment",
-      "Temporary recruitment",
-      "Contract recruitment",
+      "Fixed-fee recruitment",
+      "Exclusive recruitment",
+      "Retained recruitment",
       "Lift engineer recruitment",
       "Lift recruitment agency",
       "Fire and security recruitment",
@@ -69,7 +70,6 @@ export function getProfessionalServiceSchema() {
       "HGV technician recruitment",
       "UK-wide engineering recruitment",
       "Headhunting",
-      "Temporary staffing solutions",
       "Candidate sourcing",
     ],
     sameAs: [

@@ -95,7 +95,7 @@ function buildHgvLocation(city: string, slugSuffix: string): LocationPageContent
       `HGV technician recruitment in ${city} requires understanding of heavy vehicle diagnostics, fleet maintenance and the certifications relevant to commercial workshops.`,
       `JLD Recruit Ltd recruits HGV technicians, commercial vehicle mechanics and fleet maintenance engineers for workshops and transport operators in ${city} and across the UK.`,
       `Our proactive headhunting approach reaches employed technicians who may be open to the right opportunity — particularly valuable for hard-to-fill fleet and workshop roles.`,
-      `Permanent HGV recruitment is our core service, with temporary and contract HGV technicians available when you need responsive cover.`,
+      `Permanent HGV recruitment for workshops and transport operators in ${city} and across the UK.`,
       locationCoverageNote(city),
     ],
     roles: [

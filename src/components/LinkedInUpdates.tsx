@@ -19,7 +19,7 @@ export function LinkedInUpdates({ jobs, limit = 3 }: LinkedInUpdatesProps) {
           <SectionHeading
             eyebrow="Latest Opportunities"
             title="Active jobs & LinkedIn updates"
-            description="We post live vacancies on LinkedIn and our website. Follow us for the latest automotive and engineering roles."
+            description="Live vacancies sync automatically from our LinkedIn company posts every few minutes. Follow us for the latest engineering and automotive roles."
             align="left"
           />
           <a

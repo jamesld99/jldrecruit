@@ -55,7 +55,7 @@ export const recruitmentPages: SeoPageContent[] = [
     overview: [
       "Automotive recruitment is one of our core specialisms. We understand the difference between a general mechanic and a diagnostic specialist, and we know what garages and dealerships need when hiring technical staff.",
       "Whether you need a single MOT tester for an independent garage or multiple vehicle technicians for a growing motor group, we provide proactive, personal recruitment support — not a generic job board service.",
-      "We recruit permanently as our primary service, with temporary and contract automotive staffing available when you need short-term cover or project support.",
+      "We recruit permanently for garages, dealerships, fleet operators and motor groups across the UK.",
       "From the South West — Devon, Cornwall and Dorset — to the Midlands, London and nationwide, we support employers who need reliable, skilled automotive professionals.",
     ],
     whyChoose: sharedWhyChoose,
@@ -152,7 +152,7 @@ export const recruitmentPages: SeoPageContent[] = [
       "HGV and commercial vehicle technician recruitment requires sector-specific knowledge. Employers need candidates who understand heavy vehicle diagnostics, fleet maintenance schedules, trailer systems and the certifications relevant to commercial workshops.",
       "JLD Recruit Ltd recruits HGV technicians and commercial vehicle mechanics for independent workshops, fleet maintenance teams and transport operators who need reliable, experienced technical staff.",
       "Our proactive sourcing approach reaches candidates who may not be actively searching — including employed technicians open to the right opportunity.",
-      "We support permanent HGV recruitment as our core offering, with temporary and contract HGV technicians available when you need cover for holidays, sickness or seasonal demand.",
+      "We support permanent HGV recruitment UK-wide for workshops, fleet operators and transport businesses.",
     ],
     whyChoose: sharedWhyChoose,
     roles: [
@@ -283,7 +283,7 @@ export const recruitmentPages: SeoPageContent[] = [
       "Refrigeration and HVAC recruitment requires understanding of F-Gas qualifications, commercial refrigeration systems, split air conditioning and the varied environments engineers work in — from industrial plants to retail and domestic settings.",
       "We recruit refrigeration engineers, air conditioning engineers, HVAC engineers and F-Gas technicians for service companies, facilities management businesses and specialist contractors.",
       "Our proactive approach helps employers reach experienced engineers who are not always visible on job boards, particularly for hard-to-fill service and maintenance roles.",
-      "Permanent recruitment is our core service, with temporary refrigeration and HVAC cover available when you need short-term staffing support.",
+      "Permanent recruitment for refrigeration and HVAC engineers, with proactive headhunting for hard-to-fill service and maintenance roles.",
     ],
     whyChoose: sharedWhyChoose,
     roles: [
@@ -326,7 +326,7 @@ export const recruitmentPages: SeoPageContent[] = [
       "Gate and door engineering covers automatic doors, industrial doors, roller shutters, gates and entrance systems. Finding engineers with the right installation and service experience requires sector-focused recruitment.",
       "We recruit gate engineers, automatic door engineers, industrial door engineers and roller shutter engineers for door companies, building services providers and maintenance contractors.",
       "Like lift engineering, these roles require specific product knowledge and safety awareness that generic recruiters overlook. We source candidates with relevant hands-on experience through proactive headhunting.",
-      "We provide permanent gate and door engineer recruitment alongside temporary and contract cover when businesses need responsive staffing support.",
+      "We provide permanent gate and door engineer recruitment with proactive sourcing and headhunting for installation and service roles.",
     ],
     whyChoose: sharedWhyChoose,
     roles: [

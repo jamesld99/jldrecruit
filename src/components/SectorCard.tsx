@@ -11,15 +11,8 @@ interface SectorCardProps {
 }
 
 export function SectorCard({ sector, compact = false }: SectorCardProps) {
-  const isTempContract = "tempContract" in sector && sector.tempContract;
-
   return (
     <article className="group flex h-full flex-col rounded-2xl border border-brand-100 bg-white p-6 card-shadow transition-all duration-300 hover:-translate-y-1 hover:border-brand-300 hover:card-shadow-hover">
-      {isTempContract && (
-        <span className="mb-3 inline-flex w-fit rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">
-          Temporary &amp; Contract
-        </span>
-      )}
       <div className="icon-circle mb-4">
         <SectorIcon name={sector.icon} />
       </div>
@@ -45,9 +38,7 @@ export function SectorCard({ sector, compact = false }: SectorCardProps) {
         href={
           sector.slug in sectorRecruitmentLinks
             ? sectorRecruitmentLinks[sector.slug as keyof typeof sectorRecruitmentLinks]
-            : isTempContract
-              ? "/services/temporary-recruitment"
-              : "/contact"
+            : "/contact"
         }
         className="mt-5 inline-flex items-center text-sm font-semibold text-brand-600 transition-colors group-hover:text-brand-500"
       >
