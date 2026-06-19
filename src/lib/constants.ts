@@ -16,6 +16,13 @@ export const siteConfig = {
   linkedIn:
     "https://www.linkedin.com/company/jld-recruit-ltd/?viewAsMember=true",
   facebook: "https://www.facebook.com/JLDRecruitLtd/",
+  googleReviewsUrl:
+    process.env.GOOGLE_REVIEWS_URL ??
+    "https://www.google.com/maps/search/?api=1&query=JLD+Recruit+Ltd&kgmid=/g/11z75b470s",
+  googleWriteReviewUrl:
+    process.env.GOOGLE_WRITE_REVIEW_URL ??
+    "https://g.page/r/CVT44aBTp0JgEAI/review",
+  googleKnowledgeGraphId: "/g/11z75b470s",
   founder: "James Lloyd-Davies",
   areaServed: "United Kingdom",
   logo: "/images/logo.png",

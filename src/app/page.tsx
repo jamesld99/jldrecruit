@@ -2,19 +2,24 @@ import { Button } from "@/components/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SectorCard } from "@/components/SectorCard";
 import { CTASection } from "@/components/CTASection";
+import { GoogleReviews, GoogleReviewsLinkCard } from "@/components/GoogleReviews";
 import { LinkedInUpdates } from "@/components/LinkedInUpdates";
 import { RecruitmentSolutions } from "@/components/RecruitmentSolutions";
 import { SchemaScript } from "@/components/SchemaScript";
 import { WhyChooseSection } from "@/components/WhyChooseSection";
 import { VacancyForm } from "@/components/VacancyForm";
 import { faqs, primarySectors, siteConfig, ukWideMessage } from "@/lib/constants";
+import { getGoogleReviewsDisplay } from "@/lib/google-reviews";
 import { getJobs } from "@/lib/jobs";
-import { getFaqSchema, getWebPageSchema } from "@/lib/schema";
+import { getFaqSchema, getGoogleReviewsSchema, getWebPageSchema } from "@/lib/schema";
 
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const jobs = await getJobs();
+  const [jobs, googleReviewsDisplay] = await Promise.all([
+    getJobs(),
+    getGoogleReviewsDisplay(),
+  ]);
 
   return (
     <>
@@ -26,6 +31,9 @@ export default async function HomePage() {
             "/"
           ),
           getFaqSchema(faqs),
+          ...(googleReviewsDisplay?.mode === "reviews"
+            ? [getGoogleReviewsSchema(googleReviewsDisplay.data)]
+            : []),
         ]}
       />
 
@@ -82,6 +90,16 @@ export default async function HomePage() {
       </section>
 
       <WhyChooseSection />
+
+      {googleReviewsDisplay?.mode === "reviews" ? (
+        <GoogleReviews data={googleReviewsDisplay.data} />
+      ) : null}
+      {googleReviewsDisplay?.mode === "link" ? (
+        <GoogleReviewsLinkCard
+          mapsUrl={googleReviewsDisplay.link.mapsUrl}
+          writeReviewUrl={googleReviewsDisplay.link.writeReviewUrl}
+        />
+      ) : null}
 
       <RecruitmentSolutions
         introDescription="Permanent recruitment is our service. Fixed-fee, exclusive and retained campaigns available for skilled engineering and automotive hires."

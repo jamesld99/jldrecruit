@@ -24,6 +24,7 @@ export function getOrganizationSchema() {
       siteConfig.companiesHouseUrl,
       siteConfig.linkedIn,
       siteConfig.facebook,
+      ...(siteConfig.googleReviewsUrl ? [siteConfig.googleReviewsUrl] : []),
     ],
     areaServed: [
       { "@type": "Country", name: "United Kingdom" },
@@ -76,6 +77,7 @@ export function getProfessionalServiceSchema() {
       siteConfig.companiesHouseUrl,
       siteConfig.linkedIn,
       siteConfig.facebook,
+      ...(siteConfig.googleReviewsUrl ? [siteConfig.googleReviewsUrl] : []),
     ],
   };
 }
@@ -101,6 +103,7 @@ export function getLocalBusinessSchema() {
       siteConfig.companiesHouseUrl,
       siteConfig.linkedIn,
       siteConfig.facebook,
+      ...(siteConfig.googleReviewsUrl ? [siteConfig.googleReviewsUrl] : []),
     ],
   };
 }
@@ -195,6 +198,47 @@ export function getJobPostingSchema(job: JobListing) {
       name: "United Kingdom",
     },
     url: `${siteConfig.url}/jobs/${job.slug}`,
+  };
+}
+
+export function getGoogleReviewsSchema(data: {
+  rating: number;
+  totalReviews: number;
+  reviews: {
+    authorName: string;
+    rating: number;
+    text: string;
+    publishedAt: string;
+  }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${siteConfig.url}/#localbusiness`,
+    name: siteConfig.legalName,
+    url: siteConfig.url,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: data.rating,
+      reviewCount: data.totalReviews,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: data.reviews.map((review) => ({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: review.authorName,
+      },
+      datePublished: review.publishedAt,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: review.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      reviewBody: review.text,
+    })),
   };
 }
 
