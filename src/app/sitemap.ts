@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/constants";
 import { getJobs } from "@/lib/jobs";
 import { locationPages } from "@/lib/location-pages";
-import { insightArticles } from "@/lib/insights";
+import { getPublishedInsightArticles } from "@/lib/insights";
 import { recruitmentPages } from "@/lib/recruitment-pages";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -18,6 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/uk-coverage",
     "/services/permanent-recruitment",
     "/contact",
+    "/how-it-works",
     "/privacy-policy",
     "/terms-of-use",
   ];
@@ -28,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const locationRoutes = locationPages.map(
     (page) => `/locations/${page.slug}`
   );
-  const insightRoutes = insightArticles.map(
+  const insightRoutes = getPublishedInsightArticles().map(
     (article) => `/insights/${article.slug}`
   );
   const jobRoutes = jobs.map((job) => `/jobs/${job.slug}`);

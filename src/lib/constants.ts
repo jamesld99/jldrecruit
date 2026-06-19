@@ -36,10 +36,14 @@ export const navLinks = [
   { href: "/employers", label: "Employers" },
   { href: "/job-seekers", label: "Job Seekers" },
   { href: "/jobs", label: "Jobs" },
+  { href: "/how-it-works", label: "How It Works" },
   { href: "/sectors", label: "Sectors" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
+
+export const permanentOnlyMessage =
+  "We specialise exclusively in permanent placements — no temp cover and no contract staffing.";
 
 export const ukWideMessage =
   "We support employers across England, Scotland, Wales and Northern Ireland.";
@@ -71,8 +75,8 @@ export const footerLinks = [
   { href: "/recruitment/gate-door-recruitment", label: "Gate & Door Recruitment" },
   { href: "/recruitment/refrigeration-recruitment", label: "Refrigeration Recruitment" },
   { href: "/insights", label: "Recruitment Insights" },
-  { href: "/locations/vehicle-technician-recruitment-devon", label: "Devon Recruitment" },
-  { href: "/locations/vehicle-technician-recruitment-cornwall", label: "Cornwall Recruitment" },
+  { href: "/locations/fire-security-recruitment-essex", label: "Essex Recruitment" },
+  { href: "/locations/fire-security-recruitment-yorkshire", label: "Yorkshire Recruitment" },
 ];
 
 export const trustSignals = [
@@ -161,6 +165,11 @@ export const employerFaqs = [
     question: "Do you offer exclusive recruitment?",
     answer:
       "Yes. Exclusive recruitment can be arranged for the right vacancy, giving you dedicated focus on your role. Speak with James to discuss the best approach for your hiring needs.",
+  },
+  {
+    question: "Do you provide temp or contract cover?",
+    answer:
+      "No. JLD Recruit Ltd specialises exclusively in permanent placements. We do not supply temporary staff or contract cover — if you need a permanent hire, we would be happy to help.",
   },
 ];
 
@@ -371,6 +380,24 @@ export const processSteps = [
   },
 ];
 
+export const placementStories = [
+  {
+    title: "Industrial door engineer — Colchester",
+    summary:
+      "Helped a Colchester door company fill a hard-to-source service engineer role within three weeks through targeted headhunting.",
+  },
+  {
+    title: "Intruder alarm engineer — Yorkshire & Lancashire",
+    summary:
+      "Sourced experienced security engineers for a growing installer expanding across Yorkshire and Lancashire, with a shortlist delivered inside two weeks.",
+  },
+  {
+    title: "Lift service engineer — South East",
+    summary:
+      "Placed a lift service engineer with a family-run lift company that needed route cover and strong customer-facing skills — matched on culture as well as technical ability.",
+  },
+];
+
 export const whoWeHelp = [
   {
     title: "CEOs & Business Owners",
@@ -439,6 +466,11 @@ export const faqs = [
     question: "Do you offer fixed-fee or retained recruitment?",
     answer:
       "Yes. We offer transparent fixed-fee recruitment, exclusive recruitment campaigns and retained search for the right vacancy. Contact James to discuss the best approach for your permanent hiring needs.",
+  },
+  {
+    question: "Do you provide temporary or contract staff?",
+    answer:
+      "No. JLD Recruit Ltd specialises exclusively in permanent placements. We do not supply temporary or contract cover.",
   },
 ];
 

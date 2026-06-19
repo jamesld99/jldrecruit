@@ -76,3 +76,7 @@ export const insightArticles: InsightArticle[] = [
 export function getInsightArticle(slug: string) {
   return insightArticles.find((article) => article.slug === slug);
 }
+
+export function getPublishedInsightArticles() {
+  return insightArticles.filter((article) => !article.planned);
+}

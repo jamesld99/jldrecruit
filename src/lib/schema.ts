@@ -162,13 +162,18 @@ export function getWebPageSchema(
 }
 
 export function getJobPostingSchema(job: JobListing) {
+  const validThrough = new Date(job.postedDate);
+  validThrough.setDate(validThrough.getDate() + 90);
+
   return {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: job.title,
     description: [job.summary, ...job.overview].join(" "),
     datePosted: job.postedDate,
+    validThrough: validThrough.toISOString().slice(0, 10),
     employmentType: job.type === "Permanent" ? "FULL_TIME" : "TEMPORARY",
+    directApply: true,
     hiringOrganization: {
       "@type": "Organization",
       name: siteConfig.legalName,

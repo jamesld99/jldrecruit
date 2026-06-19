@@ -1,8 +1,9 @@
+import { EnquiryForms } from "@/components/EnquiryForms";
 import { Button } from "@/components/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CTASection } from "@/components/CTASection";
 import { SchemaScript } from "@/components/SchemaScript";
-import { candidateBenefits, primarySectors, siteConfig, ukWideMessage } from "@/lib/constants";
+import { candidateBenefits, permanentOnlyMessage, primarySectors, siteConfig, ukWideMessage } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 
@@ -53,12 +54,15 @@ export default function JobSeekersPage() {
               technician or HGV mechanic — we help match your skills with the right
               opportunity. {ukWideMessage}
             </p>
+            <p className="mt-4 text-sm font-medium text-brand-600">
+              {permanentOnlyMessage} We place candidates in permanent roles only.
+            </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button href="/jobs" variant="primary">
                 View Jobs
               </Button>
-              <Button href="/contact" variant="outline">
-                Speak to James
+              <Button href="/contact#candidates" variant="outline">
+                Send CV
               </Button>
             </div>
           </div>
@@ -148,32 +152,15 @@ export default function JobSeekersPage() {
       </section>
 
       <section className="gradient-section py-20 lg:py-28">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-navy-900 sm:text-3xl">
-            Ready to explore new opportunities?
-          </h2>
-          <p className="mt-4 text-lg text-navy-600">
-            Send us your CV or get in touch to discuss what you are looking for.
-            Email{" "}
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="font-semibold text-brand-600 hover:underline"
-            >
-              {siteConfig.email}
-            </a>{" "}
-            or call{" "}
-            <a
-              href={`tel:${siteConfig.phone}`}
-              className="font-semibold text-brand-600 hover:underline"
-            >
-              {siteConfig.phoneDisplay}
-            </a>
-            .
-          </p>
-          <div className="mt-8">
-            <Button href="/contact" variant="primary">
-              Contact Us
-            </Button>
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Register"
+            title="Send your CV"
+            description="Upload your CV and tell us what you are looking for. James will review your details and be in touch when a suitable permanent role comes up."
+            align="center"
+          />
+          <div className="rounded-2xl border border-brand-200 bg-white p-6 card-shadow sm:p-8">
+            <EnquiryForms defaultTab="candidate" />
           </div>
         </div>
       </section>

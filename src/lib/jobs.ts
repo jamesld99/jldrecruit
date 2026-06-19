@@ -103,6 +103,19 @@ function defaultWorkingHours(sector: string, overview: string[]): string {
   return "Monday to Friday (full details confirmed with employer)";
 }
 
+function filterRequirements(requirements: string[], overview: string[]) {
+  const overviewText = overview.join(" ").toLowerCase();
+
+  return requirements.filter((requirement) => {
+    const normalized = requirement.toLowerCase().trim();
+    if (normalized.length < 20) return false;
+    if (overviewText.includes(normalized.slice(0, 50))) return false;
+    return !/(?:i'm currently working with|well established|family run|get in touch|if you(?:'|’)re interested)/i.test(
+      requirement
+    );
+  });
+}
+
 function enrichJob(
   post: LinkedInJobPost,
   enrichment?: JobEnrichment
@@ -122,8 +135,8 @@ function enrichJob(
     overview,
     responsibilities:
       enrichment?.responsibilities ?? defaultResponsibilities(sector),
-    requirements:
-      enrichment?.requirements.length
+    requirements: (() => {
+      const source = enrichment?.requirements.length
         ? enrichment.requirements
         : post.requirements.length
           ? post.requirements
@@ -131,7 +144,10 @@ function enrichJob(
               "Relevant experience for the role",
               "Strong work ethic and attention to detail",
               "Right to work in the UK",
-            ],
+            ];
+      const filtered = filterRequirements(source, overview);
+      return filtered.length > 0 ? filtered : source.slice(0, 3);
+    })(),
     desirable: enrichment?.desirable ?? defaultDesirable,
     benefits:
       post.benefits.length > 0
@@ -151,6 +167,7 @@ function enrichJob(
 function mergeLinkedInPosts(posts: LinkedInJobPost[]): JobListing[] {
   const seenSlugs = new Set<string>();
   const seenActivityIds = new Set<string>();
+  const seenRoleKeys = new Set<string>();
 
   return posts
     .map((post) => {
@@ -163,6 +180,11 @@ function mergeLinkedInPosts(posts: LinkedInJobPost[]): JobListing[] {
         getEnrichmentByLinkedInSlug(post.linkedInSlug);
 
       const job = enrichJob(post, enrichment);
+      const roleKey = `${job.title.toLowerCase()}|${job.location.toLowerCase()}`;
+
+      if (seenRoleKeys.has(roleKey)) {
+        return null;
+      }
 
       if (seenSlugs.has(job.slug)) {
         job.slug = `${job.slug}-${post.activityId.slice(-6)}`;
@@ -170,6 +192,7 @@ function mergeLinkedInPosts(posts: LinkedInJobPost[]): JobListing[] {
 
       seenActivityIds.add(post.activityId);
       seenSlugs.add(job.slug);
+      seenRoleKeys.add(roleKey);
       return job;
     })
     .filter((job): job is JobListing => job !== null);

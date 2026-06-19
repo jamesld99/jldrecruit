@@ -68,7 +68,7 @@ export default async function JobsPage() {
           />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {jobs.map((job) => (
-              <JobCard key={job.slug} job={job} />
+              <JobCard key={`${job.slug}-${job.linkedInActivityId}`} job={job} />
             ))}
           </div>
           <div className="mt-12 rounded-2xl border border-brand-200 bg-brand-50/50 p-8 text-center">
@@ -84,8 +84,8 @@ export default async function JobsPage() {
               <Button href="/job-seekers" variant="primary">
                 Job Seeker Information
               </Button>
-              <Button href="/contact" variant="outline">
-                Contact James
+              <Button href="/contact#candidates" variant="outline">
+                Register Interest
               </Button>
             </div>
           </div>

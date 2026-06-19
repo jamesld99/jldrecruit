@@ -6,6 +6,7 @@ type PageMeta = {
   description: string;
   path: string;
   keywords?: string[];
+  noIndex?: boolean;
 };
 
 export function createMetadata({
@@ -13,6 +14,7 @@ export function createMetadata({
   description,
   path,
   keywords = [],
+  noIndex = false,
 }: PageMeta): Metadata {
   const fullTitle =
     title === siteConfig.name
@@ -49,7 +51,7 @@ export function createMetadata({
       description,
     },
     robots: {
-      index: true,
+      index: !noIndex,
       follow: true,
     },
   };

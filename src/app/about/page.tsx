@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CTASection } from "@/components/CTASection";
 import { SchemaScript } from "@/components/SchemaScript";
-import { siteConfig, ukWideRecruitmentSeo, ukWideServicesSeo, whyChooseUs } from "@/lib/constants";
+import { siteConfig, ukWideRecruitmentSeo, ukWideServicesSeo, permanentOnlyMessage, whyChooseUs } from "@/lib/constants";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 
@@ -54,6 +54,9 @@ export default function AboutPage() {
             </p>
             <p className="mt-4 text-lg leading-relaxed text-navy-600">
               {ukWideServicesSeo} {ukWideRecruitmentSeo}
+            </p>
+            <p className="mt-4 text-sm font-semibold text-brand-700">
+              {permanentOnlyMessage}
             </p>
             <p className="mt-4 text-sm text-navy-500">
               Registered in England and Wales —{" "}

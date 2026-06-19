@@ -47,8 +47,8 @@ function JobSection({
     <div>
       <h2 className="text-xl font-bold text-navy-900">{title}</h2>
       <ul className="mt-4 space-y-3">
-        {items.map((item) => (
-          <li key={item} className="flex items-start gap-3">
+        {items.map((item, index) => (
+          <li key={`${title}-${index}`} className="flex items-start gap-3">
             <svg className="mt-0.5 h-5 w-5 shrink-0 text-brand-500" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>

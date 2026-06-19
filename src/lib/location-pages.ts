@@ -293,8 +293,8 @@ function buildGateLocation(
 }
 
 export const locationPages: LocationPageContent[] = [
-  buildVehicleTechnicianLocation("Devon", "Devon", "devon"),
-  buildVehicleTechnicianLocation("Cornwall", "Cornwall", "cornwall"),
+  buildVehicleTechnicianLocation("Devon", "the South West", "devon"),
+  buildVehicleTechnicianLocation("Cornwall", "the South West", "cornwall"),
   buildVehicleTechnicianLocation("Plymouth", "Devon", "plymouth"),
   buildVehicleTechnicianLocation("Exeter", "Devon", "exeter"),
   buildVehicleTechnicianLocation("Torquay", "Devon", "torquay"),
@@ -314,9 +314,13 @@ export const locationPages: LocationPageContent[] = [
   buildLiftLocation("Devon", "devon"),
   buildFireSecurityLocation("Birmingham", "birmingham"),
   buildFireSecurityLocation("Manchester", "manchester"),
-  buildFireSecurityLocation("Devon", "devon"),
-  buildFireSecurityLocation("Cornwall", "cornwall"),
+  buildFireSecurityLocation("Devon", "devon", "the South West"),
+  buildFireSecurityLocation("Cornwall", "cornwall", "the South West"),
   buildFireSecurityLocation("London", "london"),
+  buildFireSecurityLocation("Essex", "essex", "East Anglia"),
+  buildFireSecurityLocation("Yorkshire", "yorkshire", "Yorkshire & Lancashire"),
+  buildFireSecurityLocation("Cheshire", "cheshire", "the North West"),
+  buildFireSecurityLocation("Dorset", "dorset", "the South West"),
   buildFireSecurityLocation("Barnstaple", "barnstaple", "Devon"),
   buildFireSecurityLocation("Midlands", "midlands"),
   buildRefrigerationLocation("London", "london"),
@@ -325,6 +329,7 @@ export const locationPages: LocationPageContent[] = [
   buildRefrigerationLocation("South West", "south-west"),
   buildGateLocation("London", "london"),
   buildGateLocation("Midlands", "midlands"),
+  buildGateLocation("Colchester", "colchester", "Essex"),
   buildVehicleTechnicianLocation("Bristol", "Avon", "bristol"),
 ];
 

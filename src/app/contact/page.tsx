@@ -1,4 +1,4 @@
-import { ContactForm } from "@/components/ContactForm";
+import { EnquiryForms } from "@/components/EnquiryForms";
 import { FAQ } from "@/components/FAQ";
 import { SchemaScript } from "@/components/SchemaScript";
 import { SocialLinks } from "@/components/SocialLinks";
@@ -117,14 +117,7 @@ export default function ContactPage() {
 
             <div className="lg:col-span-3">
               <div className="rounded-2xl border border-brand-200 bg-white p-6 card-shadow sm:p-8">
-                <h2 className="mb-2 text-xl font-bold text-navy-900">
-                  Send us a message
-                </h2>
-                <p className="mb-6 text-sm text-navy-600">
-                  Fill in the form below and we will get back to you as soon as
-                  possible.
-                </p>
-                <ContactForm submitLabel="Send Enquiry" />
+                <EnquiryForms />
               </div>
             </div>
           </div>

@@ -8,6 +8,9 @@ import { WhyChooseSection } from "@/components/WhyChooseSection";
 import {
   employerBenefits,
   employerFaqs,
+  permanentOnlyMessage,
+  placementStories,
+  processSteps,
   services,
   siteConfig,
   ukWideRecruitmentSeo,
@@ -65,6 +68,9 @@ export default function EmployersPage() {
             <p className="mt-4 text-sm leading-relaxed text-navy-600">
               {ukWideRecruitmentSeo}
             </p>
+            <p className="mt-4 text-sm font-semibold text-brand-700">
+              {permanentOnlyMessage}
+            </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Button href="/contact" variant="primary">
                 Submit Vacancy
@@ -73,6 +79,58 @@ export default function EmployersPage() {
                 Hire Staff
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="gradient-section py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="How It Works"
+            title="A straightforward recruitment process"
+            description="Submit your vacancy, receive a quality shortlist and hire with support throughout — you deal directly with James at every stage."
+          />
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {processSteps.map((step) => (
+              <article
+                key={step.step}
+                className="rounded-2xl border border-brand-100 bg-white p-6 card-shadow"
+              >
+                <p className="text-sm font-bold text-brand-600">{step.step}</p>
+                <h3 className="mt-3 text-lg font-bold text-navy-900">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-navy-600">
+                  {step.description}
+                </p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Button href="/how-it-works" variant="outline">
+              See full process
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Recent Placements"
+            title="Examples of how we help employers"
+            description="Anonymised examples of permanent placements delivered through proactive sourcing and headhunting."
+          />
+          <div className="grid gap-6 md:grid-cols-3">
+            {placementStories.map((story) => (
+              <article
+                key={story.title}
+                className="rounded-2xl border border-brand-100 bg-white p-6 card-shadow"
+              >
+                <h3 className="text-lg font-bold text-navy-900">{story.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-navy-600">
+                  {story.summary}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

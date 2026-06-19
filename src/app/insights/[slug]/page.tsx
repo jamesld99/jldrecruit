@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: Props) {
     title: article.title,
     description: article.description,
     path: `/insights/${article.slug}`,
+    noIndex: article.planned,
     keywords: [
       article.title.toLowerCase(),
       "engineering recruitment UK",

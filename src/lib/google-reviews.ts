@@ -166,7 +166,7 @@ export async function getGoogleReviews(): Promise<GoogleReviewsData | null> {
 export async function getGoogleReviewsDisplay(): Promise<GoogleReviewsDisplay | null> {
   const reviews = await getGoogleReviews();
 
-  if (reviews) {
+  if (reviews && reviews.totalReviews >= 5) {
     return { mode: "reviews", data: reviews };
   }
 

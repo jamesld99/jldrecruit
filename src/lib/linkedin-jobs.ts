@@ -224,6 +224,12 @@ function inferTitle(headline: string, salary: string, location: string) {
   return title || "Recruitment Opportunity";
 }
 
+function isPitchCopy(line: string) {
+  return /(?:i'm currently working with|i am currently working with|we are currently working with|well established|family run|family-run|if you(?:'|’)re interested|get in touch|please contact|dm me|drop me a message|looking for an experienced|this is a great opportunity|exciting opportunity|don't miss|don’t miss|📩|👉|🔥|✅)/i.test(
+    line
+  );
+}
+
 function extractRequirements(text: string) {
   const bulletItems = text
     .split("\n")
@@ -231,7 +237,8 @@ function extractRequirements(text: string) {
     .filter(
       (line) =>
         line.length > 20 &&
-        /(?:experience|licence|required|must|essential|beneficial|qualification|certification|ability)/i.test(
+        !isPitchCopy(line) &&
+        /(?:experience|licence|license|required|must|essential|beneficial|qualification|certification|ability|knowledge|competent|hold a|holding a|nvq|ecs|cscs|f-gas|17th|18th)/i.test(
           line
         )
     );
@@ -246,7 +253,9 @@ function extractRequirements(text: string) {
     .filter(
       (sentence) =>
         sentence.length > 30 &&
-        /(?:experience|licence|required|must|essential|beneficial|qualification|certification|looking for)/i.test(
+        !isPitchCopy(sentence) &&
+        !sentence.includes("Benefits include") &&
+        /(?:experience|licence|license|required|must|essential|beneficial|qualification|certification|knowledge|competent|hold a|holding a)/i.test(
           sentence
         )
     )

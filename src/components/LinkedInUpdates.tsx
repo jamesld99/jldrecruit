@@ -36,12 +36,12 @@ export function LinkedInUpdates({ jobs, limit = 3 }: LinkedInUpdatesProps) {
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {latestJobs.map((job) => (
-            <JobCard key={job.slug} job={job} compact />
+            <JobCard key={`${job.slug}-${job.linkedInActivityId}`} job={job} compact />
           ))}
         </div>
         <div className="mt-8 text-center">
           <Link href="/jobs" className="text-sm font-semibold text-brand-600 hover:text-brand-500">
-            View all current jobs &rarr;
+            View all {jobs.length} current job{jobs.length === 1 ? "" : "s"} &rarr;
           </Link>
         </div>
       </div>
