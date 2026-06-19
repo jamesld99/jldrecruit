@@ -4,9 +4,9 @@ export const siteConfig = {
   tagline:
     "Specialist Recruitment for Lift Engineering, Fire & Security, Gate & Door, Refrigeration, Automotive & HGV Businesses",
   heroHeadline:
-    "Specialist Recruitment for Lift Engineering, Fire & Security, Gate & Door and Automotive Businesses",
+    "Specialist Recruitment for Lift Engineering, Fire & Security, Gate & Door, Refrigeration, Automotive & HGV Businesses",
   heroSubheadline:
-    "UK-wide recruitment for lift engineers, fire & security engineers, gate & door engineers and vehicle technicians. We support employers across England, Scotland, Wales and Northern Ireland.",
+    "UK-wide recruitment for lift engineers, fire & security engineers, gate & door engineers, refrigeration engineers, vehicle technicians and HGV mechanics. We support employers across England, Scotland, Wales and Northern Ireland.",
   description:
     "JLD Recruit Ltd provides specialist recruitment services across England, Scotland, Wales and Northern Ireland. UK-wide recruitment for lift engineering, fire & security, gate & door, refrigeration, automotive and HGV businesses. Permanent recruitment with direct access to James.",
   url: "https://www.jldrecruit.co.uk",
@@ -36,6 +36,7 @@ export const navLinks = [
   { href: "/employers", label: "Employers" },
   { href: "/job-seekers", label: "Job Seekers" },
   { href: "/jobs", label: "Jobs" },
+  { href: "/uk-coverage", label: "UK Coverage" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/sectors", label: "Sectors" },
   { href: "/about", label: "About" },
@@ -69,14 +70,16 @@ export const seoKeywords = [
 ];
 
 export const footerLinks = [
-  { href: "/uk-coverage", label: "UK Coverage" },
+  { href: "/uk-coverage", label: "UK Coverage & Locations" },
+  { href: "/how-it-works", label: "How It Works" },
   { href: "/recruitment/lift-engineer-recruitment", label: "Lift Engineer Recruitment" },
   { href: "/recruitment/fire-security-recruitment", label: "Fire & Security Recruitment" },
   { href: "/recruitment/gate-door-recruitment", label: "Gate & Door Recruitment" },
   { href: "/recruitment/refrigeration-recruitment", label: "Refrigeration Recruitment" },
+  { href: "/recruitment/automotive-recruitment", label: "Automotive Recruitment" },
+  { href: "/recruitment/vehicle-technician-recruitment", label: "Vehicle Technician Recruitment" },
+  { href: "/recruitment/hgv-recruitment", label: "HGV Recruitment" },
   { href: "/insights", label: "Recruitment Insights" },
-  { href: "/locations/fire-security-recruitment-essex", label: "Essex Recruitment" },
-  { href: "/locations/fire-security-recruitment-yorkshire", label: "Yorkshire Recruitment" },
 ];
 
 export const trustSignals = [

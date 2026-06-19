@@ -35,6 +35,7 @@ const recruitmentLinks = [
   { label: "Refrigeration Recruitment", href: "/recruitment/refrigeration-recruitment" },
   { label: "Automotive Recruitment", href: "/recruitment/automotive-recruitment" },
   { label: "Vehicle Technician Recruitment", href: "/recruitment/vehicle-technician-recruitment" },
+  { label: "HGV Recruitment", href: "/recruitment/hgv-recruitment" },
 ];
 
 export default function SectorsPage() {

@@ -6,6 +6,7 @@ import {
   ukWideRecruitmentSeo,
   ukWideServicesSeo,
 } from "@/lib/constants";
+import { getLocationPageLinks } from "@/lib/location-pages";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 
@@ -42,74 +43,18 @@ const majorCities = [
   "Belfast",
 ];
 
-const locationLinks = [
-  {
-    label: "Lift Engineer Recruitment — London",
-    href: "/locations/lift-engineer-recruitment-london",
-  },
-  {
-    label: "Lift Engineer Recruitment — Birmingham",
-    href: "/locations/lift-engineer-recruitment-birmingham",
-  },
-  {
-    label: "Lift Engineer Recruitment — Manchester",
-    href: "/locations/lift-engineer-recruitment-manchester",
-  },
-  {
-    label: "Lift Engineer Recruitment — Glasgow",
-    href: "/locations/lift-engineer-recruitment-glasgow",
-  },
-  {
-    label: "Fire & Security Recruitment — London",
-    href: "/locations/fire-security-recruitment-london",
-  },
-  {
-    label: "Fire & Security Recruitment — Birmingham",
-    href: "/locations/fire-security-recruitment-birmingham",
-  },
-  {
-    label: "Fire & Security Recruitment — Manchester",
-    href: "/locations/fire-security-recruitment-manchester",
-  },
-  {
-    label: "Refrigeration Recruitment — London",
-    href: "/locations/refrigeration-recruitment-london",
-  },
-  {
-    label: "Refrigeration Recruitment — Birmingham",
-    href: "/locations/refrigeration-recruitment-birmingham",
-  },
-  {
-    label: "Refrigeration Recruitment — Bristol",
-    href: "/locations/refrigeration-recruitment-bristol",
-  },
-  {
-    label: "Gate Engineer Recruitment — London",
-    href: "/locations/gate-engineer-recruitment-london",
-  },
-  {
-    label: "Gate Engineer Recruitment — Midlands",
-    href: "/locations/gate-engineer-recruitment-midlands",
-  },
-  {
-    label: "Vehicle Technician Recruitment — Devon",
-    href: "/locations/vehicle-technician-recruitment-devon",
-  },
-  {
-    label: "Vehicle Technician Recruitment — Cornwall",
-    href: "/locations/vehicle-technician-recruitment-cornwall",
-  },
-  {
-    label: "Vehicle Technician Recruitment — Bristol",
-    href: "/locations/vehicle-technician-recruitment-bristol",
-  },
-  {
-    label: "HGV Technician Recruitment — Leeds",
-    href: "/locations/hgv-recruitment-leeds",
-  },
-];
+const locationGroups = [
+  "Vehicle Technician",
+  "HGV Technician",
+  "Lift Engineer",
+  "Fire & Security Engineer",
+  "Refrigeration Engineer",
+  "Gate Engineer",
+] as const;
 
 export default function UkCoveragePage() {
+  const locationLinks = getLocationPageLinks();
+
   return (
     <>
       <SchemaScript
@@ -210,18 +155,30 @@ export default function UkCoveragePage() {
           <SectionHeading
             eyebrow="Location Pages"
             title="Recruitment by location"
-            description="Explore our location-focused recruitment pages. Each page explains how we support employers in that area while working UK-wide."
+            description="Browse all location-focused recruitment pages. Each explains how we support employers in that area while working UK-wide."
           />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {locationLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-2xl border border-brand-100 bg-white p-5 text-sm font-semibold text-brand-700 transition-all hover:border-brand-300 hover:card-shadow"
-              >
-                {link.label} &rarr;
-              </Link>
-            ))}
+          <div className="space-y-12">
+            {locationGroups.map((group) => {
+              const links = locationLinks.filter((link) => link.role === group);
+              if (links.length === 0) return null;
+
+              return (
+                <div key={group}>
+                  <h2 className="text-lg font-bold text-navy-900">{group}</h2>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {links.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="rounded-2xl border border-brand-100 bg-white p-5 text-sm font-semibold text-brand-700 transition-all hover:border-brand-300 hover:card-shadow"
+                      >
+                        {link.label} &rarr;
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

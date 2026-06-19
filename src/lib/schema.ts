@@ -172,7 +172,7 @@ export function getJobPostingSchema(job: JobListing) {
     description: [job.summary, ...job.overview].join(" "),
     datePosted: job.postedDate,
     validThrough: validThrough.toISOString().slice(0, 10),
-    employmentType: job.type === "Permanent" ? "FULL_TIME" : "TEMPORARY",
+    employmentType: "FULL_TIME",
     directApply: true,
     hiringOrganization: {
       "@type": "Organization",

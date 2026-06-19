@@ -18,7 +18,7 @@ export type JobListing = {
   region: string;
   salary: string;
   sector: string;
-  type: "Permanent" | "Temporary" | "Contract";
+  type: "Permanent";
   summary: string;
   overview: string[];
   responsibilities: string[];

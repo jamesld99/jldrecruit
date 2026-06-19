@@ -20,6 +20,17 @@ function locationCoverageNote(location: string): string {
   return `${ukWideMessage} While this page focuses on ${location}, JLD Recruit works UK-wide — we are not a local-only agency.`;
 }
 
+function acrossRegionPhrase(location: string, region: string) {
+  const normalizedLocation = location.toLowerCase();
+  const normalizedRegion = region.toLowerCase().replace(/^the /, "");
+
+  if (normalizedLocation === normalizedRegion) {
+    return `across ${location}`;
+  }
+
+  return `across ${region}`;
+}
+
 function buildVehicleTechnicianLocation(
   location: string,
   region: string,
@@ -41,10 +52,10 @@ function buildVehicleTechnicianLocation(
       `garage recruitment ${location}`,
     ],
     heroTitle: `Vehicle Technician Recruitment ${location}`,
-    heroDescription: `Specialist vehicle technician and MOT tester recruitment in ${location} and across ${region}. We help garages, dealerships and motor groups find skilled mechanics through proactive sourcing and headhunting.`,
+    heroDescription: `Specialist vehicle technician and MOT tester recruitment in ${location} and ${acrossRegionPhrase(location, region)}. We help garages, dealerships and motor groups find skilled mechanics through proactive sourcing and headhunting.`,
     overview: [
       `Recruiting skilled vehicle technicians in ${location} is competitive. Good mechanics and MOT testers are in demand, and the best candidates are often already employed — which is why a proactive recruitment approach matters.`,
-      `JLD Recruit Ltd supports employers in ${location} and across ${region} with permanent vehicle technician recruitment, MOT tester sourcing and workshop staff hiring. You deal directly with James — no call centres, no generic job board service.`,
+      `JLD Recruit Ltd supports employers in ${location} and ${acrossRegionPhrase(location, region)} with permanent vehicle technician recruitment, MOT tester sourcing and workshop staff hiring. You deal directly with James — no call centres, no generic job board service.`,
       `We headhunt, screen and shortlist candidates who match your workshop requirements, salary expectations and team culture. Whether you need one technician or multiple MOT testers, we provide honest communication throughout.`,
       extraOverview ||
         `We also support motor groups and employers across ${region} and nationwide with automotive recruitment for prestige specialists, diagnostic technicians and workshop supervisors.`,
@@ -399,4 +410,12 @@ export const coverageAreas = [
 
 export function getLocationPage(slug: string) {
   return locationPages.find((page) => page.slug === slug);
+}
+
+export function getLocationPageLinks() {
+  return locationPages.map((page) => ({
+    label: page.metaTitle,
+    href: `/locations/${page.slug}`,
+    role: page.role,
+  }));
 }

@@ -5,7 +5,7 @@ export type JobEnrichment = {
   region: string;
   salary: string;
   sector: string;
-  type: "Permanent" | "Temporary" | "Contract";
+  type: "Permanent";
   summary: string;
   overview: string[];
   responsibilities?: string[];
@@ -151,98 +151,6 @@ export const jobEnrichments: JobEnrichment[] = [
       "Monday to Friday with Saturdays on a rota basis",
     ],
   },
-  {
-    slug: "vehicle-technician-mot-exeter",
-    title: "Vehicle Technician / MOT Tester",
-    location: "Exeter",
-    region: "Devon",
-    salary: "£30,000 – £50,000",
-    sector: "Automotive",
-    type: "Permanent",
-    summary:
-      "Professional workshop roles with long-term stability and progression.",
-    overview: [
-      "Multiple opportunities in Exeter with a well established motor group offering professional workshop environments and genuine progression.",
-      "Servicing, repairs, diagnostics, fault finding and general vehicle maintenance across a variety of makes and models.",
-      "Busy workshops with strong team environments and consistent workflow.",
-    ],
-    benefits: [
-      "Strong benefits package including training and development",
-      "Cycle to work scheme and staff discounts",
-      "Sick pay, life insurance and referral schemes",
-    ],
-    requirements: [
-      "Solid mechanical experience and attention to detail",
-      "Ability to work efficiently in a fast-paced environment",
-      "MOT licence an advantage but not essential",
-    ],
-  },
-  {
-    slug: "vehicle-technician-mot-plymouth",
-    title: "Vehicle Technician / MOT Tester",
-    location: "Plymouth",
-    region: "Devon",
-    salary: "£30,000 – £50,000",
-    sector: "Automotive",
-    type: "Permanent",
-    summary:
-      "Stable technician roles with a growing motor group across the South West.",
-    overview: [
-      "Multiple Vehicle Technician and MOT Tester opportunities in Plymouth with a well established motor group continuing to grow across the South West.",
-      "Day-to-day work includes servicing, diagnostics, repairs, fault finding and general maintenance in busy, well-equipped workshops.",
-      "Stable, long-term roles within professional environments that value good staff.",
-    ],
-    requirements: [
-      "Reliable technicians with strong all-round mechanical ability",
-      "Good diagnostic skills and team working ability",
-      "MOT licence beneficial but not essential",
-      "Monday to Friday with Saturdays on a rota basis",
-    ],
-  },
-  {
-    slug: "vehicle-technician-mot-st-austell",
-    title: "Vehicle Technician / MOT Tester",
-    location: "St Austell",
-    region: "Cornwall",
-    salary: "£30,000 – £50,000",
-    sector: "Automotive",
-    type: "Permanent",
-    summary:
-      "Technician roles with an established motor group in Cornwall.",
-    overview: [
-      "Experienced Vehicle Technicians and MOT Testers needed for multiple opportunities in St Austell.",
-      "Positions with a well established motor group offering stable, long-term career opportunities and excellent workshop support.",
-      "Servicing, repairs, diagnostics and general maintenance across a wide range of vehicles in a professional, busy workshop.",
-    ],
-    requirements: [
-      "Good all-round mechanical knowledge and diagnostic ability",
-      "Positive attitude towards teamwork and customer service",
-      "MOT licence an advantage but not essential",
-      "Monday to Friday with Saturdays on a rota basis",
-    ],
-  },
-  {
-    slug: "vehicle-technician-mot-truro",
-    title: "Vehicle Technician / MOT Tester",
-    location: "Truro",
-    region: "Cornwall",
-    salary: "£30,000 – £50,000",
-    sector: "Automotive",
-    type: "Permanent",
-    summary:
-      "Multiple roles with a family run motor group in Cornwall.",
-    overview: [
-      "A family run motor group in Cornwall is looking for multiple Vehicle Technicians and MOT Testers for workshop teams in Truro.",
-      "Long-term positions within a supportive business that values staff and offers strong career progression.",
-      "Servicing, maintenance, repairs, diagnostics, fault finding, road testing and repair work in a professional environment.",
-    ],
-    requirements: [
-      "Solid hands-on experience and strong work ethic",
-      "Good diagnostic ability and attention to detail",
-      "MOT testing experience a benefit but not essential",
-      "Monday to Friday with Saturdays on a rota basis",
-    ],
-  },
 ];
 
 const linkedInSlugAliases: Record<string, string> = {
@@ -251,10 +159,6 @@ const linkedInSlugAliases: Record<string, string> = {
   "motor-vehicle-technician-bournemouth-33000": "motor-vehicle-technician-bournemouth",
   "vehicle-technician-mot-tester-barnstaple": "vehicle-technician-mot-barnstaple",
   "vehicle-technician-mot-tester-torquay": "vehicle-technician-mot-torquay",
-  "vehicle-technician-mot-tester-exeter": "vehicle-technician-mot-exeter",
-  "vehicle-technician-mot-tester-plymouth": "vehicle-technician-mot-plymouth",
-  "vehicle-technician-mot-tester-st-austell": "vehicle-technician-mot-st-austell",
-  "vehicle-technician-mot-tester-truro": "vehicle-technician-mot-truro",
 };
 
 export function getSupplementalActivityIds(): string[] {
