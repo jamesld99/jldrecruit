@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props) {
     faqs: page.faqs,
     relatedLinks: page.relatedLinks,
     pagePath: `/locations/${page.slug}`,
-    breadcrumbParent: { name: "Jobs", url: "/jobs" },
+    breadcrumbParent: { name: "UK Coverage", url: "/uk-coverage" },
   };
 
   return createSeoMetadata(content);
@@ -57,7 +57,7 @@ export default async function LocationPage({ params }: Props) {
     faqs: page.faqs,
     relatedLinks: page.relatedLinks,
     pagePath: `/locations/${page.slug}`,
-    breadcrumbParent: { name: "Jobs", url: "/jobs" },
+    breadcrumbParent: { name: "UK Coverage", url: "/uk-coverage" },
   };
 
   return <SeoLandingPage content={content} />;

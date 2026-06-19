@@ -14,9 +14,11 @@ const labelClassName = "mb-1.5 block text-sm font-medium text-navy-700";
 function SuccessMessage({
   title,
   description,
+  showContactFallback = true,
 }: {
   title: string;
   description: string;
+  showContactFallback?: boolean;
 }) {
   return (
     <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
@@ -37,23 +39,25 @@ function SuccessMessage({
       </div>
       <h3 className="text-lg font-semibold text-navy-900">{title}</h3>
       <p className="mt-2 text-navy-600">{description}</p>
-      <p className="mt-4 text-sm text-navy-600">
-        If your email app does not open, contact us at{" "}
-        <a
-          href={`mailto:${siteConfig.email}`}
-          className="font-semibold text-brand-600 hover:underline"
-        >
-          {siteConfig.email}
-        </a>{" "}
-        or call{" "}
-        <a
-          href={`tel:${siteConfig.phone}`}
-          className="font-semibold text-brand-600 hover:underline"
-        >
-          {siteConfig.phoneDisplay}
-        </a>
-        .
-      </p>
+      {showContactFallback ? (
+        <p className="mt-4 text-sm text-navy-600">
+          If you need to follow up, contact us at{" "}
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="font-semibold text-brand-600 hover:underline"
+          >
+            {siteConfig.email}
+          </a>{" "}
+          or call{" "}
+          <a
+            href={`tel:${siteConfig.phone}`}
+            className="font-semibold text-brand-600 hover:underline"
+          >
+            {siteConfig.phoneDisplay}
+          </a>
+          .
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -222,14 +226,22 @@ function EmployerEnquiryForm() {
 function CandidateEnquiryForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [cvName, setCvName] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [uploadAvailable, setUploadAvailable] = useState<boolean | null>(null);
+  const [usedMailtoFallback, setUsedMailtoFallback] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
+  useEffect(() => {
+    fetch("/api/enquiry/candidate")
+      .then((response) => response.json())
+      .then((data: { available?: boolean }) => {
+        setUploadAvailable(Boolean(data.available));
+      })
+      .catch(() => {
+        setUploadAvailable(false);
+      });
+  }, []);
 
-    const formData = new FormData(e.currentTarget);
-    const cvFile = formData.get("cv") as File | null;
+  function openMailtoFallback(formData: FormData) {
     const subject = encodeURIComponent(
       `Candidate Registration — ${formData.get("name")}`
     );
@@ -242,31 +254,100 @@ function CandidateEnquiryForm() {
         `Phone: ${formData.get("phone") || "Not provided"}`,
         `Current role: ${formData.get("currentRole") || "Not provided"}`,
         `Sector: ${formData.get("sector") || "Not provided"}`,
-        `CV to attach: ${cvFile?.name || "Not provided"}`,
         "",
         "Message:",
         `${formData.get("message") || "Please find my CV attached."}`,
         "",
-        "Note: Please attach your CV file in this email before sending.",
+        "Please attach your CV to this email before sending.",
       ].join("\n")
     );
 
     window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
-    setLoading(false);
+  }
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+
+    if (uploadAvailable) {
+      try {
+        const response = await fetch("/api/enquiry/candidate", {
+          method: "POST",
+          body: formData,
+        });
+        const data = (await response.json().catch(() => ({}))) as { error?: string };
+
+        if (response.ok) {
+          setSubmitted(true);
+          setUsedMailtoFallback(false);
+          return;
+        }
+
+        if (response.status === 503) {
+          setUploadAvailable(false);
+          openMailtoFallback(formData);
+          setUsedMailtoFallback(true);
+          setSubmitted(true);
+          return;
+        }
+
+        setError(data.error ?? "We could not send your CV. Please try again.");
+      } catch {
+        setError("We could not send your CV. Please try again or email James directly.");
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+
+    openMailtoFallback(formData);
+    setUsedMailtoFallback(true);
     setSubmitted(true);
+    setLoading(false);
   }
 
   if (submitted) {
     return (
       <SuccessMessage
-        title="Almost done — please attach your CV"
-        description={`Your email app should open with your details filled in. Attach ${cvName || "your CV file"} before sending so James can review your experience.`}
+        title={
+          usedMailtoFallback
+            ? "Open your email app and attach your CV"
+            : "Thank you — your CV has been sent"
+        }
+        description={
+          usedMailtoFallback
+            ? "Your email app should open with your details filled in. Attach your CV file before sending so James can review your experience."
+            : "James has received your CV and details and will be in touch if a suitable permanent role comes up."
+        }
+        showContactFallback={usedMailtoFallback}
       />
+    );
+  }
+
+  if (uploadAvailable === null) {
+    return (
+      <p className="text-sm text-navy-600">Loading registration form...</p>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {!uploadAvailable ? (
+        <div className="rounded-xl border border-brand-200 bg-brand-50/70 px-4 py-3 text-sm text-navy-700">
+          This opens your email app with your details filled in. You will need to
+          attach your CV yourself before sending — the website cannot upload files
+          by email automatically yet.
+        </div>
+      ) : (
+        <div className="rounded-xl border border-brand-200 bg-brand-50/70 px-4 py-3 text-sm text-navy-700">
+          Upload your CV here and it will be sent directly to James as an email
+          attachment — no need to open your email app.
+        </div>
+      )}
+
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="candidate-name" className={labelClassName}>
@@ -313,26 +394,24 @@ function CandidateEnquiryForm() {
         </select>
       </div>
 
-      <div>
-        <label htmlFor="candidate-cv" className={labelClassName}>
-          Upload your CV <span className="text-red-500">*</span>
-        </label>
-        <input
-          id="candidate-cv"
-          name="cv"
-          type="file"
-          required
-          accept=".pdf,.doc,.docx"
-          className="w-full rounded-xl border border-brand-200 bg-white px-4 py-3 text-sm text-navy-700 file:mr-4 file:rounded-full file:border-0 file:bg-brand-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-700"
-          onChange={(event) => {
-            const file = event.target.files?.[0];
-            setCvName(file?.name ?? "");
-          }}
-        />
-        <p className="mt-2 text-xs text-navy-500">
-          PDF or Word format. Your email app will open next — please attach this file before sending.
-        </p>
-      </div>
+      {uploadAvailable ? (
+        <div>
+          <label htmlFor="candidate-cv" className={labelClassName}>
+            Upload your CV <span className="text-red-500">*</span>
+          </label>
+          <input
+            id="candidate-cv"
+            name="cv"
+            type="file"
+            required
+            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            className="w-full rounded-xl border border-brand-200 bg-white px-4 py-3 text-sm text-navy-700 file:mr-4 file:rounded-full file:border-0 file:bg-brand-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-700"
+          />
+          <p className="mt-2 text-xs text-navy-500">
+            PDF or Word format, up to 5 MB. Sent directly to James as an attachment.
+          </p>
+        </div>
+      ) : null}
 
       <div>
         <label htmlFor="candidate-message" className={labelClassName}>
@@ -347,6 +426,12 @@ function CandidateEnquiryForm() {
         />
       </div>
 
+      {error ? (
+        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </p>
+      ) : null}
+
       <PrivacyNote />
 
       <button
@@ -354,7 +439,13 @@ function CandidateEnquiryForm() {
         disabled={loading}
         className="w-full rounded-full border-2 border-brand-600 px-6 py-3.5 text-sm font-semibold text-brand-700 transition-all hover:bg-brand-600 hover:text-white disabled:opacity-60 sm:w-auto"
       >
-        {loading ? "Opening email..." : "Send CV & Register Interest"}
+        {loading
+          ? uploadAvailable
+            ? "Sending CV..."
+            : "Opening email..."
+          : uploadAvailable
+            ? "Send CV & Register Interest"
+            : "Open email to send CV"}
       </button>
     </form>
   );
@@ -408,7 +499,7 @@ export function EnquiryForms({ defaultTab = "employer" }: { defaultTab?: FormTyp
         <div id="candidates">
           <h2 className="mb-2 text-xl font-bold text-navy-900">Register your interest</h2>
           <p className="mb-6 text-sm text-navy-600">
-            Upload your CV and tell us what you are looking for. Our service is free for candidates.
+            Register your interest and send your CV to James. Our service is free for candidates.
           </p>
           <CandidateEnquiryForm />
         </div>
