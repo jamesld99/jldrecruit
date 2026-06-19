@@ -70,6 +70,8 @@ function InsightCard({
 
 export default function InsightsPage() {
   const salaryGuides = insightArticles.filter((a) => a.category === "Salary Guide");
+  const publishedSalaryGuides = salaryGuides.filter((a) => !a.planned);
+  const plannedSalaryGuides = salaryGuides.filter((a) => a.planned);
   const recruitmentInsights = insightArticles.filter(
     (a) => a.category === "Recruitment Insight"
   );
@@ -111,25 +113,49 @@ export default function InsightsPage() {
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="In preparation"
+            eyebrow="Published"
             title="Salary guides"
-            description="Detailed salary guides for 2026 — currently being written. These will be published here when ready."
+            description="UK salary benchmarks for specialist engineering and automotive roles in 2026."
           />
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {salaryGuides.map((article) => (
+            {publishedSalaryGuides.map((article) => (
               <li key={article.slug}>
                 <InsightCard
                   title={article.title}
                   description={article.description}
                   category={article.category}
                   planned={article.planned}
-                  href={article.planned ? undefined : `/insights/${article.slug}`}
+                  href={`/insights/${article.slug}`}
                 />
               </li>
             ))}
           </ul>
         </div>
       </section>
+
+      {plannedSalaryGuides.length > 0 ? (
+      <section className="gradient-section py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Coming soon"
+            title="More salary guides"
+            description="Additional sector salary guides are being written and will be published here when ready."
+          />
+          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {plannedSalaryGuides.map((article) => (
+              <li key={article.slug}>
+                <InsightCard
+                  title={article.title}
+                  description={article.description}
+                  category={article.category}
+                  planned={article.planned}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      ) : null}
 
       <section className="gradient-section py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

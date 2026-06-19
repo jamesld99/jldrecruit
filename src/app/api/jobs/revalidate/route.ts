@@ -25,7 +25,3 @@ export async function POST(request: Request) {
     timestamp: new Date().toISOString(),
   });
 }
-
-export async function GET(request: Request) {
-  return POST(request);
-}
