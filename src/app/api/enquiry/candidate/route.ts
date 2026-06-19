@@ -32,8 +32,14 @@ function extractEmailAddress(value: string) {
 
 function getEnquiryFromEmail() {
   const configured = process.env.ENQUIRY_FROM_EMAIL?.trim().replace(/^["']|["']$/g, "");
-  const emailAddress =
-    (configured && extractEmailAddress(configured)) || siteConfig.email;
+  const toEmail = getEnquiryToEmail();
+  let emailAddress =
+    (configured && extractEmailAddress(configured)) || siteConfig.enquiryFromEmail;
+
+  // Avoid sending from and to the same mailbox — GoDaddy/Proofpoint often drops that.
+  if (emailAddress.toLowerCase() === toEmail.toLowerCase()) {
+    emailAddress = siteConfig.enquiryFromEmail;
+  }
 
   return `JLD Recruit Website <${emailAddress}>`;
 }
