@@ -48,8 +48,13 @@ type PlacesDetailsResponse = {
   reviews?: PlacesReview[];
 };
 
-const PLACE_ID = process.env.GOOGLE_PLACE_ID;
-const API_KEY = process.env.GOOGLE_PLACES_API_KEY;
+function getPlaceId() {
+  return process.env.GOOGLE_PLACE_ID?.trim() || siteConfig.googlePlaceId;
+}
+
+function getApiKey() {
+  return process.env.GOOGLE_PLACES_API_KEY?.trim() || "";
+}
 
 function getGoogleMapsUrl() {
   return (
@@ -81,44 +86,47 @@ function buildWriteReviewUrl(placeId: string) {
 }
 
 function parseReview(review: PlacesReview): GoogleReview | null {
-  const text = review.text?.text?.trim();
   const authorName = review.authorAttribution?.displayName?.trim();
   const rating = review.rating;
 
-  if (!text || !authorName || !rating) {
+  if (!authorName || !rating) {
     return null;
   }
+
+  const text = review.text?.text?.trim();
 
   return {
     authorName,
     authorPhotoUrl: review.authorAttribution?.photoUri,
     rating,
-    text,
+    text: text || "Rated this business on Google.",
     relativeTime: review.relativePublishTimeDescription ?? "",
     publishedAt: review.publishTime?.slice(0, 10) ?? new Date().toISOString().slice(0, 10),
   };
 }
 
 async function fetchGoogleReviewsFromApi(): Promise<GoogleReviewsData | null> {
-  if (!PLACE_ID || !API_KEY) {
+  const placeId = getPlaceId();
+  const apiKey = getApiKey();
+
+  if (!placeId || !apiKey) {
     return null;
   }
 
-  const response = await fetch(
-    `https://places.googleapis.com/v1/places/${PLACE_ID}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "X-Goog-Api-Key": API_KEY,
-        "X-Goog-FieldMask":
-          "displayName,rating,userRatingCount,googleMapsUri,reviews",
-      },
-      next: { revalidate: 86400, tags: ["google-reviews"] },
-    }
-  );
+  const response = await fetch(`https://places.googleapis.com/v1/places/${placeId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "X-Goog-Api-Key": apiKey,
+      "X-Goog-FieldMask": "displayName,rating,userRatingCount,googleMapsUri,reviews",
+    },
+    next: { revalidate: 3600, tags: ["google-reviews"] },
+  });
 
   if (!response.ok) {
-    throw new Error(`Google Places API returned ${response.status}`);
+    const errorBody = await response.text();
+    throw new Error(
+      `Google Places API returned ${response.status} for place ${placeId}: ${errorBody}`
+    );
   }
 
   const data = (await response.json()) as PlacesDetailsResponse;
@@ -127,6 +135,13 @@ async function fetchGoogleReviewsFromApi(): Promise<GoogleReviewsData | null> {
     .filter((review): review is GoogleReview => review !== null);
 
   if (!data.rating || !data.userRatingCount || reviews.length === 0) {
+    console.warn("Google Places returned no usable reviews:", {
+      placeId,
+      rating: data.rating,
+      userRatingCount: data.userRatingCount,
+      rawReviewCount: data.reviews?.length ?? 0,
+      parsedReviewCount: reviews.length,
+    });
     return null;
   }
 
@@ -135,23 +150,23 @@ async function fetchGoogleReviewsFromApi(): Promise<GoogleReviewsData | null> {
     rating: data.rating,
     totalReviews: data.userRatingCount,
     reviews,
-    mapsUrl: data.googleMapsUri ?? buildMapsUrl(PLACE_ID),
-    writeReviewUrl: buildWriteReviewUrl(PLACE_ID),
+    mapsUrl: data.googleMapsUri ?? buildMapsUrl(placeId),
+    writeReviewUrl: buildWriteReviewUrl(placeId),
     syncedAt: new Date().toISOString(),
   };
 }
 
 const getCachedGoogleReviews = unstable_cache(
   async () => fetchGoogleReviewsFromApi(),
-  ["google-place-reviews"],
+  ["google-place-reviews-v2"],
   {
-    revalidate: 86400,
+    revalidate: 3600,
     tags: ["google-reviews"],
   }
 );
 
 export async function getGoogleReviews(): Promise<GoogleReviewsData | null> {
-  if (!PLACE_ID || !API_KEY) {
+  if (!getApiKey()) {
     return null;
   }
 
@@ -166,7 +181,7 @@ export async function getGoogleReviews(): Promise<GoogleReviewsData | null> {
 export async function getGoogleReviewsDisplay(): Promise<GoogleReviewsDisplay | null> {
   const reviews = await getGoogleReviews();
 
-  if (reviews && reviews.totalReviews >= 5) {
+  if (reviews && reviews.reviews.length > 0) {
     return { mode: "reviews", data: reviews };
   }
 
@@ -185,4 +200,4 @@ export async function getGoogleReviewsDisplay(): Promise<GoogleReviewsDisplay | 
   return null;
 }
 
-export const googleReviewsRevalidateSeconds = 86400;
+export const googleReviewsRevalidateSeconds = 3600;

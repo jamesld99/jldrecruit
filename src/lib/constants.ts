@@ -22,6 +22,7 @@ export const siteConfig = {
   googleWriteReviewUrl:
     process.env.GOOGLE_WRITE_REVIEW_URL ??
     "https://g.page/r/CVT44aBTp0JgEAI/review",
+  googlePlaceId: "ChIJX8nVHMP_3EcRVPjhoFOnQmA",
   googleKnowledgeGraphId: "/g/11z75b470s",
   founder: "James Lloyd-Davies",
   areaServed: "United Kingdom",
