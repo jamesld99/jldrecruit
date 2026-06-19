@@ -38,6 +38,69 @@ function getEnquiryFromEmail() {
   return `JLD Recruit Website <${siteConfig.email}>`;
 }
 
+function getEnquiryToEmail() {
+  const configured = process.env.ENQUIRY_TO_EMAIL?.trim().replace(/^["']|["']$/g, "");
+
+  if (configured && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(configured)) {
+    return configured;
+  }
+
+  return siteConfig.email;
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function buildCandidateEmailBody(fields: {
+  name: string;
+  email: string;
+  phone: string;
+  currentRole: string;
+  sector: string;
+  message: string;
+}) {
+  const lines = [
+    ["Name", fields.name],
+    ["Email", fields.email],
+    ["Phone", fields.phone || "Not provided"],
+    ["Current role", fields.currentRole || "Not provided"],
+    ["Sector", fields.sector || "Not provided"],
+    ["Message", fields.message || "Please find my CV attached."],
+  ];
+
+  const textBody = [
+    "CANDIDATE REGISTRATION",
+    "",
+    ...lines.map(([label, value]) => `${label}: ${value}`),
+  ].join("\n");
+
+  const htmlBody = `
+    <div style="font-family: Arial, sans-serif; color: #1e293b; line-height: 1.6;">
+      <h2 style="margin: 0 0 16px; color: #0f172a;">Candidate registration</h2>
+      <p style="margin: 0 0 16px;">A candidate submitted their CV through the JLD Recruit website.</p>
+      <table style="border-collapse: collapse; width: 100%; max-width: 640px;">
+        ${lines
+          .map(
+            ([label, value]) => `
+          <tr>
+            <th style="text-align: left; padding: 8px 12px 8px 0; vertical-align: top; white-space: nowrap;">${label}</th>
+            <td style="padding: 8px 0;">${escapeHtml(value).replace(/\n/g, "<br />")}</td>
+          </tr>`
+          )
+          .join("")}
+      </table>
+      <p style="margin: 16px 0 0;">The CV is attached to this email.</p>
+    </div>
+  `.trim();
+
+  return { textBody, htmlBody };
+}
+
 function getCvExtension(filename: string): AllowedCvExtension | null {
   const lower = filename.toLowerCase();
 
@@ -130,26 +193,23 @@ export async function POST(request: Request) {
     const resend = new Resend(apiKey);
     const cvBuffer = Buffer.from(await cv.arrayBuffer());
     const fromEmail = getEnquiryFromEmail();
-
-    const textBody = [
-      "CANDIDATE REGISTRATION",
-      "",
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Phone: ${phone || "Not provided"}`,
-      `Current role: ${currentRole || "Not provided"}`,
-      `Sector: ${sector || "Not provided"}`,
-      "",
-      "Message:",
-      message || "Please find my CV attached.",
-    ].join("\n");
+    const toEmail = getEnquiryToEmail();
+    const { textBody, htmlBody } = buildCandidateEmailBody({
+      name,
+      email,
+      phone,
+      currentRole,
+      sector,
+      message,
+    });
 
     const { error } = await resend.emails.send({
       from: fromEmail,
-      to: [siteConfig.email],
+      to: [toEmail],
       replyTo: email,
       subject: `Candidate Registration — ${name}`,
       text: textBody,
+      html: htmlBody,
       attachments: [
         {
           filename: cv.name,
