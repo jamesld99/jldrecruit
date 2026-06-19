@@ -7,7 +7,7 @@ import { LinkedInUpdates } from "@/components/LinkedInUpdates";
 import { RecruitmentSolutions } from "@/components/RecruitmentSolutions";
 import { SchemaScript } from "@/components/SchemaScript";
 import { WhyChooseSection } from "@/components/WhyChooseSection";
-import { VacancyForm } from "@/components/VacancyForm";
+import { EnquiryForms } from "@/components/EnquiryForms";
 import { faqs, primarySectors, siteConfig, ukWideMessage } from "@/lib/constants";
 import { getGoogleReviewsDisplay } from "@/lib/google-reviews";
 import { getJobs } from "@/lib/jobs";
@@ -64,7 +64,9 @@ export default async function HomePage() {
                 {ukWideMessage} Direct access to James &middot; Headhunting included
               </p>
             </div>
-            <VacancyForm />
+            <div className="rounded-2xl border border-brand-200 bg-white p-6 card-shadow sm:p-8">
+              <EnquiryForms defaultTab="employer" />
+            </div>
           </div>
         </div>
       </section>

@@ -40,6 +40,8 @@ export default async function InsightArticlePage({ params }: Props) {
 
   if (!article) notFound();
 
+  const isPublished = !article.planned && article.sections && article.sections.length > 0;
+
   return (
     <>
       <SchemaScript
@@ -75,27 +77,57 @@ export default async function InsightArticlePage({ params }: Props) {
 
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-brand-200 bg-brand-50/50 p-8 card-shadow">
-            <h2 className="text-xl font-bold text-navy-900">Article in preparation</h2>
-            <p className="mt-4 leading-relaxed text-navy-600">
-              This article is currently being prepared. {siteConfig.name} supports
-              employers across England, Scotland, Wales and Northern Ireland with
-              specialist engineering and automotive recruitment.
-            </p>
-            <p className="mt-4 leading-relaxed text-navy-600">
-              If you need recruitment support now — whether for lift engineers,
-              fire & security engineers, gate & door engineers, refrigeration
-              engineers or vehicle technicians — speak directly with James.
-            </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Button href="/contact" variant="primary">
-                Submit Vacancy
-              </Button>
-              <Button href="/jobs" variant="outline">
-                View Jobs
-              </Button>
+          {isPublished ? (
+            <div className="space-y-10">
+              {article.sections!.map((section) => (
+                <article key={section.heading}>
+                  <h2 className="text-2xl font-bold text-navy-900">{section.heading}</h2>
+                  {section.body.split("\n\n").map((paragraph) => (
+                    <p key={paragraph.slice(0, 40)} className="mt-4 leading-relaxed text-navy-600">
+                      {paragraph}
+                    </p>
+                  ))}
+                </article>
+              ))}
+              <div className="rounded-2xl border border-brand-200 bg-brand-50/50 p-8 card-shadow">
+                <h2 className="text-xl font-bold text-navy-900">Need recruitment support?</h2>
+                <p className="mt-4 leading-relaxed text-navy-600">
+                  {siteConfig.name} provides permanent recruitment UK-wide with direct access
+                  to James. Submit a vacancy or browse current roles.
+                </p>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <Button href="/contact" variant="primary">
+                    Submit Vacancy
+                  </Button>
+                  <Button href="/jobs" variant="outline">
+                    View Jobs
+                  </Button>
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="rounded-2xl border border-brand-200 bg-brand-50/50 p-8 card-shadow">
+              <h2 className="text-xl font-bold text-navy-900">Article in preparation</h2>
+              <p className="mt-4 leading-relaxed text-navy-600">
+                This article is currently being prepared. {siteConfig.name} supports
+                employers across England, Scotland, Wales and Northern Ireland with
+                specialist engineering and automotive recruitment.
+              </p>
+              <p className="mt-4 leading-relaxed text-navy-600">
+                If you need recruitment support now — whether for lift engineers,
+                fire & security engineers, gate & door engineers, refrigeration
+                engineers or vehicle technicians — speak directly with James.
+              </p>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <Button href="/contact" variant="primary">
+                  Submit Vacancy
+                </Button>
+                <Button href="/jobs" variant="outline">
+                  View Jobs
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

@@ -1,6 +1,69 @@
 import { faqs, siteConfig } from "./constants";
 import type { JobListing } from "./jobs";
 
+type ParsedSalary =
+  | { kind: "range"; minValue: number; maxValue: number }
+  | { kind: "single"; value: number };
+
+export function parseSalaryRange(salary: string): ParsedSalary | null {
+  const cleaned = salary
+    .replace(/plus overtime/gi, "")
+    .replace(/\+/g, "")
+    .trim();
+
+  const matches = cleaned.match(/\d[\d,]*/g);
+  if (!matches || matches.length === 0) {
+    return null;
+  }
+
+  const values = matches
+    .map((match) => Number.parseInt(match.replace(/,/g, ""), 10))
+    .filter((value) => Number.isFinite(value) && value > 0);
+
+  if (values.length === 0) {
+    return null;
+  }
+
+  if (values.length === 1) {
+    return { kind: "single", value: values[0] };
+  }
+
+  const minValue = Math.min(values[0], values[1]);
+  const maxValue = Math.max(values[0], values[1]);
+
+  return { kind: "range", minValue, maxValue };
+}
+
+function buildBaseSalarySchema(salary: string) {
+  const parsed = parseSalaryRange(salary);
+  if (!parsed) {
+    return undefined;
+  }
+
+  if (parsed.kind === "single") {
+    return {
+      "@type": "MonetaryAmount",
+      currency: "GBP",
+      value: {
+        "@type": "QuantitativeValue",
+        value: parsed.value,
+        unitText: "YEAR",
+      },
+    };
+  }
+
+  return {
+    "@type": "MonetaryAmount",
+    currency: "GBP",
+    value: {
+      "@type": "QuantitativeValue",
+      minValue: parsed.minValue,
+      maxValue: parsed.maxValue,
+      unitText: "YEAR",
+    },
+  };
+}
+
 export function getOrganizationSchema() {
   return {
     "@context": "https://schema.org",
@@ -164,6 +227,7 @@ export function getWebPageSchema(
 export function getJobPostingSchema(job: JobListing) {
   const validThrough = new Date(job.postedDate);
   validThrough.setDate(validThrough.getDate() + 90);
+  const baseSalary = buildBaseSalarySchema(job.salary);
 
   return {
     "@context": "https://schema.org",
@@ -189,15 +253,7 @@ export function getJobPostingSchema(job: JobListing) {
         addressCountry: "GB",
       },
     },
-    baseSalary: {
-      "@type": "MonetaryAmount",
-      currency: "GBP",
-      value: {
-        "@type": "QuantitativeValue",
-        value: job.salary,
-        unitText: "YEAR",
-      },
-    },
+    ...(baseSalary ? { baseSalary } : {}),
     applicantLocationRequirements: {
       "@type": "Country",
       name: "United Kingdom",
