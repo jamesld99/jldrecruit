@@ -3,11 +3,55 @@ import { Resend } from "resend";
 import { siteConfig } from "@/lib/constants";
 
 const MAX_CV_BYTES = 5 * 1024 * 1024;
+const ALLOWED_CV_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;
 const ALLOWED_CV_TYPES = new Set([
   "application/pdf",
   "application/msword",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ]);
+
+type AllowedCvExtension = (typeof ALLOWED_CV_EXTENSIONS)[number];
+
+function getEnquiryFromEmail() {
+  const configured = process.env.ENQUIRY_FROM_EMAIL?.trim().replace(/^["']|["']$/g, "");
+
+  if (configured && /<[^<>@\s]+@[^<>@\s]+>/.test(configured)) {
+    return configured;
+  }
+
+  if (configured && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(configured)) {
+    return `JLD Recruit Website <${configured}>`;
+  }
+
+  return `JLD Recruit Website <${siteConfig.email}>`;
+}
+
+function getCvExtension(filename: string): AllowedCvExtension | null {
+  const lower = filename.toLowerCase();
+
+  for (const extension of ALLOWED_CV_EXTENSIONS) {
+    if (lower.endsWith(extension)) {
+      return extension;
+    }
+  }
+
+  return null;
+}
+
+function contentTypeFromExtension(extension: AllowedCvExtension) {
+  switch (extension) {
+    case ".pdf":
+      return "application/pdf";
+    case ".doc":
+      return "application/msword";
+    case ".docx":
+      return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+  }
+}
+
+function isAllowedCvType(contentType: string) {
+  return !contentType || ALLOWED_CV_TYPES.has(contentType);
+}
 
 export async function GET() {
   return NextResponse.json({
@@ -53,7 +97,18 @@ export async function POST(request: Request) {
       );
     }
 
-    if (cv.type && !ALLOWED_CV_TYPES.has(cv.type)) {
+    const extension = getCvExtension(cv.name);
+    if (!extension) {
+      return NextResponse.json(
+        {
+          error:
+            "CV must be a PDF or Word document with a .pdf, .doc, or .docx file extension.",
+        },
+        { status: 400 }
+      );
+    }
+
+    if (!isAllowedCvType(cv.type)) {
       return NextResponse.json(
         { error: "CV must be a PDF or Word document." },
         { status: 400 }
@@ -62,8 +117,7 @@ export async function POST(request: Request) {
 
     const resend = new Resend(apiKey);
     const cvBuffer = Buffer.from(await cv.arrayBuffer());
-    const fromEmail =
-      process.env.ENQUIRY_FROM_EMAIL ?? "JLD Recruit Website <onboarding@resend.dev>";
+    const fromEmail = getEnquiryFromEmail();
 
     const textBody = [
       "CANDIDATE REGISTRATION",
@@ -80,22 +134,34 @@ export async function POST(request: Request) {
 
     const { error } = await resend.emails.send({
       from: fromEmail,
-      to: siteConfig.email,
+      to: [siteConfig.email],
       replyTo: email,
       subject: `Candidate Registration — ${name}`,
       text: textBody,
       attachments: [
         {
           filename: cv.name,
-          content: cvBuffer,
+          content: cvBuffer.toString("base64"),
+          contentType: contentTypeFromExtension(extension),
         },
       ],
     });
 
     if (error) {
       console.error("Candidate enquiry email failed:", error);
+
+      const resendMessage =
+        typeof error === "object" && error !== null && "message" in error
+          ? String(error.message)
+          : null;
+
       return NextResponse.json(
-        { error: "We could not send your CV. Please try again or email James directly." },
+        {
+          error:
+            resendMessage?.includes("from") || resendMessage?.includes("domain")
+              ? "CV upload is temporarily unavailable. Please email James directly with your CV attached."
+              : "We could not send your CV. Please try again or email James directly.",
+        },
         { status: 502 }
       );
     }

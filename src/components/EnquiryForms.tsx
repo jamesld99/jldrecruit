@@ -408,7 +408,8 @@ function CandidateEnquiryForm() {
             className="w-full rounded-xl border border-brand-200 bg-white px-4 py-3 text-sm text-navy-700 file:mr-4 file:rounded-full file:border-0 file:bg-brand-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-700"
           />
           <p className="mt-2 text-xs text-navy-500">
-            PDF or Word format, up to 5 MB. Sent directly to James as an attachment.
+            PDF or Word format (.pdf, .doc, or .docx), up to 5 MB. The file name
+            must include the extension. Sent directly to James as an attachment.
           </p>
         </div>
       ) : null}
