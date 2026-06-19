@@ -12,30 +12,30 @@ const ALLOWED_CV_TYPES = new Set([
 
 type AllowedCvExtension = (typeof ALLOWED_CV_EXTENSIONS)[number];
 
+function extractEmailAddress(value: string) {
+  const angleMatch = value.match(/<([^<>@\s]+@[^<>@\s]+)>/);
+  if (angleMatch) {
+    return angleMatch[1];
+  }
+
+  const spacedMatch = value.match(/([^\s@]+@[^\s@]+\.[^\s@]+)$/);
+  if (spacedMatch) {
+    return spacedMatch[1];
+  }
+
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+    return value;
+  }
+
+  return null;
+}
+
 function getEnquiryFromEmail() {
   const configured = process.env.ENQUIRY_FROM_EMAIL?.trim().replace(/^["']|["']$/g, "");
+  const emailAddress =
+    (configured && extractEmailAddress(configured)) || siteConfig.email;
 
-  if (!configured) {
-    return `JLD Recruit Website <${siteConfig.email}>`;
-  }
-
-  // Valid Resend format: Name <email@domain.com>
-  if (/<[^<>@\s]+@[^<>@\s]+>/.test(configured)) {
-    return configured;
-  }
-
-  // Plain email only: email@domain.com
-  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(configured)) {
-    return `JLD Recruit Website <${configured}>`;
-  }
-
-  // Vercel can strip angle brackets, leaving: "James james@domain.com"
-  const nameAndEmail = configured.match(/^(.+?)\s+([^\s@]+@[^\s@]+\.[^\s@]+)$/);
-  if (nameAndEmail) {
-    return `${nameAndEmail[1].trim()} <${nameAndEmail[2]}>`;
-  }
-
-  return `JLD Recruit Website <${siteConfig.email}>`;
+  return `JLD Recruit Website <${emailAddress}>`;
 }
 
 function getEnquiryToEmail() {
@@ -128,9 +128,24 @@ function isAllowedCvType(contentType: string) {
   return !contentType || ALLOWED_CV_TYPES.has(contentType);
 }
 
+function maskEmail(email: string) {
+  const [local, domain] = email.split("@");
+  if (!local || !domain) {
+    return email;
+  }
+
+  const visible = local.slice(0, Math.min(2, local.length));
+  return `${visible}***@${domain}`;
+}
+
 export async function GET() {
+  const deliversTo = getEnquiryToEmail();
+  const usingCustomInbox = Boolean(process.env.ENQUIRY_TO_EMAIL?.trim());
+
   return NextResponse.json({
     available: Boolean(process.env.RESEND_API_KEY),
+    deliversTo: maskEmail(deliversTo),
+    usingCustomInbox,
   });
 }
 
