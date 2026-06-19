@@ -15,12 +15,24 @@ type AllowedCvExtension = (typeof ALLOWED_CV_EXTENSIONS)[number];
 function getEnquiryFromEmail() {
   const configured = process.env.ENQUIRY_FROM_EMAIL?.trim().replace(/^["']|["']$/g, "");
 
-  if (configured && /<[^<>@\s]+@[^<>@\s]+>/.test(configured)) {
+  if (!configured) {
+    return `JLD Recruit Website <${siteConfig.email}>`;
+  }
+
+  // Valid Resend format: Name <email@domain.com>
+  if (/<[^<>@\s]+@[^<>@\s]+>/.test(configured)) {
     return configured;
   }
 
-  if (configured && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(configured)) {
+  // Plain email only: email@domain.com
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(configured)) {
     return `JLD Recruit Website <${configured}>`;
+  }
+
+  // Vercel can strip angle brackets, leaving: "James james@domain.com"
+  const nameAndEmail = configured.match(/^(.+?)\s+([^\s@]+@[^\s@]+\.[^\s@]+)$/);
+  if (nameAndEmail) {
+    return `${nameAndEmail[1].trim()} <${nameAndEmail[2]}>`;
   }
 
   return `JLD Recruit Website <${siteConfig.email}>`;
