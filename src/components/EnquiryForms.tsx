@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, FormEvent } from "react";
+import { useEffect, useId, useState, FormEvent } from "react";
 import Link from "next/link";
 import { primarySectors, siteConfig } from "@/lib/constants";
 
@@ -223,23 +223,49 @@ function EmployerEnquiryForm() {
   );
 }
 
-function CandidateEnquiryForm() {
+function CvFileInput() {
+  const inputId = useId();
+  const [fileName, setFileName] = useState<string | null>(null);
+
+  return (
+    <div>
+      <label htmlFor={inputId} className={labelClassName}>
+        Upload your CV <span className="text-red-500">*</span>
+      </label>
+      <input
+        id={inputId}
+        name="cv"
+        type="file"
+        required
+        accept=".pdf,.doc,.docx"
+        className="sr-only"
+        onChange={(event) => {
+          setFileName(event.target.files?.[0]?.name ?? null);
+        }}
+      />
+      <label
+        htmlFor={inputId}
+        className="flex min-h-14 w-full cursor-pointer touch-manipulation items-center justify-center rounded-xl border-2 border-dashed border-brand-300 bg-brand-50/50 px-4 py-4 text-center text-sm font-semibold text-brand-700 transition-colors hover:border-brand-500 hover:bg-brand-50 active:bg-brand-100"
+      >
+        {fileName ?? "Tap to choose your CV file"}
+      </label>
+      {fileName ? (
+        <p className="mt-2 text-sm text-navy-700">Selected: {fileName}</p>
+      ) : null}
+      <p className="mt-2 text-xs text-navy-500">
+        PDF or Word format (.pdf, .doc, or .docx), up to 5 MB. The file name must
+        include the extension. Sent directly to James as an attachment.
+      </p>
+    </div>
+  );
+}
+
+function CandidateEnquiryForm({ cvUploadAvailable }: { cvUploadAvailable: boolean }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [uploadAvailable, setUploadAvailable] = useState<boolean | null>(null);
+  const [uploadAvailable, setUploadAvailable] = useState(cvUploadAvailable);
   const [usedMailtoFallback, setUsedMailtoFallback] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/enquiry/candidate")
-      .then((response) => response.json())
-      .then((data: { available?: boolean }) => {
-        setUploadAvailable(Boolean(data.available));
-      })
-      .catch(() => {
-        setUploadAvailable(false);
-      });
-  }, []);
 
   function openMailtoFallback(formData: FormData) {
     const subject = encodeURIComponent(
@@ -327,12 +353,6 @@ function CandidateEnquiryForm() {
     );
   }
 
-  if (uploadAvailable === null) {
-    return (
-      <p className="text-sm text-navy-600">Loading registration form...</p>
-    );
-  }
-
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       {!uploadAvailable ? (
@@ -394,25 +414,7 @@ function CandidateEnquiryForm() {
         </select>
       </div>
 
-      {uploadAvailable ? (
-        <div>
-          <label htmlFor="candidate-cv" className={labelClassName}>
-            Upload your CV <span className="text-red-500">*</span>
-          </label>
-          <input
-            id="candidate-cv"
-            name="cv"
-            type="file"
-            required
-            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-            className="w-full rounded-xl border border-brand-200 bg-white px-4 py-3 text-sm text-navy-700 file:mr-4 file:rounded-full file:border-0 file:bg-brand-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-700"
-          />
-          <p className="mt-2 text-xs text-navy-500">
-            PDF or Word format (.pdf, .doc, or .docx), up to 5 MB. The file name
-            must include the extension. Sent directly to James as an attachment.
-          </p>
-        </div>
-      ) : null}
+      {uploadAvailable ? <CvFileInput /> : null}
 
       <div>
         <label htmlFor="candidate-message" className={labelClassName}>
@@ -452,7 +454,13 @@ function CandidateEnquiryForm() {
   );
 }
 
-export function EnquiryForms({ defaultTab = "employer" }: { defaultTab?: FormType }) {
+export function EnquiryForms({
+  defaultTab = "employer",
+  cvUploadAvailable = false,
+}: {
+  defaultTab?: FormType;
+  cvUploadAvailable?: boolean;
+}) {
   const [activeTab, setActiveTab] = useState<FormType>(defaultTab);
 
   useEffect(() => {
@@ -502,7 +510,7 @@ export function EnquiryForms({ defaultTab = "employer" }: { defaultTab?: FormTyp
           <p className="mb-6 text-sm text-navy-600">
             Register your interest and send your CV to James. Our service is free for candidates.
           </p>
-          <CandidateEnquiryForm />
+          <CandidateEnquiryForm cvUploadAvailable={cvUploadAvailable} />
         </div>
       )}
     </div>
