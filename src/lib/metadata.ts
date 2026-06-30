@@ -32,10 +32,16 @@ export function createMetadata({
   return {
     title: fullTitle,
     description,
+    applicationName: siteConfig.legalName,
     keywords: [...defaultKeywords, ...keywords],
     metadataBase: new URL(siteConfig.url),
     alternates: {
       canonical: path,
+    },
+    appleWebApp: {
+      capable: true,
+      title: siteConfig.legalName,
+      statusBarStyle: "default",
     },
     openGraph: {
       title: fullTitle,
