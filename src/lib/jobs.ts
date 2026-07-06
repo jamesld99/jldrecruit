@@ -44,6 +44,11 @@ const defaultDesirable = [
   "Strong communication and customer-facing skills",
 ];
 
+const EXCLUDED_JOB_SLUGS = new Set([
+  "jld-recruit-ltd-specialist-recruitment",
+  "jld-recruit-ltd-specialist-recruitment-934208",
+]);
+
 function defaultResponsibilities(sector: string): string[] {
   if (sector === "Fire & Security") {
     return [
@@ -210,7 +215,9 @@ const getCachedLinkedInPosts = unstable_cache(
 export async function getJobs(): Promise<JobListing[]> {
   try {
     const posts = await getCachedLinkedInPosts();
-    const jobs = mergeLinkedInPosts(posts);
+    const jobs = mergeLinkedInPosts(posts).filter(
+      (job) => !EXCLUDED_JOB_SLUGS.has(job.slug)
+    );
 
     if (jobs.length > 0) {
       return jobs;
@@ -219,7 +226,7 @@ export async function getJobs(): Promise<JobListing[]> {
     console.error("LinkedIn job sync failed:", error);
   }
 
-  return getFallbackJobs();
+  return getFallbackJobs().filter((job) => !EXCLUDED_JOB_SLUGS.has(job.slug));
 }
 
 export async function getJobBySlug(slug: string) {

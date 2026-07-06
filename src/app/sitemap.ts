@@ -42,7 +42,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...jobRoutes,
   ];
 
-  return allRoutes.map((route) => ({
+  const uniqueRoutes = [...new Set(allRoutes)];
+
+  return uniqueRoutes.map((route) => ({
     url: `${siteConfig.url}${route}`,
     lastModified: new Date(),
     changeFrequency:
