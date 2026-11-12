@@ -12,11 +12,13 @@ export function isRelevantExperience(value: string): value is RelevantExperience
   return (RELEVANT_EXPERIENCE_OPTIONS as readonly string[]).includes(value);
 }
 
+export const CURRENT_LOCATION_ERROR = "Enter the town, city or postcode where you currently live.";
+
 export function currentLocationIsValid(value: string) {
   const trimmed = value.trim();
-  if (trimmed.length < 5 || trimmed.length > 120) return false;
+  if (trimmed.length < 2 || trimmed.length > 120) return false;
   const normalised = trimmed.toLowerCase();
   if (normalised === "not applicable" || normalised === "to be confirmed") return false;
-  const hasTown = trimmed.split(/\s+/).some((word) => /^[A-Za-z][A-Za-z.'-]{1,}$/.test(word));
-  return hasTown && /\d/.test(trimmed);
+  const letters = trimmed.match(/[A-Za-z]/g);
+  return (letters?.length ?? 0) >= 2;
 }

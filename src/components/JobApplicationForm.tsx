@@ -2,7 +2,7 @@
 
 import { FormEvent, useId, useState } from "react";
 import Link from "next/link";
-import { currentLocationIsValid, isRelevantExperience, RELEVANT_EXPERIENCE_OPTIONS } from "@/lib/candidate-questions";
+import { CURRENT_LOCATION_ERROR, currentLocationIsValid, isRelevantExperience, RELEVANT_EXPERIENCE_OPTIONS } from "@/lib/candidate-questions";
 import { siteConfig } from "@/lib/constants";
 import { MAX_CV_BYTES } from "@/lib/enquiry-limits";
 
@@ -57,7 +57,7 @@ export function JobApplicationForm({
       return;
     }
     if (!currentLocationIsValid(currentLocation)) {
-      setError("Enter the town or city and postcode where you currently live.");
+      setError(CURRENT_LOCATION_ERROR);
       return;
     }
     if (!isRelevantExperience(relevantExperience)) {
@@ -183,7 +183,7 @@ export function JobApplicationForm({
       </div>
       <div>
         <label htmlFor={`${cvId}-location`} className={labelClassName}>
-          Where are you currently based? (Town/City and Postcode) <span className="text-red-500">*</span>
+          Where are you currently based? (Town, City or Postcode) <span className="text-red-500">*</span>
         </label>
         <input
           id={`${cvId}-location`}
@@ -192,9 +192,9 @@ export function JobApplicationForm({
           required
           autoComplete="postal-code"
           maxLength={120}
-          pattern="(?=.*[A-Za-z])(?=.*\d).{5,120}"
-          title="Enter the town or city and postcode where you currently live."
-          placeholder="For example, Barnstaple EX31 1AB"
+          pattern="(?=.*[A-Za-z].*[A-Za-z]).{2,120}"
+          title="Enter the town, city or postcode where you currently live."
+          placeholder="For example, Plymouth, Manchester or PL1 1AA"
           aria-describedby={`${cvId}-location-hint`}
           className={inputClassName}
         />

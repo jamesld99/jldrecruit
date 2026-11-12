@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { currentLocationIsValid, isRelevantExperience } from "@/lib/candidate-questions";
+import { CURRENT_LOCATION_ERROR, currentLocationIsValid, isRelevantExperience } from "@/lib/candidate-questions";
 import { siteConfig } from "@/lib/constants";
 import { MAX_CV_BYTES, MAX_REQUEST_BYTES } from "@/lib/enquiry-limits";
 
@@ -265,12 +265,10 @@ export function readRequiredPhone(formData: FormData): FieldResult {
 export function readCurrentLocation(formData: FormData): FieldResult {
   const field = readField(formData, "currentLocation", { required: true, max: 120 });
   if (isFieldError(field)) {
-    return missingOrInvalid(field)
-      ? { error: "Enter the town or city and postcode where you currently live." }
-      : field;
+    return missingOrInvalid(field) ? { error: CURRENT_LOCATION_ERROR } : field;
   }
   if (!currentLocationIsValid(field.value)) {
-    return { error: "Enter the town or city and postcode where you currently live." };
+    return { error: CURRENT_LOCATION_ERROR };
   }
   return field;
 }
