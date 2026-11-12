@@ -46,7 +46,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return uniqueRoutes.map((route) => ({
     url: `${siteConfig.url}${route}`,
-    lastModified: new Date(),
     changeFrequency:
       route.startsWith("/jobs") ? "weekly" : route === "" ? "weekly" : "monthly",
     priority: route === "" ? 1 : route === "/jobs" ? 0.9 : 0.8,

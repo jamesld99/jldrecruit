@@ -14,7 +14,6 @@ export async function POST(request: Request) {
   }
 
   revalidateTag("jobs");
-  revalidateTag("linkedin-jobs");
   revalidateTag("google-reviews");
   revalidatePath("/");
   revalidatePath("/jobs");

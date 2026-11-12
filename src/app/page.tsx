@@ -9,7 +9,7 @@ import { SchemaScript } from "@/components/SchemaScript";
 import { WhyChooseSection } from "@/components/WhyChooseSection";
 import { EnquiryForms } from "@/components/EnquiryForms";
 import { faqs, primarySectors, siteConfig, ukWideMessage } from "@/lib/constants";
-import { isCvUploadAvailable } from "@/lib/enquiry";
+import { isCvUploadAvailable, isEmployerDeliveryTest, isLocalFormPreview } from "@/lib/enquiry";
 import { getGoogleReviewsDisplay } from "@/lib/google-reviews";
 import { getJobs } from "@/lib/jobs";
 import { getFaqSchema, getGoogleReviewsSchema, getWebPageSchema } from "@/lib/schema";
@@ -70,7 +70,9 @@ export default async function HomePage() {
             <div className="rounded-2xl border border-brand-200 bg-white p-6 card-shadow sm:p-8">
               <EnquiryForms
                 defaultTab="employer"
-                cvUploadAvailable={isCvUploadAvailable()}
+                emailDeliveryAvailable={isCvUploadAvailable()}
+                previewOnly={isLocalFormPreview()}
+                employerDeliveryTest={isEmployerDeliveryTest()}
               />
             </div>
           </div>

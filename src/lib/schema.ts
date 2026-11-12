@@ -1,66 +1,72 @@
 import { faqs, siteConfig } from "./constants";
-import type { JobListing } from "./jobs";
+import { jobAdvertIsComplete, type JobListing } from "./jobs";
 
 type ParsedSalary =
   | { kind: "range"; minValue: number; maxValue: number }
-  | { kind: "single"; value: number };
+  | { kind: "single"; value: number }
+  | { kind: "min"; value: number }
+  | { kind: "max"; value: number };
 
 export function parseSalaryRange(salary: string): ParsedSalary | null {
-  const cleaned = salary
-    .replace(/plus overtime/gi, "")
-    .replace(/\+/g, "")
-    .trim();
+  const cleaned = salary.replace(/plus overtime/gi, "").replace(/\+/g, "").trim();
 
-  const matches = cleaned.match(/\d[\d,]*/g);
+  if (/\b(approximately|approx\.?|depending on experience)\b/i.test(cleaned)) {
+    return null;
+  }
+
+  const matches = cleaned.match(/\d[\d,]*(?:\.\d+)?/g);
   if (!matches || matches.length === 0) {
     return null;
   }
 
   const values = matches
-    .map((match) => Number.parseInt(match.replace(/,/g, ""), 10))
+    .map((match) => Number.parseFloat(match.replace(/,/g, "")))
     .filter((value) => Number.isFinite(value) && value > 0);
 
-  if (values.length === 0) {
+  if (values.length === 0 || values.length > 2) {
     return null;
   }
 
   if (values.length === 1) {
+    if (/\bup to\b/i.test(cleaned)) return { kind: "max", value: values[0] };
+    if (/\bfrom\b/i.test(cleaned)) return { kind: "min", value: values[0] };
     return { kind: "single", value: values[0] };
   }
 
-  const minValue = Math.min(values[0], values[1]);
-  const maxValue = Math.max(values[0], values[1]);
-
-  return { kind: "range", minValue, maxValue };
+  return {
+    kind: "range",
+    minValue: Math.min(values[0], values[1]),
+    maxValue: Math.max(values[0], values[1]),
+  };
 }
 
-function buildBaseSalarySchema(salary: string) {
+function buildBaseSalarySchema(
+  salary: string,
+  unitText: "HOUR" | "DAY" | "WEEK" | "MONTH" | "YEAR"
+) {
   const parsed = parseSalaryRange(salary);
   if (!parsed) {
     return undefined;
   }
 
-  if (parsed.kind === "single") {
-    return {
-      "@type": "MonetaryAmount",
-      currency: "GBP",
-      value: {
-        "@type": "QuantitativeValue",
-        value: parsed.value,
-        unitText: "YEAR",
-      },
-    };
-  }
+  const value =
+    parsed.kind === "single"
+      ? { "@type": "QuantitativeValue", value: parsed.value, unitText }
+      : parsed.kind === "min"
+        ? { "@type": "QuantitativeValue", minValue: parsed.value, unitText }
+        : parsed.kind === "max"
+          ? { "@type": "QuantitativeValue", maxValue: parsed.value, unitText }
+          : {
+              "@type": "QuantitativeValue",
+              minValue: parsed.minValue,
+              maxValue: parsed.maxValue,
+              unitText,
+            };
 
   return {
     "@type": "MonetaryAmount",
     currency: "GBP",
-    value: {
-      "@type": "QuantitativeValue",
-      minValue: parsed.minValue,
-      maxValue: parsed.maxValue,
-      unitText: "YEAR",
-    },
+    value,
   };
 }
 
@@ -87,6 +93,7 @@ export function getOrganizationSchema() {
       siteConfig.companiesHouseUrl,
       siteConfig.linkedIn,
       siteConfig.facebook,
+      siteConfig.instagram,
       ...(siteConfig.googleReviewsUrl ? [siteConfig.googleReviewsUrl] : []),
     ],
     areaServed: [
@@ -140,6 +147,7 @@ export function getProfessionalServiceSchema() {
       siteConfig.companiesHouseUrl,
       siteConfig.linkedIn,
       siteConfig.facebook,
+      siteConfig.instagram,
       ...(siteConfig.googleReviewsUrl ? [siteConfig.googleReviewsUrl] : []),
     ],
   };
@@ -166,6 +174,7 @@ export function getLocalBusinessSchema() {
       siteConfig.companiesHouseUrl,
       siteConfig.linkedIn,
       siteConfig.facebook,
+      siteConfig.instagram,
       ...(siteConfig.googleReviewsUrl ? [siteConfig.googleReviewsUrl] : []),
     ],
   };
@@ -224,19 +233,53 @@ export function getWebPageSchema(
   };
 }
 
+const SALARY_UNIT = {
+  hour: "HOUR",
+  day: "DAY",
+  week: "WEEK",
+  month: "MONTH",
+  year: "YEAR",
+} as const;
+
+function jobPostingDescription(job: JobListing) {
+  const sections = [
+    job.summary,
+    ...job.overview,
+    job.workingHours ? `Working hours: ${job.workingHours}` : "",
+    job.responsibilities.length
+      ? `Responsibilities:\n${job.responsibilities.map((item) => `- ${item}`).join("\n")}`
+      : "",
+    job.requirements.length
+      ? `Requirements:\n${job.requirements.map((item) => `- ${item}`).join("\n")}`
+      : "",
+    job.benefits.length
+      ? `Benefits:\n${job.benefits.map((item) => `- ${item}`).join("\n")}`
+      : "",
+  ];
+
+  return sections
+    .map((section) => section.trim())
+    .filter(Boolean)
+    .join("\n\n");
+}
+
 export function getJobPostingSchema(job: JobListing) {
-  const validThrough = new Date(job.postedDate);
-  validThrough.setDate(validThrough.getDate() + 90);
-  const baseSalary = buildBaseSalarySchema(job.salary);
+  if (job.status !== "open" || !job.postedDate || !jobAdvertIsComplete(job)) {
+    return null;
+  }
+
+  const salaryUnit = job.payFrequency ? SALARY_UNIT[job.payFrequency] : undefined;
+  const baseSalary =
+    job.salary && salaryUnit ? buildBaseSalarySchema(job.salary, salaryUnit) : undefined;
 
   return {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: job.title,
-    description: [job.summary, ...job.overview].join(" "),
+    description: jobPostingDescription(job),
     datePosted: job.postedDate,
-    validThrough: validThrough.toISOString().slice(0, 10),
-    employmentType: "FULL_TIME",
+    ...(job.closingDate ? { validThrough: job.closingDate } : {}),
+    ...(job.type === "Permanent" ? { employmentType: "FULL_TIME" } : {}),
     directApply: true,
     hiringOrganization: {
       "@type": "Organization",
@@ -249,15 +292,11 @@ export function getJobPostingSchema(job: JobListing) {
       address: {
         "@type": "PostalAddress",
         addressLocality: job.location,
-        addressRegion: job.region,
+        ...(job.region ? { addressRegion: job.region } : {}),
         addressCountry: "GB",
       },
     },
     ...(baseSalary ? { baseSalary } : {}),
-    applicantLocationRequirements: {
-      "@type": "Country",
-      name: "United Kingdom",
-    },
     url: `${siteConfig.url}/jobs/${job.slug}`,
   };
 }
@@ -308,7 +347,7 @@ export function getJobListSchema(jobList: JobListing[]) {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Current Jobs at JLD Recruit Ltd",
-    itemListElement: jobList.map((job, index) => ({
+    itemListElement: jobList.filter(jobAdvertIsComplete).map((job, index) => ({
       "@type": "ListItem",
       position: index + 1,
       url: `${siteConfig.url}/jobs/${job.slug}`,

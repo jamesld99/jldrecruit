@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { CTASection } from "@/components/CTASection";
 import { SchemaScript } from "@/components/SchemaScript";
 import { candidateBenefits, permanentOnlyMessage, primarySectors, siteConfig, ukWideMessage } from "@/lib/constants";
-import { isCvUploadAvailable } from "@/lib/enquiry";
+import { isCvUploadAvailable, isLocalFormPreview } from "@/lib/enquiry";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 
@@ -163,7 +163,8 @@ export default function JobSeekersPage() {
           <div className="rounded-2xl border border-brand-200 bg-white p-6 card-shadow sm:p-8">
             <EnquiryForms
               defaultTab="candidate"
-              cvUploadAvailable={isCvUploadAvailable()}
+              emailDeliveryAvailable={isCvUploadAvailable()}
+              previewOnly={isLocalFormPreview()}
             />
           </div>
         </div>

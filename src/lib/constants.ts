@@ -17,6 +17,7 @@ export const siteConfig = {
   linkedIn:
     "https://www.linkedin.com/company/jld-recruit-ltd/?viewAsMember=true",
   facebook: "https://www.facebook.com/JLDRecruitLtd/",
+  instagram: "https://www.instagram.com/jldrecruitltd",
   googleReviewsUrl:
     process.env.GOOGLE_REVIEWS_URL ??
     "https://www.google.com/maps/search/?api=1&query=JLD+Recruit+Ltd&kgmid=/g/11z75b470s",
