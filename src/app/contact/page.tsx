@@ -3,7 +3,7 @@ import { FAQ } from "@/components/FAQ";
 import { SchemaScript } from "@/components/SchemaScript";
 import { SocialLinks } from "@/components/SocialLinks";
 import { faqs, siteConfig, ukWideServicesSeo } from "@/lib/constants";
-import { isCvUploadAvailable } from "@/lib/enquiry";
+import { isCvUploadAvailable, isEmployerDeliveryTest, isLocalFormPreview } from "@/lib/enquiry";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getFaqSchema, getWebPageSchema } from "@/lib/schema";
 
@@ -118,7 +118,11 @@ export default function ContactPage() {
 
             <div className="lg:col-span-3">
               <div className="rounded-2xl border border-brand-200 bg-white p-6 card-shadow sm:p-8">
-                <EnquiryForms cvUploadAvailable={isCvUploadAvailable()} />
+                <EnquiryForms
+                  emailDeliveryAvailable={isCvUploadAvailable()}
+                  previewOnly={isLocalFormPreview()}
+                  employerDeliveryTest={isEmployerDeliveryTest()}
+                />
               </div>
             </div>
           </div>

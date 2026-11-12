@@ -1,270 +1,120 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
-import { siteConfig } from "@/lib/constants";
+import {
+  emailDocument,
+  enquiryProblems,
+  enquiryResponse,
+  getEnquiryToEmail,
+  guardEnquiryRequest,
+  honeypotFilled,
+  readCv,
+  readEmail,
+  readEnquiryForm,
+  readField,
+  readPhone,
+  sendEnquiryEmail,
+  isEnquiryTestMode,
+  isFieldError,
+} from "@/lib/enquiry-server";
 
-const MAX_CV_BYTES = 5 * 1024 * 1024;
-const ALLOWED_CV_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;
-const ALLOWED_CV_TYPES = new Set([
-  "application/pdf",
-  "application/msword",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-]);
-
-type AllowedCvExtension = (typeof ALLOWED_CV_EXTENSIONS)[number];
-
-function extractEmailAddress(value: string) {
-  const angleMatch = value.match(/<([^<>@\s]+@[^<>@\s]+)>/);
-  if (angleMatch) {
-    return angleMatch[1];
-  }
-
-  const spacedMatch = value.match(/([^\s@]+@[^\s@]+\.[^\s@]+)$/);
-  if (spacedMatch) {
-    return spacedMatch[1];
-  }
-
-  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-    return value;
-  }
-
-  return null;
-}
-
-function getEnquiryFromEmail() {
-  const configured = process.env.ENQUIRY_FROM_EMAIL?.trim().replace(/^["']|["']$/g, "");
-  const toEmail = getEnquiryToEmail();
-  let emailAddress =
-    (configured && extractEmailAddress(configured)) || siteConfig.enquiryFromEmail;
-
-  // Avoid sending from and to the same mailbox — GoDaddy/Proofpoint often drops that.
-  if (emailAddress.toLowerCase() === toEmail.toLowerCase()) {
-    emailAddress = siteConfig.enquiryFromEmail;
-  }
-
-  return `JLD Recruit Website <${emailAddress}>`;
-}
-
-function getEnquiryToEmail() {
-  const configured = process.env.ENQUIRY_TO_EMAIL?.trim().replace(/^["']|["']$/g, "");
-
-  if (configured && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(configured)) {
-    return configured;
-  }
-
-  return siteConfig.email;
-}
-
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function buildCandidateEmailBody(fields: {
-  name: string;
-  email: string;
-  phone: string;
-  currentRole: string;
-  sector: string;
-  message: string;
-}) {
-  const lines = [
-    ["Name", fields.name],
-    ["Email", fields.email],
-    ["Phone", fields.phone || "Not provided"],
-    ["Current role", fields.currentRole || "Not provided"],
-    ["Sector", fields.sector || "Not provided"],
-    ["Message", fields.message || "Please find my CV attached."],
-  ];
-
-  const textBody = [
-    "CANDIDATE REGISTRATION",
-    "",
-    ...lines.map(([label, value]) => `${label}: ${value}`),
-  ].join("\n");
-
-  const htmlBody = `
-    <div style="font-family: Arial, sans-serif; color: #1e293b; line-height: 1.6;">
-      <h2 style="margin: 0 0 16px; color: #0f172a;">Candidate registration</h2>
-      <p style="margin: 0 0 16px;">A candidate submitted their CV through the JLD Recruit website.</p>
-      <table style="border-collapse: collapse; width: 100%; max-width: 640px;">
-        ${lines
-          .map(
-            ([label, value]) => `
-          <tr>
-            <th style="text-align: left; padding: 8px 12px 8px 0; vertical-align: top; white-space: nowrap;">${label}</th>
-            <td style="padding: 8px 0;">${escapeHtml(value).replace(/\n/g, "<br />")}</td>
-          </tr>`
-          )
-          .join("")}
-      </table>
-      <p style="margin: 16px 0 0;">The CV is attached to this email.</p>
-    </div>
-  `.trim();
-
-  return { textBody, htmlBody };
-}
-
-function getCvExtension(filename: string): AllowedCvExtension | null {
-  const lower = filename.toLowerCase();
-
-  for (const extension of ALLOWED_CV_EXTENSIONS) {
-    if (lower.endsWith(extension)) {
-      return extension;
-    }
-  }
-
-  return null;
-}
-
-function contentTypeFromExtension(extension: AllowedCvExtension) {
-  switch (extension) {
-    case ".pdf":
-      return "application/pdf";
-    case ".doc":
-      return "application/msword";
-    case ".docx":
-      return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-  }
-}
-
-function isAllowedCvType(contentType: string) {
-  return !contentType || ALLOWED_CV_TYPES.has(contentType);
-}
+export const runtime = "nodejs";
 
 function maskEmail(email: string) {
   const [local, domain] = email.split("@");
-  if (!local || !domain) {
-    return email;
-  }
+  if (!local || !domain) return email;
+  return `${local.slice(0, Math.min(2, local.length))}***@${domain}`;
+}
 
-  const visible = local.slice(0, Math.min(2, local.length));
-  return `${visible}***@${domain}`;
+function invalid(request: Request, error: string, reason: "invalid" | "file" = "invalid") {
+  return enquiryResponse(request, {
+    ok: false,
+    status: reason === "file" ? enquiryProblems.file.status : 400,
+    error,
+    reason,
+  });
 }
 
 export async function GET() {
   const deliversTo = getEnquiryToEmail();
-  const usingCustomInbox = Boolean(process.env.ENQUIRY_TO_EMAIL?.trim());
 
   return NextResponse.json({
-    available: Boolean(process.env.RESEND_API_KEY),
+    available: Boolean(process.env.RESEND_API_KEY?.trim()),
     deliversTo: maskEmail(deliversTo),
-    usingCustomInbox,
+    usingCustomInbox: Boolean(process.env.ENQUIRY_TO_EMAIL?.trim()),
   });
 }
 
 export async function POST(request: Request) {
-  const apiKey = process.env.RESEND_API_KEY;
+  const blocked = guardEnquiryRequest(request);
+  if (blocked) return blocked;
 
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: "CV upload is not configured on the server." },
-      { status: 503 }
-    );
+  const body = await readEnquiryForm(request);
+  if ("response" in body) return body.response;
+  if (honeypotFilled(body.formData)) {
+    return enquiryResponse(request, {
+      ok: false,
+      status: enquiryProblems.rejected.status,
+      error: enquiryProblems.rejected.error,
+      reason: "rejected",
+    });
   }
 
-  try {
-    const formData = await request.formData();
-    const name = String(formData.get("name") ?? "").trim();
-    const email = String(formData.get("email") ?? "").trim();
-    const phone = String(formData.get("phone") ?? "").trim();
-    const currentRole = String(formData.get("currentRole") ?? "").trim();
-    const sector = String(formData.get("sector") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
-    const cv = formData.get("cv");
+  const formData = body.formData;
+  const name = readField(formData, "name", { required: true, max: 100 });
+  const email = readEmail(formData);
+  const phone = readPhone(formData);
+  const currentRole = readField(formData, "currentRole", { required: true, max: 120 });
+  const sector = readField(formData, "sector", { required: true, max: 120 });
+  const message = readField(formData, "message", { required: true, max: 4000, multiline: true });
 
-    if (!name || !email) {
-      return NextResponse.json(
-        { error: "Name and email are required." },
-        { status: 400 }
-      );
-    }
+  if (isFieldError(name)) return invalid(request, name.error);
+  if (isFieldError(email)) return invalid(request, email.error);
+  if (isFieldError(phone)) return invalid(request, phone.error);
+  if (isFieldError(currentRole)) return invalid(request, currentRole.error);
+  if (isFieldError(sector)) return invalid(request, sector.error);
+  if (isFieldError(message)) return invalid(request, message.error);
 
-    if (!(cv instanceof File) || cv.size === 0) {
-      return NextResponse.json({ error: "A CV file is required." }, { status: 400 });
-    }
+  const cv = await readCv(formData);
+  if (isFieldError(cv)) return invalid(request, cv.error, "file");
 
-    if (cv.size > MAX_CV_BYTES) {
-      return NextResponse.json(
-        { error: "CV file must be 5 MB or smaller." },
-        { status: 400 }
-      );
-    }
-
-    const extension = getCvExtension(cv.name);
-    if (!extension) {
-      return NextResponse.json(
-        {
-          error:
-            "CV must be a PDF or Word document with a .pdf, .doc, or .docx file extension.",
-        },
-        { status: 400 }
-      );
-    }
-
-    if (!isAllowedCvType(cv.type)) {
-      return NextResponse.json(
-        { error: "CV must be a PDF or Word document." },
-        { status: 400 }
-      );
-    }
-
-    const resend = new Resend(apiKey);
-    const cvBuffer = Buffer.from(await cv.arrayBuffer());
-    const fromEmail = getEnquiryFromEmail();
-    const toEmail = getEnquiryToEmail();
-    const { textBody, htmlBody } = buildCandidateEmailBody({
-      name,
-      email,
-      phone,
-      currentRole,
-      sector,
-      message,
-    });
-
-    const { error } = await resend.emails.send({
-      from: fromEmail,
-      to: [toEmail],
-      replyTo: email,
-      subject: `Candidate Registration — ${name}`,
-      text: textBody,
-      html: htmlBody,
-      attachments: [
-        {
-          filename: cv.name,
-          content: cvBuffer.toString("base64"),
-          contentType: contentTypeFromExtension(extension),
-        },
-      ],
-    });
-
-    if (error) {
-      console.error("Candidate enquiry email failed:", error);
-
-      const resendMessage =
-        typeof error === "object" && error !== null && "message" in error
-          ? String(error.message)
-          : null;
-
-      return NextResponse.json(
-        {
-          error:
-            resendMessage?.includes("from") || resendMessage?.includes("domain")
-              ? "CV upload is temporarily unavailable. Please email James directly with your CV attached."
-              : "We could not send your CV. Please try again or email James directly.",
-        },
-        { status: 502 }
-      );
-    }
-
-    return NextResponse.json({ ok: true });
-  } catch (error) {
-    console.error("Candidate enquiry submission failed:", error);
-    return NextResponse.json(
-      { error: "Something went wrong. Please try again or email James directly." },
-      { status: 500 }
-    );
+  if (isEnquiryTestMode()) {
+    return enquiryResponse(request, { ok: true, form: "candidate", testMode: true });
   }
+
+  const document = emailDocument(
+    "Candidate registration",
+    "A candidate submitted a CV through the JLD Recruit website. The CV is attached.",
+    [
+      ["Name", name.value],
+      ["Email", email.value],
+      ["Phone", phone.value],
+      ["Current role", currentRole.value],
+      ["Sector", sector.value],
+      ["Message", message.value],
+    ]
+  );
+
+  const sent = await sendEnquiryEmail({
+    subject: `Candidate Registration — ${name.value}`,
+    replyTo: email.value,
+    text: document.text,
+    html: document.html,
+    attachments: [
+      {
+        filename: cv.filename,
+        content: cv.content,
+        contentType: cv.contentType,
+      },
+    ],
+  });
+
+  if ("error" in sent && sent.error) {
+    return enquiryResponse(request, {
+      ok: false,
+      status: 502,
+      error: sent.error,
+      reason: "rejected",
+    });
+  }
+
+  return enquiryResponse(request, { ok: true, form: "candidate" });
 }

@@ -52,8 +52,7 @@ export default async function JobsPage() {
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-navy-600">
               Browse our current vacancies across lift engineering, fire & security,
-              gate & door, refrigeration and automotive & HGV sectors. Roles sync
-              automatically from our LinkedIn updates every few minutes.
+              gate & door, refrigeration and automotive & HGV sectors.
             </p>
           </div>
         </div>
@@ -64,11 +63,11 @@ export default async function JobsPage() {
           <SectionHeading
             eyebrow={`${jobs.length} Active Roles`}
             title="Current opportunities"
-            description="These vacancies are synced from our LinkedIn job posts and updated regularly. Don't see the right role? Register your interest and we'll be in touch when something suitable comes up."
+            description="These are the vacancies currently open with JLD Recruit Ltd. Don't see the right role? Register your interest and we'll be in touch when something suitable comes up."
           />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {jobs.map((job) => (
-              <JobCard key={`${job.slug}-${job.linkedInActivityId}`} job={job} />
+              <JobCard key={job.slug} job={job} />
             ))}
           </div>
           <div className="mt-12 rounded-2xl border border-brand-200 bg-brand-50/50 p-8 text-center">

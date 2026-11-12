@@ -17,9 +17,9 @@ export function LinkedInUpdates({ jobs, limit = 3 }: LinkedInUpdatesProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <SectionHeading
-            eyebrow="Latest Opportunities"
-            title="Active jobs & LinkedIn updates"
-            description="Live vacancies sync automatically from our LinkedIn company posts every few minutes. Follow us for the latest engineering and automotive roles."
+            eyebrow="Current vacancies"
+            title="Active jobs"
+            description="Current vacancies appear here when a role is approved for the website. Follow JLD Recruit on LinkedIn for company updates."
             align="left"
           />
           <a
@@ -36,7 +36,7 @@ export function LinkedInUpdates({ jobs, limit = 3 }: LinkedInUpdatesProps) {
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {latestJobs.map((job) => (
-            <JobCard key={`${job.slug}-${job.linkedInActivityId}`} job={job} compact />
+            <JobCard key={job.slug} job={job} compact />
           ))}
         </div>
         <div className="mt-8 text-center">
