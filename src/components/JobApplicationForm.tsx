@@ -2,6 +2,7 @@
 
 import { FormEvent, useId, useState } from "react";
 import Link from "next/link";
+import { currentLocationIsValid, isRelevantExperience, RELEVANT_EXPERIENCE_OPTIONS } from "@/lib/candidate-questions";
 import { siteConfig } from "@/lib/constants";
 import { MAX_CV_BYTES } from "@/lib/enquiry-limits";
 
@@ -44,6 +45,23 @@ export function JobApplicationForm({
     }
     if (!/\.(pdf|doc|docx)$/i.test(file.name)) {
       setError("CV must be a PDF or Word document with a .pdf, .doc, or .docx file extension.");
+      return;
+    }
+
+    const details = new FormData(event.currentTarget);
+    const phone = String(details.get("phone") ?? "").trim();
+    const currentLocation = String(details.get("currentLocation") ?? "");
+    const relevantExperience = String(details.get("relevantExperience") ?? "");
+    if (!/^[0-9+().\-\s]{8,40}$/.test(phone)) {
+      setError("Enter a valid phone number.");
+      return;
+    }
+    if (!currentLocationIsValid(currentLocation)) {
+      setError("Enter the town or city and postcode where you currently live.");
+      return;
+    }
+    if (!isRelevantExperience(relevantExperience)) {
+      setError("Select how many years of relevant experience you have.");
       return;
     }
 
@@ -142,10 +160,68 @@ export function JobApplicationForm({
         </div>
         <div>
           <label htmlFor={`${cvId}-phone`} className={labelClassName}>
-            Phone
+            Phone <span className="text-red-500">*</span>
           </label>
-          <input id={`${cvId}-phone`} name="phone" type="tel" autoComplete="tel" maxLength={30} className={inputClassName} />
+          <input
+            id={`${cvId}-phone`}
+            name="phone"
+            type="tel"
+            required
+            autoComplete="tel"
+            inputMode="tel"
+            maxLength={40}
+            pattern="[0-9+().\-\s]{8,40}"
+            title="Enter a valid phone number."
+            placeholder="07123 456789"
+            aria-describedby={`${cvId}-phone-hint`}
+            className={inputClassName}
+          />
+          <p id={`${cvId}-phone-hint`} className="mt-2 text-xs text-navy-500">
+            A phone number is required so James can contact you about this application.
+          </p>
         </div>
+      </div>
+      <div>
+        <label htmlFor={`${cvId}-location`} className={labelClassName}>
+          Where are you currently based? (Town/City and Postcode) <span className="text-red-500">*</span>
+        </label>
+        <input
+          id={`${cvId}-location`}
+          name="currentLocation"
+          type="text"
+          required
+          autoComplete="postal-code"
+          maxLength={120}
+          pattern="(?=.*[A-Za-z])(?=.*\d).{5,120}"
+          title="Enter the town or city and postcode where you currently live."
+          placeholder="For example, Barnstaple EX31 1AB"
+          aria-describedby={`${cvId}-location-hint`}
+          className={inputClassName}
+        />
+        <p id={`${cvId}-location-hint`} className="mt-2 text-xs text-navy-500">
+          This is where you live now, not where you would prefer to work.
+        </p>
+      </div>
+      <div>
+        <label htmlFor={`${cvId}-experience`} className={labelClassName}>
+          How many years of relevant experience do you have? <span className="text-red-500">*</span>
+        </label>
+        <select
+          id={`${cvId}-experience`}
+          name="relevantExperience"
+          required
+          defaultValue=""
+          className={inputClassName}
+        >
+          <option value="" disabled>
+            Select your experience
+          </option>
+          {RELEVANT_EXPERIENCE_OPTIONS.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
         <label htmlFor={cvId} className={labelClassName}>

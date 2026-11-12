@@ -8,9 +8,11 @@ import {
   honeypotFilled,
   readCv,
   readEmail,
+  readCurrentLocation,
   readEnquiryForm,
   readField,
-  readOptionalPhone,
+  readRelevantExperience,
+  readRequiredPhone,
   sendEnquiryEmail,
   isEnquiryTestMode,
   isFieldError,
@@ -43,13 +45,17 @@ export async function POST(request: Request) {
   const slug = readField(formData, "jobSlug", { required: true, max: 120 });
   const name = readField(formData, "name", { required: true, max: 100 });
   const email = readEmail(formData);
-  const phone = readOptionalPhone(formData);
+  const phone = readRequiredPhone(formData);
+  const currentLocation = readCurrentLocation(formData);
+  const relevantExperience = readRelevantExperience(formData);
   const message = readField(formData, "message", { max: 4000, multiline: true });
 
   if (isFieldError(slug)) return invalid(request, slug.error);
   if (isFieldError(name)) return invalid(request, name.error);
   if (isFieldError(email)) return invalid(request, email.error);
   if (isFieldError(phone)) return invalid(request, phone.error);
+  if (isFieldError(currentLocation)) return invalid(request, currentLocation.error);
+  if (isFieldError(relevantExperience)) return invalid(request, relevantExperience.error);
   if (isFieldError(message)) return invalid(request, message.error);
 
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug.value)) {
@@ -97,7 +103,9 @@ export async function POST(request: Request) {
       ["Vacancy page", `${siteConfig.url}/jobs/${vacancy.slug}`],
       ["Name", name.value],
       ["Email", email.value],
-      ["Phone", phone.value || "Not provided"],
+      ["Phone", phone.value],
+      ["Where they currently live", currentLocation.value],
+      ["Years of relevant experience", relevantExperience.value],
       ["Message", message.value || "Please find my CV attached."],
     ]
   );

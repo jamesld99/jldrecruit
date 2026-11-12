@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useState, FormEvent } from "react";
 import Link from "next/link";
+import { currentLocationIsValid, isRelevantExperience, RELEVANT_EXPERIENCE_OPTIONS } from "@/lib/candidate-questions";
 import { primarySectors, siteConfig } from "@/lib/constants";
 import { MAX_CV_BYTES } from "@/lib/enquiry-limits";
 
@@ -397,6 +398,21 @@ function CandidateEnquiryForm({
       return;
     }
 
+    const details = new FormData(event.currentTarget);
+    const phone = String(details.get("phone") ?? "").trim();
+    if (!/^[0-9+().\-\s]{8,40}$/.test(phone)) {
+      setError("Enter a valid phone number.");
+      return;
+    }
+    if (!currentLocationIsValid(String(details.get("currentLocation") ?? ""))) {
+      setError("Enter the town or city and postcode where you currently live.");
+      return;
+    }
+    if (!isRelevantExperience(String(details.get("relevantExperience") ?? ""))) {
+      setError("Select how many years of relevant experience you have.");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -471,7 +487,23 @@ function CandidateEnquiryForm({
           <label htmlFor="candidate-phone" className={labelClassName}>
             Phone <span className="text-red-500">*</span>
           </label>
-          <input id="candidate-phone" name="phone" type="text" required autoComplete="tel" maxLength={40} className={inputClassName} placeholder="Number, Not applicable, or To be confirmed" />
+          <input
+            id="candidate-phone"
+            name="phone"
+            type="tel"
+            required
+            autoComplete="tel"
+            inputMode="tel"
+            maxLength={40}
+            pattern="[0-9+().\-\s]{8,40}"
+            title="Enter a valid phone number."
+            placeholder="07123 456789"
+            aria-describedby="candidate-phone-hint"
+            className={inputClassName}
+          />
+          <p id="candidate-phone-hint" className="mt-2 text-xs text-navy-500">
+            A phone number is required so James can contact you.
+          </p>
         </div>
         <div>
           <label htmlFor="candidate-current-role" className={labelClassName}>
@@ -479,6 +511,44 @@ function CandidateEnquiryForm({
           </label>
           <input id="candidate-current-role" name="currentRole" type="text" required maxLength={120} className={inputClassName} placeholder="e.g. Fire Alarm Engineer, Not applicable, or To be confirmed" />
         </div>
+      </div>
+
+      <div>
+        <label htmlFor="candidate-location" className={labelClassName}>
+          Where are you currently based? (Town/City and Postcode) <span className="text-red-500">*</span>
+        </label>
+        <input
+          id="candidate-location"
+          name="currentLocation"
+          type="text"
+          required
+          autoComplete="postal-code"
+          maxLength={120}
+          pattern="(?=.*[A-Za-z])(?=.*\d).{5,120}"
+          title="Enter the town or city and postcode where you currently live."
+          placeholder="For example, Barnstaple EX31 1AB"
+          aria-describedby="candidate-location-hint"
+          className={inputClassName}
+        />
+        <p id="candidate-location-hint" className="mt-2 text-xs text-navy-500">
+          This is where you live now, not where you would prefer to work.
+        </p>
+      </div>
+
+      <div>
+        <label htmlFor="candidate-experience" className={labelClassName}>
+          How many years of relevant experience do you have? <span className="text-red-500">*</span>
+        </label>
+        <select id="candidate-experience" name="relevantExperience" required className={inputClassName} defaultValue="">
+          <option value="" disabled>
+            Select your experience
+          </option>
+          {RELEVANT_EXPERIENCE_OPTIONS.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>

@@ -6,11 +6,13 @@ import {
   getEnquiryToEmail,
   guardEnquiryRequest,
   honeypotFilled,
+  readCurrentLocation,
   readCv,
   readEmail,
   readEnquiryForm,
   readField,
-  readPhone,
+  readRelevantExperience,
+  readRequiredPhone,
   sendEnquiryEmail,
   isEnquiryTestMode,
   isFieldError,
@@ -61,8 +63,10 @@ export async function POST(request: Request) {
   const formData = body.formData;
   const name = readField(formData, "name", { required: true, max: 100 });
   const email = readEmail(formData);
-  const phone = readPhone(formData);
+  const phone = readRequiredPhone(formData);
   const currentRole = readField(formData, "currentRole", { required: true, max: 120 });
+  const currentLocation = readCurrentLocation(formData);
+  const relevantExperience = readRelevantExperience(formData);
   const sector = readField(formData, "sector", { required: true, max: 120 });
   const message = readField(formData, "message", { required: true, max: 4000, multiline: true });
 
@@ -70,6 +74,8 @@ export async function POST(request: Request) {
   if (isFieldError(email)) return invalid(request, email.error);
   if (isFieldError(phone)) return invalid(request, phone.error);
   if (isFieldError(currentRole)) return invalid(request, currentRole.error);
+  if (isFieldError(currentLocation)) return invalid(request, currentLocation.error);
+  if (isFieldError(relevantExperience)) return invalid(request, relevantExperience.error);
   if (isFieldError(sector)) return invalid(request, sector.error);
   if (isFieldError(message)) return invalid(request, message.error);
 
@@ -88,6 +94,8 @@ export async function POST(request: Request) {
       ["Email", email.value],
       ["Phone", phone.value],
       ["Current role", currentRole.value],
+      ["Where they currently live", currentLocation.value],
+      ["Years of relevant experience", relevantExperience.value],
       ["Sector", sector.value],
       ["Message", message.value],
     ]

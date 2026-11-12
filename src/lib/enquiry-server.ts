@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { currentLocationIsValid, isRelevantExperience } from "@/lib/candidate-questions";
 import { siteConfig } from "@/lib/constants";
 import { MAX_CV_BYTES, MAX_REQUEST_BYTES } from "@/lib/enquiry-limits";
 
@@ -249,13 +250,42 @@ export function readPhone(formData: FormData): FieldResult {
   return { error: "Enter a phone number, Not applicable, or To be confirmed." };
 }
 
-export function readOptionalPhone(formData: FormData): FieldResult {
-  const field = readField(formData, "phone", { max: 40 });
+function missingOrInvalid(field: FieldResult) {
+  return isFieldError(field) && field.error === enquiryProblems.invalid.error;
+}
+
+export function readRequiredPhone(formData: FormData): FieldResult {
+  const field = readField(formData, "phone", { required: true, max: 40 });
+  if (missingOrInvalid(field)) return { error: "Enter a valid phone number." };
   if (isFieldError(field)) return field;
-  if (field.value.length === 0 || isExplicitAnswer(field.value) || PHONE_PATTERN.test(field.value)) {
-    return field;
+  if (!PHONE_PATTERN.test(field.value)) return { error: "Enter a valid phone number." };
+  return field;
+}
+
+export function readCurrentLocation(formData: FormData): FieldResult {
+  const field = readField(formData, "currentLocation", { required: true, max: 120 });
+  if (isFieldError(field)) {
+    return missingOrInvalid(field)
+      ? { error: "Enter the town or city and postcode where you currently live." }
+      : field;
   }
-  return { error: "Enter a phone number, leave it blank, or use Not applicable or To be confirmed." };
+  if (!currentLocationIsValid(field.value)) {
+    return { error: "Enter the town or city and postcode where you currently live." };
+  }
+  return field;
+}
+
+export function readRelevantExperience(formData: FormData): FieldResult {
+  const field = readField(formData, "relevantExperience", { required: true, max: 40 });
+  if (isFieldError(field)) {
+    return missingOrInvalid(field)
+      ? { error: "Select how many years of relevant experience you have." }
+      : field;
+  }
+  if (!isRelevantExperience(field.value)) {
+    return { error: "Select how many years of relevant experience you have." };
+  }
+  return field;
 }
 
 function extensionFor(filename: string): AllowedCvExtension | null {
