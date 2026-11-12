@@ -1,5 +1,6 @@
 import { faqs, siteConfig } from "./constants";
 import { jobAdvertIsComplete, type JobListing } from "./jobs";
+import { closingDateHasPassed } from "./vacancies";
 
 type ParsedSalary =
   | { kind: "range"; minValue: number; maxValue: number }
@@ -263,14 +264,43 @@ function jobPostingDescription(job: JobListing) {
     .join("\n\n");
 }
 
+function verifiedEmploymentType(job: JobListing) {
+  const text = `${job.type} ${job.workingHours}`;
+  if (/\bfull[-\s]?time\b/i.test(text)) return "FULL_TIME";
+  if (/\bpart[-\s]?time\b/i.test(text)) return "PART_TIME";
+  return undefined;
+}
+
+function hiringOrganization(job: JobListing) {
+  if (job.employerConfidential) {
+    return {
+      "@type": "Organization",
+      name: "confidential",
+    };
+  }
+
+  return {
+    "@type": "Organization",
+    name: siteConfig.legalName,
+    sameAs: siteConfig.url,
+    logo: `${siteConfig.url}${siteConfig.logo}`,
+  };
+}
+
 export function getJobPostingSchema(job: JobListing) {
-  if (job.status !== "open" || !job.postedDate || !jobAdvertIsComplete(job)) {
+  if (
+    job.status !== "open" ||
+    !job.postedDate ||
+    !jobAdvertIsComplete(job) ||
+    closingDateHasPassed(job.closingDate)
+  ) {
     return null;
   }
 
   const salaryUnit = job.payFrequency ? SALARY_UNIT[job.payFrequency] : undefined;
   const baseSalary =
     job.salary && salaryUnit ? buildBaseSalarySchema(job.salary, salaryUnit) : undefined;
+  const employmentType = verifiedEmploymentType(job);
 
   return {
     "@context": "https://schema.org",
@@ -279,14 +309,9 @@ export function getJobPostingSchema(job: JobListing) {
     description: jobPostingDescription(job),
     datePosted: job.postedDate,
     ...(job.closingDate ? { validThrough: job.closingDate } : {}),
-    ...(job.type === "Permanent" ? { employmentType: "FULL_TIME" } : {}),
+    ...(employmentType ? { employmentType } : {}),
     directApply: true,
-    hiringOrganization: {
-      "@type": "Organization",
-      name: siteConfig.legalName,
-      sameAs: siteConfig.url,
-      logo: `${siteConfig.url}${siteConfig.logo}`,
-    },
+    hiringOrganization: hiringOrganization(job),
     jobLocation: {
       "@type": "Place",
       address: {
