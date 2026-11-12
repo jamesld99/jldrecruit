@@ -38,6 +38,7 @@ export function toPreviewListing(vacancy: Vacancy): JobListing {
     desirable: vacancy.desirable,
     benefits: vacancy.benefits,
     workingHours: vacancy.workingHours ?? "",
+    employerConfidential: vacancy.employerConfidential,
     status: vacancy.status,
     seoTitle: vacancy.seoTitle,
     metaDescription: vacancy.metaDescription,

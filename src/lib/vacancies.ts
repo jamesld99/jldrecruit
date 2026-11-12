@@ -176,6 +176,15 @@ export function getVacancyBySlug(slug: string) {
   return vacancies.find((vacancy) => vacancy.slug === slug);
 }
 
+export function utcDateString(date = new Date()) {
+  return date.toISOString().slice(0, 10);
+}
+
+/** True only when a recorded closing date is already in the past. An unset date does not expire the vacancy. */
+export function closingDateHasPassed(closingOn: string | undefined, today = utcDateString()) {
+  return Boolean(closingOn && closingOn < today);
+}
+
 export function getPublicVacancySlugs() {
   return vacancies
     .filter((vacancy) => vacancy.status !== "draft")
@@ -192,11 +201,14 @@ const preservedOpenNote =
   "The existing public URL and salary are unchanged. The page uses the approved layout and the facts already published for this vacancy.";
 
 /**
- * No earlier advertisement date was found for the newly approved vacancies.
- * Leave this unset until their first publication date is confirmed.
- * Do not fill it from the build clock.
+ * First date these vacancy URLs were publicly available on jldrecruit.co.uk.
+ * None of the 23 URLs existed in production commit c744b3e, deployed on 6 July 2026.
+ * Vercel production deployment 7737760426, commit 393331e, completed successfully at
+ * 2026-11-12T12:53:37Z and was the first production release that served them.
+ * Vacancies that already record an earlier LinkedIn date keep that date.
+ * This is not a build clock and it is not shown on the page.
  */
-export const NEW_VACANCIES_FIRST_PUBLISHED_ON: string | undefined = undefined;
+export const NEW_VACANCIES_FIRST_PUBLISHED_ON = "2026-11-12";
 
 function openVacancy(
   vacancy: Omit<

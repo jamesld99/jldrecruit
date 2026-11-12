@@ -27,6 +27,7 @@ export type JobListing = {
   workingHours: string;
   postedDate?: string;
   closingDate?: string;
+  employerConfidential: boolean;
   payFrequency?: PayFrequency;
   linkedInUrl?: string;
   status: VacancyStatus;
@@ -95,6 +96,7 @@ function toListing(vacancy: Vacancy): JobListing {
     workingHours: vacancy.workingHours ?? "",
     postedDate: vacancy.publishedOn,
     closingDate: vacancy.closingOn,
+    employerConfidential: vacancy.employerConfidential,
     payFrequency: vacancy.payFrequency,
     linkedInUrl: vacancy.linkedInUrl,
     status: vacancy.status,
