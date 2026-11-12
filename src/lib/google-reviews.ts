@@ -4,6 +4,7 @@ import { siteConfig } from "@/lib/constants";
 export type GoogleReview = {
   authorName: string;
   authorPhotoUrl?: string;
+  authorUri?: string;
   rating: number;
   text: string;
   relativeTime: string;
@@ -37,6 +38,7 @@ type PlacesReview = {
   authorAttribution?: {
     displayName?: string;
     photoUri?: string;
+    uri?: string;
   };
 };
 
@@ -98,6 +100,7 @@ function parseReview(review: PlacesReview): GoogleReview | null {
   return {
     authorName,
     authorPhotoUrl: review.authorAttribution?.photoUri,
+    authorUri: review.authorAttribution?.uri,
     rating,
     text: text || "Rated this business on Google.",
     relativeTime: review.relativePublishTimeDescription ?? "",

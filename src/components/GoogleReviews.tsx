@@ -1,4 +1,5 @@
-import type { GoogleReview, GoogleReviewsData, GoogleReviewsLink } from "@/lib/google-reviews";
+import type { GoogleReviewsData, GoogleReviewsLink } from "@/lib/google-reviews";
+import { GoogleReviewCarousel } from "./GoogleReviewCarousel";
 import { SectionHeading } from "./SectionHeading";
 
 function StarRating({
@@ -55,40 +56,6 @@ function GoogleIcon({ className = "h-5 w-5" }: { className?: string }) {
         d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
       />
     </svg>
-  );
-}
-
-function ReviewCard({ review }: { review: GoogleReview }) {
-  return (
-    <article className="flex h-full flex-col rounded-2xl border border-brand-100 bg-white p-6 card-shadow">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-center gap-3">
-          {review.authorPhotoUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={review.authorPhotoUrl}
-              alt=""
-              className="h-10 w-10 rounded-full object-cover"
-              loading="lazy"
-            />
-          ) : (
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-100 text-sm font-semibold text-brand-700">
-              {review.authorName.charAt(0)}
-            </div>
-          )}
-          <div>
-            <p className="font-semibold text-navy-900">{review.authorName}</p>
-            {review.relativeTime ? (
-              <p className="text-xs text-navy-500">{review.relativeTime}</p>
-            ) : null}
-          </div>
-        </div>
-        <StarRating rating={review.rating} size="sm" />
-      </div>
-      <p className="mt-4 flex-grow text-sm leading-relaxed text-navy-600">
-        {review.text}
-      </p>
-    </article>
   );
 }
 
@@ -158,11 +125,7 @@ export function GoogleReviews({ data }: GoogleReviewsProps) {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {data.reviews.map((review) => (
-            <ReviewCard key={`${review.authorName}-${review.publishedAt}`} review={review} />
-          ))}
-        </div>
+        <GoogleReviewCarousel reviews={data.reviews} />
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
