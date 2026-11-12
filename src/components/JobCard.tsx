@@ -15,11 +15,6 @@ export function JobCard({ job, compact = false, href, draft = false }: JobCardPr
         <span className="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">
           {job.sector}
         </span>
-        {job.type ? (
-          <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
-            {job.type}
-          </span>
-        ) : null}
         {draft ? (
           <span className="rounded-full bg-navy-100 px-3 py-1 text-xs font-semibold text-navy-700">
             DRAFT

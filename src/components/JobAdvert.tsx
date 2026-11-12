@@ -57,11 +57,6 @@ export function JobAdvert({
                   DRAFT
                 </span>
               ) : null}
-              {job.type ? (
-                <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
-                  {job.type}
-                </span>
-              ) : null}
             </div>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-navy-900 sm:text-5xl">
               {job.title}
@@ -75,12 +70,6 @@ export function JobAdvert({
                 <div>
                   <dt className="text-xs font-semibold uppercase tracking-wider text-navy-500">Salary</dt>
                   <dd className="mt-1 font-medium text-navy-900">{job.salary}</dd>
-                </div>
-              ) : null}
-              {job.type ? (
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wider text-navy-500">Job type</dt>
-                  <dd className="mt-1 font-medium text-navy-900">{job.type}</dd>
                 </div>
               ) : null}
               {job.workingHours ? (

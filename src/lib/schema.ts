@@ -93,6 +93,7 @@ export function getOrganizationSchema() {
       siteConfig.companiesHouseUrl,
       siteConfig.linkedIn,
       siteConfig.facebook,
+      siteConfig.instagram,
       ...(siteConfig.googleReviewsUrl ? [siteConfig.googleReviewsUrl] : []),
     ],
     areaServed: [
@@ -146,6 +147,7 @@ export function getProfessionalServiceSchema() {
       siteConfig.companiesHouseUrl,
       siteConfig.linkedIn,
       siteConfig.facebook,
+      siteConfig.instagram,
       ...(siteConfig.googleReviewsUrl ? [siteConfig.googleReviewsUrl] : []),
     ],
   };
@@ -172,6 +174,7 @@ export function getLocalBusinessSchema() {
       siteConfig.companiesHouseUrl,
       siteConfig.linkedIn,
       siteConfig.facebook,
+      siteConfig.instagram,
       ...(siteConfig.googleReviewsUrl ? [siteConfig.googleReviewsUrl] : []),
     ],
   };
