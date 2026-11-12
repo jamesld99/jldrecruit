@@ -2,7 +2,6 @@ import { Button } from "@/components/Button";
 import { CTASection } from "@/components/CTASection";
 import { JobCard } from "@/components/JobCard";
 import { SchemaScript } from "@/components/SchemaScript";
-import { SectionHeading } from "@/components/SectionHeading";
 import { getJobs } from "@/lib/jobs";
 import { createMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema, getJobListSchema, getWebPageSchema } from "@/lib/schema";
@@ -43,28 +42,22 @@ export default async function JobsPage() {
         ]}
       />
 
-      <section className="gradient-hero py-20 lg:py-28">
+      <section className="gradient-hero pt-16 pb-10 lg:pt-20 lg:pb-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-4 eyebrow-pill">Current Vacancies</p>
             <h1 className="text-4xl font-bold tracking-tight text-navy-900 sm:text-5xl">
-              Jobs we&apos;re recruiting for
+              Current Vacancies
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-navy-600">
-              Browse our current vacancies across lift engineering, fire & security,
-              gate & door, refrigeration and automotive & HGV sectors.
+            <p className="mt-5 text-lg leading-relaxed text-navy-600">
+              Explore our latest opportunities across lift engineering, fire & security,
+              HVAC, automotive, HGV and specialist engineering sectors.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-20 lg:py-28">
+      <section className="pb-20 pt-8 lg:pb-28 lg:pt-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow={`${jobs.length} Active Roles`}
-            title="Current opportunities"
-            description="These are the vacancies currently open with JLD Recruit Ltd. Don't see the right role? Register your interest and we'll be in touch when something suitable comes up."
-          />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {jobs.map((job) => (
               <JobCard key={job.slug} job={job} />
